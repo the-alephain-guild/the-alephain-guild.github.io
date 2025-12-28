@@ -5,7 +5,7 @@
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('The Alephain Guild website loaded');
-    
+
     // Initialize all modules
     initLanguageToggle();
     initMobileMenu();
@@ -14,10 +14,174 @@ document.addEventListener('DOMContentLoaded', function() {
     initCycleDiagram();
     initEcosystemCards();
     initBackToTop();
-    
+    initStarfield();
+
     // Set initial language
     setLanguage('en');
 });
+
+/* ==========================================================================
+   Starfield Background Animation
+   ========================================================================== */
+function initStarfield() {
+    // Create canvas element
+    const canvas = document.createElement('canvas');
+    canvas.id = 'starfield';
+    document.body.insertBefore(canvas, document.body.firstChild);
+
+    const ctx = canvas.getContext('2d');
+
+    // Resize canvas to window size
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Star class
+    class Star {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speed = Math.random() * 0.5 + 0.1;
+            this.opacity = Math.random() * 0.8 + 0.2;
+            this.pulseSpeed = Math.random() * 0.02 + 0.01;
+            this.pulsePhase = Math.random() * Math.PI * 2;
+            // Color: mix of gold (#D4AF37) and blue (#3A6B8C)
+            this.isGold = Math.random() < 0.15; // 15% chance of gold star
+        }
+
+        update() {
+            // Slow drift upward
+            this.y -= this.speed;
+
+            // Pulse opacity
+            this.pulsePhase += this.pulseSpeed;
+            this.currentOpacity = this.opacity * (0.6 + 0.4 * Math.sin(this.pulsePhase));
+
+            // Reset if out of view
+            if (this.y < -10) {
+                this.y = canvas.height + 10;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+            if (this.isGold) {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.currentOpacity})`;
+                // Add glow for gold stars
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'rgba(212, 175, 55, 0.5)';
+            } else {
+                ctx.fillStyle = `rgba(58, 107, 140, ${this.currentOpacity * 0.7})`;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = 'rgba(58, 107, 140, 0.3)';
+            }
+
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    // Constellation line class
+    class ConstellationLine {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.startX = Math.random() * canvas.width;
+            this.startY = Math.random() * canvas.height;
+            this.length = Math.random() * 100 + 50;
+            this.angle = Math.random() * Math.PI * 2;
+            this.opacity = 0;
+            this.maxOpacity = Math.random() * 0.15 + 0.05;
+            this.fadeIn = true;
+            this.lifespan = Math.random() * 200 + 100;
+            this.age = 0;
+        }
+
+        update() {
+            this.age++;
+
+            if (this.fadeIn) {
+                this.opacity = Math.min(this.opacity + 0.005, this.maxOpacity);
+                if (this.opacity >= this.maxOpacity) {
+                    this.fadeIn = false;
+                }
+            } else {
+                this.opacity -= 0.003;
+            }
+
+            if (this.age > this.lifespan || this.opacity <= 0) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            if (this.opacity <= 0) return;
+
+            const endX = this.startX + Math.cos(this.angle) * this.length;
+            const endY = this.startY + Math.sin(this.angle) * this.length;
+
+            const gradient = ctx.createLinearGradient(this.startX, this.startY, endX, endY);
+            gradient.addColorStop(0, `rgba(58, 107, 140, 0)`);
+            gradient.addColorStop(0.5, `rgba(58, 107, 140, ${this.opacity})`);
+            gradient.addColorStop(1, `rgba(58, 107, 140, 0)`);
+
+            ctx.beginPath();
+            ctx.moveTo(this.startX, this.startY);
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+    }
+
+    // Create stars and constellation lines
+    const stars = [];
+    const constellationLines = [];
+    const numStars = Math.min(150, Math.floor((canvas.width * canvas.height) / 15000));
+    const numLines = 5;
+
+    for (let i = 0; i < numStars; i++) {
+        stars.push(new Star());
+    }
+
+    for (let i = 0; i < numLines; i++) {
+        constellationLines.push(new ConstellationLine());
+    }
+
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw constellation lines first (behind stars)
+        constellationLines.forEach(line => {
+            line.update();
+            line.draw();
+        });
+
+        // Draw stars
+        stars.forEach(star => {
+            star.update();
+            star.draw();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
 
 /* ==========================================================================
    1. Language Toggle System
@@ -349,127 +513,186 @@ function initPrinciples() {
 function initCycleDiagram() {
     const container = document.querySelector('.cycle-diagram');
     if (!container) return;
-    
-    // Create SVG element
+
+    // Create advanced SVG cycle diagram
     const svgNS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNS, "svg");
     svg.setAttribute("viewBox", "0 0 400 400");
     svg.setAttribute("class", "cycle-svg");
     svg.innerHTML = `
         <defs>
-            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#3A6B8C"/>
-            </marker>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2" result="blur"/>
+            <!-- Gradient definitions -->
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#D4AF37;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#5A9FD4;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#3A6B8C;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#3A6B8C;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#3A6B8C;stop-opacity:1" />
+            </linearGradient>
+
+            <!-- Glow filters -->
+            <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="blur"/>
+                <feFlood flood-color="#D4AF37" flood-opacity="0.6"/>
+                <feComposite in2="blur" operator="in"/>
                 <feMerge>
-                    <feMergeNode in="blur"/>
+                    <feMergeNode/>
                     <feMergeNode in="SourceGraphic"/>
                 </feMerge>
             </filter>
+            <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feFlood flood-color="#3A6B8C" flood-opacity="0.5"/>
+                <feComposite in2="blur" operator="in"/>
+                <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+
+            <!-- Arrow marker -->
+            <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="url(#blueGradient)"/>
+            </marker>
         </defs>
-        
-        <!-- Outer circle -->
-        <circle cx="200" cy="200" r="150" fill="none" stroke="#5A5A5A" stroke-width="2" stroke-dasharray="4,4"/>
-        
-        <!-- Center node (Technical Philosophy) -->
-        <circle cx="200" cy="200" r="20" fill="#D4AF37" stroke="#D4AF37" stroke-width="3" filter="url(#glow)"/>
-        <text x="200" y="200" text-anchor="middle" dy="5" fill="#FFFFFF" font-size="12" font-weight="bold">
-            <tspan x="200" dy="-10" data-lang="en">Tech</tspan>
-            <tspan x="200" dy="15" data-lang="en">Philosophy</tspan>
-            <tspan x="200" dy="-10" data-lang="zh" style="display:none;">技术</tspan>
-            <tspan x="200" dy="15" data-lang="zh" style="display:none;">哲学</tspan>
-        </text>
-        
-        <!-- Phase nodes -->
+
+        <!-- Outer decorative rings -->
+        <circle cx="200" cy="200" r="190" fill="none" stroke="#3A6B8C" stroke-width="1.5" stroke-dasharray="3,8" opacity="0.25">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="120s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="200" cy="200" r="178" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="5,10" opacity="0.2">
+            <animateTransform attributeName="transform" type="rotate" from="360 200 200" to="0 200 200" dur="90s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Main cycle path (animated) -->
+        <circle cx="200" cy="200" r="145" fill="none" stroke="url(#blueGradient)" stroke-width="2.5" stroke-dasharray="15,8" opacity="0.5">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="60s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Flow arrows (curved paths between nodes) -->
+        <g class="flow-arrows" opacity="0.8">
+            <!-- 1 -> 2 -->
+            <path d="M 250 65 Q 340 110 340 200" fill="none" stroke="url(#arrowGradient)" stroke-width="3" marker-end="url(#arrowHead)">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
+            </path>
+            <!-- 2 -> 3 -->
+            <path d="M 335 250 Q 300 350 200 360" fill="none" stroke="url(#arrowGradient)" stroke-width="3" marker-end="url(#arrowHead)">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+            </path>
+            <!-- 3 -> 4 -->
+            <path d="M 150 355 Q 60 320 60 200" fill="none" stroke="url(#arrowGradient)" stroke-width="3" marker-end="url(#arrowHead)">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite" begin="1s"/>
+            </path>
+            <!-- 4 -> 1 -->
+            <path d="M 70 145 Q 100 50 200 40" fill="none" stroke="url(#arrowGradient)" stroke-width="3" marker-end="url(#arrowHead)">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite" begin="1.5s"/>
+            </path>
+        </g>
+
+        <!-- Connection lines to center (pulsing) -->
+        <g class="center-connections" opacity="0.5">
+            <line x1="200" y1="140" x2="200" y2="70" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4,4">
+                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+            </line>
+            <line x1="260" y1="200" x2="310" y2="200" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4,4">
+                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" begin="0.75s"/>
+            </line>
+            <line x1="200" y1="260" x2="200" y2="330" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4,4">
+                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+            </line>
+            <line x1="140" y1="200" x2="90" y2="200" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4,4">
+                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" begin="2.25s"/>
+            </line>
+        </g>
+
+        <!-- Phase nodes - larger and positioned closer to edges -->
         <g class="phase-node" data-phase="insight">
-            <circle cx="200" cy="50" r="30" fill="#0A0F2C" stroke="#3A6B8C" stroke-width="3" filter="url(#glow)"/>
-            <text x="200" y="50" text-anchor="middle" dy="5" fill="#FFFFFF" font-size="14" font-weight="bold">
-                <tspan x="200" dy="-8" data-lang="en">Insight</tspan>
-                <tspan x="200" dy="16" data-lang="en">洞察</tspan>
-                <tspan x="200" dy="-8" data-lang="zh" style="display:none;">洞察</tspan>
-                <tspan x="200" dy="16" data-lang="zh" style="display:none;">Insight</tspan>
-            </text>
+            <circle cx="200" cy="40" r="34" fill="#0A0F2C" stroke="url(#blueGradient)" stroke-width="3.5" filter="url(#blueGlow)"/>
+            <circle cx="200" cy="40" r="24" fill="none" stroke="#3A6B8C" stroke-width="1.5" opacity="0.5"/>
+            <text x="200" y="47" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="bold">1</text>
         </g>
-        
+
         <g class="phase-node" data-phase="modeling">
-            <circle cx="350" cy="200" r="30" fill="#0A0F2C" stroke="#3A6B8C" stroke-width="3" filter="url(#glow)"/>
-            <text x="350" y="200" text-anchor="middle" dy="5" fill="#FFFFFF" font-size="14" font-weight="bold">
-                <tspan x="350" dy="-8" data-lang="en">Modeling</tspan>
-                <tspan x="350" dy="16" data-lang="en">建模</tspan>
-                <tspan x="350" dy="-8" data-lang="zh" style="display:none;">建模</tspan>
-                <tspan x="350" dy="16" data-lang="zh" style="display:none;">Modeling</tspan>
-            </text>
+            <circle cx="360" cy="200" r="34" fill="#0A0F2C" stroke="url(#blueGradient)" stroke-width="3.5" filter="url(#blueGlow)"/>
+            <circle cx="360" cy="200" r="24" fill="none" stroke="#3A6B8C" stroke-width="1.5" opacity="0.5"/>
+            <text x="360" y="207" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="bold">2</text>
         </g>
-        
+
         <g class="phase-node" data-phase="refinement">
-            <circle cx="200" cy="350" r="30" fill="#0A0F2C" stroke="#3A6B8C" stroke-width="3" filter="url(#glow)"/>
-            <text x="200" y="350" text-anchor="middle" dy="5" fill="#FFFFFF" font-size="14" font-weight="bold">
-                <tspan x="200" dy="-8" data-lang="en">Refinement</tspan>
-                <tspan x="200" dy="16" data-lang="en">炼成</tspan>
-                <tspan x="200" dy="-8" data-lang="zh" style="display:none;">炼成</tspan>
-                <tspan x="200" dy="16" data-lang="zh" style="display:none;">Refinement</tspan>
-            </text>
+            <circle cx="200" cy="360" r="34" fill="#0A0F2C" stroke="url(#blueGradient)" stroke-width="3.5" filter="url(#blueGlow)"/>
+            <circle cx="200" cy="360" r="24" fill="none" stroke="#3A6B8C" stroke-width="1.5" opacity="0.5"/>
+            <text x="200" y="367" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="bold">3</text>
         </g>
-        
+
         <g class="phase-node" data-phase="verification">
-            <circle cx="50" cy="200" r="30" fill="#0A0F2C" stroke="#3A6B8C" stroke-width="3" filter="url(#glow)"/>
-            <text x="50" y="200" text-anchor="middle" dy="5" fill="#FFFFFF" font-size="14" font-weight="bold">
-                <tspan x="50" dy="-8" data-lang="en">Verification</tspan>
-                <tspan x="50" dy="16" data-lang="en">验证</tspan>
-                <tspan x="50" dy="-8" data-lang="zh" style="display:none;">验证</tspan>
-                <tspan x="50" dy="16" data-lang="zh" style="display:none;">Verification</tspan>
-            </text>
+            <circle cx="40" cy="200" r="34" fill="#0A0F2C" stroke="url(#blueGradient)" stroke-width="3.5" filter="url(#blueGlow)"/>
+            <circle cx="40" cy="200" r="24" fill="none" stroke="#3A6B8C" stroke-width="1.5" opacity="0.5"/>
+            <text x="40" y="207" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="bold">4</text>
         </g>
-        
-        <!-- Connecting arrows -->
-        <path d="M200,80 Q200,100 230,120" fill="none" stroke="#3A6B8C" stroke-width="2" marker-end="url(#arrow)"/>
-        <path d="M320,200 Q340,200 370,200" fill="none" stroke="#3A6B8C" stroke-width="2" marker-end="url(#arrow)"/>
-        <path d="M200,320 Q200,340 170,370" fill="none" stroke="#3A6B8C" stroke-width="2" marker-end="url(#arrow)"/>
-        <path d="M80,200 Q60,200 30,200" fill="none" stroke="#3A6B8C" stroke-width="2" marker-end="url(#arrow)"/>
-        
-        <!-- Connection to center -->
-        <line x1="200" y1="180" x2="200" y2="220" stroke="#D4AF37" stroke-width="2" stroke-dasharray="4,4"/>
-        <line x1="180" y1="200" x2="220" y2="200" stroke="#D4AF37" stroke-width="2" stroke-dasharray="4,4"/>
+
+        <!-- Center node (Technical Philosophy) - prominent golden core - larger -->
+        <circle cx="200" cy="200" r="60" fill="#0A0F2C" stroke="url(#goldGradient)" stroke-width="5" filter="url(#goldGlow)"/>
+        <circle cx="200" cy="200" r="50" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.6">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="20s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="200" cy="200" r="42" fill="url(#goldGradient)" opacity="0.9"/>
+
+        <!-- Aleph symbol in center - larger -->
+        <text x="200" y="195" text-anchor="middle" fill="#0A0F2C" font-size="32" font-weight="bold" font-family="serif">א</text>
+        <text x="200" y="220" text-anchor="middle" fill="#0A0F2C" font-size="11" font-weight="bold" opacity="0.8">
+            <tspan data-lang="en">PHILOSOPHY</tspan>
+            <tspan data-lang="zh" style="display:none;">哲学</tspan>
+        </text>
     `;
-    
+
     container.appendChild(svg);
-    
+
     // Add interactivity to phase nodes
     svg.querySelectorAll('.phase-node').forEach(node => {
+        node.style.cursor = 'pointer';
         node.addEventListener('mouseenter', function() {
             const phase = this.getAttribute('data-phase');
             document.querySelectorAll(`.phase-card[data-phase="${phase}"]`).forEach(card => {
                 card.style.transform = 'scale(1.05)';
                 card.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.3)';
+                card.style.borderColor = '#D4AF37';
             });
         });
-        
+
         node.addEventListener('mouseleave', function() {
             const phase = this.getAttribute('data-phase');
             document.querySelectorAll(`.phase-card[data-phase="${phase}"]`).forEach(card => {
                 card.style.transform = '';
                 card.style.boxShadow = '';
+                card.style.borderColor = '';
             });
         });
-        
+
         node.addEventListener('click', function() {
             const phase = this.getAttribute('data-phase');
             const card = document.querySelector(`.phase-card[data-phase="${phase}"]`);
             if (card) {
                 card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
+
                 // Visual feedback
-                card.style.transform = 'scale(1.1)';
+                card.style.transform = 'scale(1.05)';
                 card.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.4)';
+                card.style.borderColor = '#D4AF37';
                 setTimeout(() => {
                     card.style.transform = '';
                     card.style.boxShadow = '';
+                    card.style.borderColor = '';
                 }, 1000);
             }
         });
     });
-    
+
     // Update language-specific text in SVG when language changes
     function updateSVGLanguage() {
         const lang = document.documentElement.lang || 'en';
@@ -481,10 +704,10 @@ function initCycleDiagram() {
             }
         });
     }
-    
+
     // Initial language update
     updateSVGLanguage();
-    
+
     // Listen for language changes
     document.addEventListener('languagechange', updateSVGLanguage);
     const observer = new MutationObserver(function(mutations) {

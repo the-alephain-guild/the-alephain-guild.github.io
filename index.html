@@ -28,7 +28,12 @@
     <link rel="stylesheet" href="style.css">
     
     <!-- Favicon -->
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#050A1A">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://the-alephain-guild.github.io">
@@ -38,7 +43,7 @@
     <nav class="nav" id="nav">
         <div class="container nav-container">
             <a href="#top" class="nav-logo">
-                <img src="images/the-alephain-guild.png" alt="The Alephain Guild Logo" width="40" height="40">
+                <img src="images/logo.svg" alt="The Alephain Guild Logo" width="44" height="44">
                 <span class="nav-logo-text" data-lang="en">The Alephain Guild</span>
                 <span class="nav-logo-text" data-lang="zh" style="display: none;">阿莱夫行会</span>
             </a>
@@ -135,7 +140,16 @@
 
                 <!-- Vision Card -->
                 <div class="card card-highlight">
-                    <div class="card-icon">🔭</div>
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="4"/>
+                            <line x1="12" y1="2" x2="12" y2="6"/>
+                            <line x1="12" y1="18" x2="12" y2="22"/>
+                            <line x1="2" y1="12" x2="6" y2="12"/>
+                            <line x1="18" y1="12" x2="22" y2="12"/>
+                        </svg>
+                    </div>
                     <h3 data-lang="en">Vision</h3>
                     <h3 data-lang="zh" style="display: none;">愿景</h3>
                     <p data-lang="en">
@@ -192,7 +206,12 @@
                 <!-- Threefold Mission -->
                 <div class="mission-cards">
                     <div class="card mission-card">
-                        <div class="mission-icon">🔍</div>
+                        <div class="mission-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                                <circle cx="10" cy="10" r="7"/>
+                                <line x1="15" y1="15" x2="21" y2="21"/>
+                            </svg>
+                        </div>
                         <h4 data-lang="en">Mission of Exploration</h4>
                         <h4 data-lang="zh" style="display: none;">探索之使命</h4>
                         <p data-lang="en">
@@ -208,7 +227,13 @@
                     </div>
                     
                     <div class="card mission-card">
-                        <div class="mission-icon">⚗️</div>
+                        <div class="mission-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                                <path d="M9 3h6v6l4 9H5l4-9V3z"/>
+                                <line x1="9" y1="3" x2="15" y2="3"/>
+                                <line x1="7" y1="15" x2="17" y2="15"/>
+                            </svg>
+                        </div>
                         <h4 data-lang="en">Mission of Alchemy</h4>
                         <h4 data-lang="zh" style="display: none;">炼金之使命</h4>
                         <p data-lang="en">
@@ -223,7 +248,13 @@
                     </div>
                     
                     <div class="card mission-card">
-                        <div class="mission-icon">🛡️</div>
+                        <div class="mission-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                                <path d="M12 3L4 7v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-4z"/>
+                                <path d="M12 8v8"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                        </div>
                         <h4 data-lang="en">Mission of Guardianship</h4>
                         <h4 data-lang="zh" style="display: none;">守护之使命</h4>
                         <p data-lang="en">
@@ -245,7 +276,13 @@
                     
                     <div class="values-grid">
                         <div class="value-card">
-                            <div class="value-icon">🧠</div>
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                                    <path d="M12 4a4 4 0 0 0-4 4c0 2 1 3 2 4l-2 8h8l-2-8c1-1 2-2 2-4a4 4 0 0 0-4-4z"/>
+                                    <circle cx="12" cy="8" r="2"/>
+                                    <line x1="10" y1="20" x2="14" y2="20"/>
+                                </svg>
+                            </div>
                             <h4 data-lang="en">Rationality First</h4>
                             <h4 data-lang="zh" style="display: none;">理性至上</h4>
                             <p data-lang="en">Data and logic are the only yardstick, overcoming all intuition and bias.</p>
@@ -253,7 +290,17 @@
                         </div>
                         
                         <div class="value-card">
-                            <div class="value-icon">🔬</div>
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                                    <circle cx="12" cy="8" r="4"/>
+                                    <circle cx="12" cy="8" r="1.5"/>
+                                    <line x1="12" y1="12" x2="12" y2="18"/>
+                                    <line x1="8" y1="18" x2="16" y2="18"/>
+                                    <line x1="9" y1="21" x2="15" y2="21"/>
+                                    <line x1="10" y1="18" x2="10" y2="21"/>
+                                    <line x1="14" y1="18" x2="14" y2="21"/>
+                                </svg>
+                            </div>
                             <h4 data-lang="en">Source Inquiry</h4>
                             <h4 data-lang="zh" style="display: none;">本源探究</h4>
                             <p data-lang="en">Never satisfied with phenomena, always asking deeper "why".</p>
@@ -261,7 +308,12 @@
                         </div>
                         
                         <div class="value-card">
-                            <div class="value-icon">⚙️</div>
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                                </svg>
+                            </div>
                             <h4 data-lang="en">Discipline Forged</h4>
                             <h4 data-lang="zh" style="display: none;">纪律炼成</h4>
                             <p data-lang="en">Transform cognition into repeatable, verifiable automated processes.</p>
@@ -269,7 +321,14 @@
                         </div>
                         
                         <div class="value-card">
-                            <div class="value-icon">🤝</div>
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                                    <path d="M7 11l3 3 7-7"/>
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <path d="M17 8l-1-1"/>
+                                    <path d="M8 15l-1 1"/>
+                                </svg>
+                            </div>
                             <h4 data-lang="en">Wisdom Symbiosis</h4>
                             <h4 data-lang="zh" style="display: none;">智慧共生</h4>
                             <p data-lang="en">Establish rigorous, collaborative ethics between human intelligence and artificial intelligence.</p>
@@ -448,13 +507,13 @@
                         <div class="ecosystem-status">
                             <span class="status-label" data-lang="en">Website:</span>
                             <span class="status-label" data-lang="zh" style="display: none;">网站：</span>
-                            <span class="status-value under-construction" onclick="alert('Website under construction')" style="cursor: pointer;">
-                                <span data-lang="en">Under Construction</span>
-                                <span data-lang="zh" style="display: none;">网站建设中</span>
-                            </span>
+                            <a href="https://alchymia-labs.github.io/" target="_blank" class="status-value ecosystem-link">
+                                <span data-lang="en">alchymia-labs.github.io</span>
+                                <span data-lang="zh" style="display: none;">alchymia-labs.github.io</span>
+                            </a>
                         </div>
                     </div>
-                    
+
                     <!-- Tesseract Trading -->
                     <div class="ecosystem-card">
                         <div class="ecosystem-logo">
@@ -479,10 +538,10 @@
                         <div class="ecosystem-status">
                             <span class="status-label" data-lang="en">Website:</span>
                             <span class="status-label" data-lang="zh" style="display: none;">网站：</span>
-                            <span class="status-value under-construction" onclick="alert('Website under construction')" style="cursor: pointer;">
-                                <span data-lang="en">Under Construction</span>
-                                <span data-lang="zh" style="display: none;">网站建设中</span>
-                            </span>
+                            <a href="https://tesseract-trading-ltd.github.io/" target="_blank" class="status-value ecosystem-link">
+                                <span data-lang="en">tesseract-trading-ltd.github.io</span>
+                                <span data-lang="zh" style="display: none;">tesseract-trading-ltd.github.io</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -509,7 +568,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="images/the-alephain-guild.png" alt="The Alephain Guild Logo" width="32" height="32">
+                    <img src="images/logo.svg" alt="The Alephain Guild Logo" width="36" height="36">
                     <div>
                         <h4>The Alephain Guild</h4>
                         <p class="footer-tagline" data-lang="en">Translators and explorers of the market's Aleph</p>

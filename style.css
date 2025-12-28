@@ -19,7 +19,7 @@
     --color-bg-secondary: var(--color-white);
     --color-text-primary: var(--color-white);
     --color-text-secondary: var(--color-gray);
-    --color-text-inverse: var(--color-black);
+    --color-text-inverse: #000000;
     --color-accent: var(--color-gold);
     --color-border: rgba(255, 255, 255, 0.1);
     
@@ -273,10 +273,16 @@ img {
 }
 
 .nav-logo img {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    border: 2px solid var(--color-gold);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+    transition: all 0.3s ease;
+}
+
+.nav-logo:hover img {
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.9));
+    transform: scale(1.05);
 }
 
 .nav-links {
@@ -411,10 +417,39 @@ img {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--color-black) 0%, #1A1F3C 100%);
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(58, 107, 140, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(58, 107, 140, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, var(--color-black) 0%, #0D1235 50%, #0A0F2C 100%);
     position: relative;
     overflow: hidden;
     padding-top: 80px; /* Account for fixed nav */
+}
+
+/* Animated background particles effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, rgba(212, 175, 55, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(58, 107, 140, 0.4), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(212, 175, 55, 0.2), transparent),
+        radial-gradient(1px 1px at 160px 30px, rgba(58, 107, 140, 0.3), transparent);
+    background-size: 200px 100px;
+    animation: sparkle 20s linear infinite;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@keyframes sparkle {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100px); }
 }
 
 .hero-container {
@@ -551,13 +586,37 @@ img {
 
 .card-highlight {
     border-top: 4px solid var(--color-gold);
-    background: linear-gradient(to bottom, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0) 100%);
+    background: linear-gradient(135deg, rgba(10, 15, 44, 0.95) 0%, rgba(20, 30, 60, 0.98) 100%);
+    color: var(--color-white);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-top: 4px solid var(--color-gold);
+}
+
+.card-highlight h3,
+.card-highlight h4 {
+    color: var(--color-gold);
+}
+
+.card-highlight p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.card-highlight strong {
+    color: var(--color-white);
 }
 
 .card-icon {
-    font-size: 2.5rem;
     margin-bottom: var(--space-md);
     color: var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icon svg {
+    stroke: var(--color-gold);
+    width: 40px;
+    height: 40px;
 }
 
 .card-footer {
@@ -614,9 +673,17 @@ img {
 }
 
 .mission-icon {
-    font-size: 2.5rem;
     margin-bottom: var(--space-md);
     color: var(--color-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mission-icon svg {
+    stroke: var(--color-blue);
+    width: 36px;
+    height: 36px;
 }
 
 /* Value Cards */
@@ -654,9 +721,17 @@ img {
 }
 
 .value-icon {
-    font-size: 2rem;
     margin-bottom: var(--space-md);
     color: var(--color-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.value-icon svg {
+    stroke: var(--color-blue);
+    width: 32px;
+    height: 32px;
 }
 
 /* ==========================================================================
@@ -792,8 +867,32 @@ img {
 .cycle-diagram {
     position: relative;
     width: 100%;
-    height: 400px;
-    margin-bottom: var(--space-xl);
+    max-width: 520px;
+    aspect-ratio: 1;
+    margin: 0 auto var(--space-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cycle-diagram svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 20px rgba(58, 107, 140, 0.2));
+}
+
+.cycle-diagram .phase-node {
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.cycle-diagram .phase-node:hover {
+    filter: brightness(1.3);
+}
+
+.cycle-diagram .phase-node:hover circle:first-child {
+    stroke: var(--color-gold);
+    stroke-width: 4;
 }
 
 /* Phase Cards */
@@ -968,6 +1067,19 @@ img {
     border-bottom-color: var(--color-blue);
 }
 
+.ecosystem-link {
+    color: var(--color-gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-gold);
+    transition: all var(--transition-normal);
+}
+
+.ecosystem-link:hover {
+    color: var(--color-white);
+    border-bottom-color: var(--color-white);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
 .ecosystem-note {
     margin-top: var(--space-xl);
     padding: var(--space-lg);
@@ -1006,10 +1118,10 @@ img {
 }
 
 .footer-brand img {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    border: 1px solid var(--color-gold);
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
 }
 
 .footer-tagline {
@@ -1184,20 +1296,319 @@ img {
     .nav-logo {
         margin-right: var(--space-sm);
     }
-    
+
     .nav-links > * + * {
         margin-left: var(--space-lg);
     }
-    
+
     .hero-actions > * + * {
         margin-left: var(--space-md);
     }
-    
+
     .vision-point {
         margin-bottom: var(--space-lg);
     }
-    
+
     .vision-point:last-child {
         margin-bottom: 0;
     }
+}
+
+/* ==========================================================================
+   16. Mystical Effects & Animations
+   ========================================================================== */
+
+/* Starfield Background Canvas */
+#starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+/* Ensure content is above starfield */
+.nav, main, footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Gold Shimmer Animation for Important Text */
+@keyframes goldShimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.hero-title {
+    background: linear-gradient(
+        90deg,
+        var(--color-white) 0%,
+        var(--color-white) 40%,
+        var(--color-gold) 50%,
+        var(--color-white) 60%,
+        var(--color-white) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShimmer 6s ease-in-out infinite;
+}
+
+/* Glowing Text Effect for Section Titles */
+.section h2 {
+    text-shadow:
+        0 0 10px rgba(212, 175, 55, 0.3),
+        0 0 20px rgba(212, 175, 55, 0.2),
+        0 0 40px rgba(212, 175, 55, 0.1);
+}
+
+/* Card Hover Glow Effects */
+.card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg,
+        transparent 0%,
+        rgba(58, 107, 140, 0.3) 25%,
+        rgba(212, 175, 55, 0.3) 50%,
+        rgba(58, 107, 140, 0.3) 75%,
+        transparent 100%
+    );
+    border-radius: inherit;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
+    filter: blur(8px);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(58, 107, 140, 0.2);
+}
+
+/* Highlight Card Special Glow */
+.card-highlight::before {
+    background: linear-gradient(45deg,
+        transparent 0%,
+        rgba(212, 175, 55, 0.4) 25%,
+        rgba(212, 175, 55, 0.6) 50%,
+        rgba(212, 175, 55, 0.4) 75%,
+        transparent 100%
+    );
+}
+
+.card-highlight:hover {
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(212, 175, 55, 0.3);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.ecosystem-logo img {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Pulse Glow for Icons */
+@keyframes pulseGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(58, 107, 140, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(58, 107, 140, 0.8));
+    }
+}
+
+.mission-icon svg,
+.value-icon svg {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.card-icon svg {
+    animation: pulseGlow 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+}
+
+/* Button Glow Effect */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+    );
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.btn-primary:hover::after {
+    transform: rotate(45deg) translateX(100%);
+}
+
+/* Principle Cards Reveal Effect */
+.principle-item {
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.principle-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-blue));
+    transition: width 0.4s ease;
+}
+
+.principle-item:hover::after {
+    width: 100%;
+}
+
+/* Phase Card Hover Effect */
+.phase-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(212, 175, 55, 0.1),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.phase-card:hover::before {
+    left: 100%;
+}
+
+.phase-card:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Scroll Down Arrow Animation */
+@keyframes bounceArrow {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(10px);
+    }
+    60% {
+        transform: translateY(5px);
+    }
+}
+
+.scroll-down {
+    animation: bounceArrow 2s ease infinite;
+}
+
+/* Navigation Link Mystical Underline */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Quote Block Mystical Style */
+blockquote {
+    position: relative;
+    background: linear-gradient(135deg, rgba(10, 15, 44, 0.8) 0%, rgba(58, 107, 140, 0.1) 100%);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    border-left: 3px solid var(--color-gold);
+}
+
+blockquote::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 4rem;
+    color: var(--color-gold);
+    opacity: 0.3;
+    font-family: serif;
+}
+
+/* Footer Glow Effect */
+.footer {
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
