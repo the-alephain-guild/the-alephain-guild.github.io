@@ -1,0 +1,28 @@
+# GitHub Pages Configuration for The Alephain Guild
+title: The Alephain Guild
+description: Translators and explorers of the market's Aleph
+url: "https://the-alephain-guild.github.io"
+baseurl: ""
+permalink: pretty
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Custom variables
+brand_colors:
+  black: "#0A0F2C"
+  gold: "#D4AF37"
+  gray: "#5A5A5A"
+  blue: "#3A6B8C"
+  white: "#FFFFFF"
