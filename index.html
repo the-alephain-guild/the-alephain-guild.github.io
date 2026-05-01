@@ -191,7 +191,7 @@
     font-family: var(--mono); font-size: 9.5px; color: var(--muted-2);
     margin-right: 6px; vertical-align: 2px;
   }
-  .navlinks a:hover{ color: var(--muted); }
+  @media (hover: hover){ .navlinks a:hover{ color: var(--muted); } }
   .navlinks a.is-active{ color: var(--accent); }
   .navlinks a.is-active .idx{ color: var(--accent); }
   .navlinks a.is-active::after{
@@ -222,7 +222,7 @@
     font-size: 16px;
   }
   .lang-toggle button.active{ color: var(--fg); }
-  .lang-toggle button:hover:not(.active){ color: var(--fg); }
+  @media (hover: hover){ .lang-toggle button:hover:not(.active){ color: var(--fg); } }
   .lang-toggle .sep{
     width: 1px; height: 14px; background: var(--rule);
     margin: 0 2px;
@@ -242,7 +242,7 @@
     transition: border-color .2s ease, background .2s ease, color .2s ease;
     cursor: pointer; position: relative; overflow: hidden;
   }
-  .theme-switch:hover{ border-color: var(--fg); }
+  @media (hover: hover){ .theme-switch:hover{ border-color: var(--fg); } }
   .theme-switch svg{
     width: 14px; height: 14px;
     transition: transform .35s cubic-bezier(.6,.05,.3,1), opacity .25s ease;
@@ -265,10 +265,9 @@
     border: 1px solid var(--fg); color: var(--fg); background: transparent;
     transition: all .2s ease;
   }
-  .btn:hover{ background: var(--fg); color: var(--bg); }
+  @media (hover: hover){ .btn:hover{ background: var(--fg); color: var(--bg); } }
   .btn.solid{ background: var(--fg); color: var(--bg); }
-  .btn.solid:hover{ background: var(--accent-2); border-color: var(--accent-2); color: var(--bar-bg); }
-
+  @media (hover: hover){ .btn.solid:hover{ background: var(--accent-2); border-color: var(--accent-2); color: var(--bar-bg); } }
   /* ================= HERO ================= */
   .hero{
     background: var(--bg);
@@ -376,7 +375,7 @@
     transition: background .25s ease;
   }
   .principle:nth-child(2n){ border-right: 0; }
-  .principle:hover{ background: var(--tint); }
+  @media (hover: hover){ .principle:hover{ background: var(--tint); } }
   .principle .pn{ font-family: var(--mono); font-size: 11px; color: var(--accent-2); letter-spacing: 0.1em; padding-top: 6px; }
   .principle h4{ font-family: var(--serif); font-weight: 400; font-size: 22px; letter-spacing: -0.005em; margin-bottom: 8px; color: var(--fg); }
   .principle h4 em{ font-style: italic; color: var(--accent-2); font-weight: 300; }
@@ -421,7 +420,7 @@
     transition: background .18s;
     height: 100%;
   }
-  .axiom-index .ax-list a:hover{ background: var(--tint); }
+  @media (hover: hover){ .axiom-index .ax-list a:hover{ background: var(--tint); } }
   .axiom-index .ax-list .k{
     font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em;
     color: var(--accent-2);
@@ -561,8 +560,7 @@
   }
   .eco-lab{ border-right: 1px solid var(--rule); }
   .eco-floor{ border-left: 1px solid var(--rule); text-align: right; align-items: flex-end; }
-  .eco-side:hover{ background: var(--bg-2); }
-
+  @media (hover: hover){ .eco-side:hover{ background: var(--bg-2); } }
   .es-h{
     display: flex; justify-content: space-between; align-items: flex-start;
     width: 100%; gap: 24px;
@@ -629,8 +627,7 @@
     border-bottom: 1px solid transparent;
     transition: border-color .18s;
   }
-  .es-link:hover{ border-bottom-color: var(--accent-2); }
-
+  @media (hover: hover){ .es-link:hover{ border-bottom-color: var(--accent-2); } }
   /* Bridge between the two arms */
   .eco-bridge{
     position: relative;
@@ -686,7 +683,7 @@
   footer h5{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 20px; font-weight: 500; }
   footer ul{ list-style: none; display: flex; flex-direction: column; gap: 10px; }
   footer ul a{ font-size: 13px; color: rgba(255,255,255,.7); }
-  footer ul a:hover{ color: var(--accent-2); }
+  @media (hover: hover){ footer ul a:hover{ color: var(--accent-2); } }
   footer .colophon-head{
     margin-top: 48px;
     display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center;
@@ -730,7 +727,7 @@
     color: var(--bar-fg);
     transition: all .2s ease;
   }
-  footer .contact-card:hover{ border-color: var(--accent-2); }
+  @media (hover: hover){ footer .contact-card:hover{ border-color: var(--accent-2); } }
   footer .contact-card__label{
     font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--accent-2);
@@ -788,8 +785,8 @@
     position: relative;
   }
   .research .toc-row:last-child{ border-bottom: 0; }
-  .research .toc-row:hover{ background: var(--paper); }
-  .research .toc-row:hover .toc-folio{ color: var(--accent); }
+  @media (hover: hover){ .research .toc-row:hover{ background: var(--paper); } }
+  @media (hover: hover){ .research .toc-row:hover .toc-folio{ color: var(--accent); } }
   .research .toc-row .toc-folio{
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
     color: var(--muted-2);
@@ -818,7 +815,7 @@
     letter-spacing: 0.04em; text-align: right;
     border-bottom: 1px solid transparent;
   }
-  .research .toc-row:hover .toc-page{ border-bottom-color: var(--accent); color: var(--accent); }
+  @media (hover: hover){ .research .toc-row:hover .toc-page{ border-bottom-color: var(--accent); color: var(--accent); } }
   .research .toc-foot{
     display: grid; grid-template-columns: 1fr auto;
     align-items: center; gap: 24px;
@@ -832,7 +829,7 @@
     color: var(--fg); border-bottom: 1px solid var(--accent);
     padding-bottom: 2px;
   }
-  .research .toc-foot .archive:hover{ color: var(--accent); }
+  @media (hover: hover){ .research .toc-foot .archive:hover{ color: var(--accent); } }
   .research .toc-subscribe{
     margin-top: 28px;
     display: grid; grid-template-columns: 1.5fr 1fr auto;
@@ -859,10 +856,9 @@
     text-transform: uppercase;
     transition: background .15s ease, border-color .15s ease;
   }
-  .research .toc-subscribe .cta:hover{ background: rgba(255,255,255,.08); border-color: var(--accent-2); }
+  @media (hover: hover){ .research .toc-subscribe .cta:hover{ background: rgba(255,255,255,.08); border-color: var(--accent-2); } }
   .research .toc-subscribe .cta::after{ content: "→"; font-size: 13px; transition: transform .15s ease; }
-  .research .toc-subscribe .cta:hover::after{ transform: translateX(3px); }
-
+  @media (hover: hover){ .research .toc-subscribe .cta:hover::after{ transform: translateX(3px); } }
   /* In dark/slate mode, --fg is light — invert the subscribe slab so it reads as a dark CTA on light surface */
   [data-theme="slate"] .research .toc-subscribe{
     background: #0E1218;
@@ -1085,7 +1081,7 @@
     background: var(--bg);
     transition: background .25s;
   }
-  .cap-card:hover{ background: var(--tint); }
+  @media (hover: hover){ .cap-card:hover{ background: var(--tint); } }
   .cap-card-h{
     display: flex; align-items: baseline; gap: 12px;
   }
