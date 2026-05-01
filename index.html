@@ -1042,7 +1042,12 @@
     margin: 0;
   }
   .q-prompt em{ font-style: italic; color: var(--accent-2); font-weight: 300; }
-  html[lang="zh"] .q-prompt{ font-style: normal; line-height: 1.32; letter-spacing: 0.01em; }
+  html[lang="zh"] .q-prompt{
+    font-style: normal; line-height: 1.32; letter-spacing: 0.01em;
+    /* In zh, the <br>-separated phrases are short; let them lay out
+       greedily instead of being re-split by `text-wrap: balance`. */
+    text-wrap: initial;
+  }
   html[lang="zh"] .q-prompt em{ font-style: normal; }
 
   /* Bridge — a hairline + small tag separating question from declaration */
@@ -1069,7 +1074,16 @@
   .q-h1 em{
     font-style: italic; color: var(--accent-2); font-weight: var(--serif-weight);
   }
-  html[lang="zh"] .q-h1{ letter-spacing: 0.005em; line-height: 1.12; }
+  /* zh: the English 120px ceiling is too large for hanzi (square glyphs
+     are ~2x wider than Latin letters), so a 12-13 character phrase like
+     “翻译为有限且确定的 alpha” overflows the 1180px container and forces
+     a mid-phrase break. Cap the type smaller and disable balance so each
+     <br>-separated phrase lays out as a single line. */
+  html[lang="zh"] .q-h1{
+    letter-spacing: 0.005em; line-height: 1.12;
+    font-size: calc(clamp(36px, 5.6vw, 80px) * var(--display-scale));
+    text-wrap: initial;
+  }
   html[lang="zh"] .q-h1 em{ font-style: normal; }
   .q-foot{
     margin-top: 48px;
