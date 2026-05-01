@@ -295,10 +295,13 @@
     color: var(--fg); max-width: 1180px; margin-top: 28px;
   }
   .hero h1 em{ font-style: italic; color: var(--accent-2); font-weight: var(--serif-weight); }
-  /* Chinese display tightens hanzi a touch and removes italic affectation. */
+  /* Chinese display tightens hanzi a touch and removes italic affectation.
+     `nowrap` keeps multi-character gold em-phrases (e.g. 无穷, 公理) from
+     breaking mid-word — Chinese text otherwise allows line breaks between
+     any two glyphs. */
   html[lang="zh"] .hero h1{ letter-spacing: 0.005em; line-height: 1.1; }
   html[lang="zh"] .hero h1 em,
-  html[lang="zh"] em{ font-style: normal; }
+  html[lang="zh"] em{ font-style: normal; white-space: nowrap; }
 
   .hero-deck{
     display: grid; grid-template-columns: 4fr 5fr; gap: 64px;
