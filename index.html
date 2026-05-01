@@ -1226,7 +1226,7 @@
   .engage-form .ef-result.is-error{ color: var(--dn); }
   .engage-form .ef-result.is-success{ color: var(--up); }
   /* Honeypot — visually hidden, accessible to bots only */
-  .engage-form input[name="_gotcha"]{
+  .engage-form input[name="_honey"]{
     position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;
   }
 
@@ -2124,10 +2124,14 @@
       <button class="btn solid" id="engageOpenBtn" type="button" data-i18n="engage.cta.btn" aria-controls="engageForm" aria-expanded="false">Initiate engagement →</button>
     </div>
 
-    <!-- Engagement form (Formspree) — replace YOUR_FORM_ID with the live id. -->
-    <form class="engage-form" id="engageForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" hidden novalidate>
+    <!-- Engagement form (FormSubmit) — first submission triggers an
+         activation email to ir@alephain.com; click the link in it to
+         go live. After that, all submissions arrive in that inbox. -->
+    <form class="engage-form" id="engageForm" action="https://formsubmit.co/ajax/ir@alephain.com" method="POST" hidden novalidate>
       <input type="hidden" name="_subject" value="Alephain · Initial Inquiry">
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="ef-grid">
         <label class="ef-field">
@@ -3074,7 +3078,7 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       // Honeypot trip — silently pretend success
-      if (form.querySelector('input[name="_gotcha"]').value) {
+      if (form.querySelector('input[name="_honey"]').value) {
         result.className = 'ef-result is-success';
         result.textContent = t('engage.form.success', 'Thank you.');
         return;
