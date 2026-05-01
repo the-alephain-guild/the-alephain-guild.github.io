@@ -1,624 +1,2944 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Alephain Guild - Translators and explorers of the market's Aleph</title>
-    <meta name="description" content="We are translators and explorers of the market's Aleph. Through algorithmic insight, we seek the deterministic origin of alpha returns.">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="The Alephain Guild">
-    <meta property="og:description" content="Translators and explorers of the market's Aleph">
-    <meta property="og:image" content="images/the-alephain-guild.png">
-    <meta property="og:url" content="https://alephain.com">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="The Alephain Guild">
-    <meta name="twitter:description" content="Translators and explorers of the market's Aleph">
-    <meta name="twitter:image" content="images/the-alephain-guild.png">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" sizes="48x48">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#050A1A">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://alephain.com">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alephain — Quantitative Research & Systematic Trading</title>
+
+<!-- Favicons · brand v2 RFC-2026-01 · A-route, auto light/dark via prefers-color-scheme -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Noto+Serif+SC:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8ET23JLKJE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-8ET23JLKJE', {
+    /* Privacy: drop last IP octet before GA ingests — PDPO / GDPR baseline */
+    anonymize_ip: true,
+    /* Cross-subdomain measurement: stitch user across
+       alephain.com / alchymia.alephain.com / tesseract.alephain.com */
+    cookie_domain: 'auto',
+    cookie_flags: 'SameSite=None;Secure',
+    /* When deployed on a primary domain, also list cross-domains
+       in GA4 admin > Data Streams > Configure tag settings.   */
+    linker: {
+      domains: ['alephain.com', 'alchymia.alephain.com', 'tesseract.alephain.com']
+    }
+  });
+</script>
+<style>
+  /* ================================================================
+     ALEPHAIN · v3
+     Two-mode (Paper / Slate). Wordmark identity. Technical-clean.
+     ================================================================ */
+
+  /* -------- PAPER (default / day) -------- */
+  :root,
+  [data-theme="paper"]{
+    --bg:        #FAFAF7;
+    --bg-2:      #F2F2EC;
+    --paper:     #F2EFE6;
+    --fg:        #0F1115;
+    --fg-2:      #1B1E25;
+    --muted:     #6B727E;
+    --muted-2:   #9099A6;
+    --rule:      #E1E1DA;
+    --rule-soft: #ECECE5;
+    --bar-bg:    #0F1115;
+    --bar-fg:    #FAFAF7;
+    --accent:    #9099A6;     /* cool neutral, not gold */
+    --accent-2:  #B8902F;     /* tempered gold — used sparingly */
+    --up:        #3C7A5B;
+    --dn:        #A85345;
+    --tint:      rgba(15,17,21,0.04);
+  }
+  /* -------- SLATE (night) -------- */
+  [data-theme="slate"]{
+    --bg:        #1A1F26;
+    --bg-2:      #141921;
+    --paper:     #20262F;
+    --fg:        #EDE9DD;
+    --fg-2:      #F5F2EA;
+    --muted:     #8C95A3;
+    --muted-2:   #6B7382;
+    --rule:      #2E3540;
+    --rule-soft: #232932;
+    --bar-bg:    #0E1218;
+    --bar-fg:    #EDE9DD;
+    --accent:    #C8A24A;     /* warm gold reads well on slate */
+    --accent-2:  #C8A24A;
+    --up:        #7BB593;
+    --dn:        #D27E70;
+    --tint:      rgba(237,233,221,0.04);
+  }
+
+  :root{
+    --serif: "Newsreader", "Source Serif Pro", "Songti SC", Georgia, serif;
+    --sans:  "Inter", -apple-system, "Segoe UI", "PingFang SC", "Source Han Sans", sans-serif;
+    --mono:  "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    --max: 1320px;
+    --gutter: 32px;
+    --display-scale: 1;
+    --serif-weight: 300;
+    --section-pad: 96px;
+    --ticker-dur: 60s;
+  }
+  /* Chinese mode swaps the type stack to Noto Serif/Sans SC for proper hanzi rendering. */
+  html[lang="zh"]{
+    --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", "Newsreader", Georgia, serif;
+    --sans:  "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Inter", -apple-system, sans-serif;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--sans);
+    font-size: 15px; line-height: 1.55;
+    color: var(--fg); background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01","cv11","tnum";
+    transition: background-color .35s ease, color .35s ease;
+  }
+  ::selection{ background: var(--fg); color: var(--bg); }
+  a{ color: inherit; text-decoration: none; }
+  button{ font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  img{ display:block; max-width:100%; }
+
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  .num{ font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* ================= TOPBAR ================= */
+  .topbar{
+    background: var(--bar-bg); color: var(--bar-fg);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
+  }
+  .topbar .wrap{
+    display: flex; justify-content: space-between; align-items: center;
+    height: 32px;
+  }
+  .topbar .left, .topbar .right{ display: flex; gap: 28px; align-items: center; opacity: .82; }
+  .topbar .live{ color: var(--accent-2); }
+  .topbar .live::before{
+    content:""; display: inline-block; width:6px; height:6px; border-radius:50%;
+    background: var(--accent-2); margin-right:8px; vertical-align:1px;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.35} }
+
+  /* ================= NAV ================= */
+  .nav{
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    position: sticky; top: 0; z-index: 50;
+    transition: background-color .35s ease, border-color .35s ease;
+  }
+  .nav .wrap{
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; height: 76px; gap: 40px;
+  }
+
+  /* WORDMARK identity */
+  .brand{ display: flex; align-items: baseline; gap: 12px; }
+  .brand .name{
+    font-family: var(--sans); font-weight: 600; font-size: 18px;
+    letter-spacing: -0.005em; color: var(--fg);
+  }
+  .brand .div{
+    width: 1px; height: 16px; background: var(--rule);
+    align-self: center; margin: 0 2px;
+  }
+  .brand .sub{
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  .navlinks{ display: flex; justify-content: center; gap: 36px; }
+  .navlinks a{
+    font-size: 13px; font-weight: 500; color: var(--fg); padding: 6px 0;
+    position: relative;
+    transition: color .15s ease;
+  }
+  .navlinks a .idx{
+    font-family: var(--mono); font-size: 9.5px; color: var(--muted-2);
+    margin-right: 6px; vertical-align: 2px;
+  }
+  .navlinks a:hover{ color: var(--muted); }
+  .navlinks a.is-active{ color: var(--accent); }
+  .navlinks a.is-active .idx{ color: var(--accent); }
+  .navlinks a.is-active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-1px;
+    height:2px; background: var(--accent);
+  }
+
+  .nav-right{ display: flex; align-items: center; gap: 14px; }
+
+  /* ====== Refined nav controls ======
+     Language selector: a typographic switch — the inactive lang is muted,
+     active is full fg, separated by a vertical hairline. No box, no fills.
+     Theme: single icon button that morphs between sun/moon, like a switch.
+  */
+  .lang-toggle{
+    display: inline-flex; align-items: center; gap: 0;
+    font-family: var(--serif); font-size: 14px; font-weight: 400;
+    letter-spacing: 0; line-height: 1;
+    user-select: none;
+  }
+  .lang-toggle button{
+    padding: 6px 10px; color: var(--muted-2); background: transparent;
+    transition: color .18s ease;
+    font-family: inherit; font-size: inherit; letter-spacing: inherit;
+  }
+  .lang-toggle button[data-lang="zh"]{
+    /* Slightly larger optical size for hanzi against latin */
+    font-size: 16px;
+  }
+  .lang-toggle button.active{ color: var(--fg); }
+  .lang-toggle button:hover:not(.active){ color: var(--fg); }
+  .lang-toggle .sep{
+    width: 1px; height: 14px; background: var(--rule);
+    margin: 0 2px;
+  }
+
+  /* Vertical rule between control groups */
+  .nav-rule{
+    width: 1px; height: 18px; background: var(--rule); margin: 0 4px;
+  }
+
+  /* Theme switch — circular icon button */
+  .theme-switch{
+    width: 32px; height: 32px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--rule); border-radius: 50%;
+    color: var(--fg); background: transparent;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
+    cursor: pointer; position: relative; overflow: hidden;
+  }
+  .theme-switch:hover{ border-color: var(--fg); }
+  .theme-switch svg{
+    width: 14px; height: 14px;
+    transition: transform .35s cubic-bezier(.6,.05,.3,1), opacity .25s ease;
+  }
+  /* Cross-fade the two icons via stacking */
+  .theme-switch .icon{
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    transition: transform .45s cubic-bezier(.6,.05,.3,1), opacity .25s ease;
+  }
+  .theme-switch .icon.sun{ opacity: 1; }
+  .theme-switch .icon.moon{ opacity: 0; transform: translate(-50%, -50%) rotate(-90deg); }
+  [data-theme="slate"] .theme-switch .icon.sun{ opacity: 0; transform: translate(-50%, -50%) rotate(90deg); }
+  [data-theme="slate"] .theme-switch .icon.moon{ opacity: 1; transform: translate(-50%, -50%) rotate(0deg); }
+
+  .btn{
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 36px; padding: 0 16px;
+    font-size: 12.5px; font-weight: 500; letter-spacing: 0.04em;
+    border: 1px solid var(--fg); color: var(--fg); background: transparent;
+    transition: all .2s ease;
+  }
+  .btn:hover{ background: var(--fg); color: var(--bg); }
+  .btn.solid{ background: var(--fg); color: var(--bg); }
+  .btn.solid:hover{ background: var(--accent-2); border-color: var(--accent-2); color: var(--bar-bg); }
+
+  /* ================= HERO ================= */
+  .hero{
+    background: var(--bg);
+    padding: 72px 0 0; border-bottom: 1px solid var(--rule);
+    transition: background-color .35s ease;
+  }
+  .hero-meta{
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 24px;
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .hero-meta .center{ display: flex; align-items: center; gap: 14px; justify-content: center; }
+  .hero-meta .center::before, .hero-meta .center::after{
+    content:""; width: 36px; height: 1px; background: var(--rule);
+  }
+  .hero-meta .right{ text-align: right; }
+
+  .hero h1{
+    font-family: var(--serif); font-weight: var(--serif-weight);
+    font-size: calc(clamp(48px, 7vw, 104px) * var(--display-scale));
+    line-height: 0.96; letter-spacing: -0.022em;
+    color: var(--fg); max-width: 1180px; margin-top: 28px;
+  }
+  .hero h1 em{ font-style: italic; color: var(--accent-2); font-weight: var(--serif-weight); }
+  /* Chinese display tightens hanzi a touch and removes italic affectation. */
+  html[lang="zh"] .hero h1{ letter-spacing: 0.005em; line-height: 1.1; }
+  html[lang="zh"] .hero h1 em,
+  html[lang="zh"] em{ font-style: normal; }
+
+  .hero-deck{
+    display: grid; grid-template-columns: 4fr 5fr; gap: 64px;
+    padding: 28px 0 56px; border-top: 1px solid var(--rule); margin-top: 24px;
+  }
+  .hero-deck .lede{
+    font-family: var(--serif); font-size: 21px; line-height: 1.45; font-weight: 400;
+    color: var(--fg); max-width: 460px;
+  }
+  .hero-deck .lede::first-letter{
+    font-size: 64px; line-height: 0.9; float: left; margin: 6px 10px 0 -2px;
+    font-weight: 400; color: var(--accent-2);
+  }
+  .hero-deck .body{ display: flex; flex-direction: column; gap: 24px; }
+  .hero-deck .body p{ font-size: 14.5px; line-height: 1.7; color: var(--muted); max-width: 520px; }
+  .hero-cta{ display: flex; gap: 14px; }
+
+  /* Stats */
+  .stats{
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .stats .stat{
+    padding: 28px; border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .stats .stat:last-child{ border-right: 0; }
+  .stats .label{
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted-2);
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .stats .value{
+    font-family: var(--serif); font-weight: 300; font-size: 44px; line-height: 1;
+    letter-spacing: -0.02em; color: var(--fg); font-variant-numeric: tabular-nums;
+  }
+  .stats .value sup{ font-size: 16px; color: var(--accent-2); margin-left: 4px; vertical-align: top; top: 6px; }
+  .stats .foot{ font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* Ticker */
+  .ticker{
+    background: var(--bar-bg); color: var(--bar-fg); overflow: hidden;
+    position: relative; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .ticker::before, .ticker::after{
+    content:""; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+  }
+  .ticker::before{ left: 0; background: linear-gradient(to right, var(--bar-bg), transparent); }
+  .ticker::after{  right: 0; background: linear-gradient(to left, var(--bar-bg), transparent); }
+  .ticker-track{
+    display: flex; gap: 56px; padding: 16px 0; width: max-content;
+    animation: slide var(--ticker-dur) linear infinite;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+  }
+  .ticker-track.paused{ animation-play-state: paused; }
+  .ticker-item{ display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .ticker-item .px{ opacity: .65; }
+  .ticker-item .chg.up{ color: var(--up); }
+  .ticker-item .chg.dn{ color: var(--dn); }
+  .ticker-item .sep{ width: 4px; height: 4px; border-radius: 50%; background: var(--accent-2); opacity: .55; }
+  @keyframes slide{ 0%{ transform: translateX(0)} 100%{ transform: translateX(-50%)} }
+
+  /* ================= SECTION ================= */
+  section.s{ padding: var(--section-pad) 0; }
+  .s-head{
+    display: grid; grid-template-columns: 1fr 2fr; gap: 64px;
+    padding-bottom: 56px; border-bottom: 1px solid var(--rule); margin-bottom: 56px;
+  }
+  .s-head .label{ display: flex; align-items: flex-start; gap: 16px; }
+  .s-head .label .num{ font-family: var(--mono); font-size: 12px; color: var(--accent-2); letter-spacing: 0.1em; }
+  .s-head .label .txt{
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--muted-2);
+  }
+  .s-head .title{
+    font-family: var(--serif); font-weight: var(--serif-weight);
+    font-size: calc(clamp(34px, 4vw, 56px) * var(--display-scale));
+    line-height: 1.05;
+    letter-spacing: -0.015em; color: var(--fg);
+  }
+  .s-head .title em{ font-style: italic; color: var(--accent-2); font-weight: var(--serif-weight); }
+  html[lang="zh"] .s-head .title{ letter-spacing: 0.01em; line-height: 1.2; }
+  .s-head .deck{ margin-top: 24px; max-width: 720px; color: var(--muted); font-size: 15.5px; line-height: 1.7; }
+
+  /* MANDATE — v5.1 reduced */
+  .mandate-grid{
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--rule);
+  }
+  .mandate-grid .col{
+    padding: 40px 36px 44px; border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .mandate-grid .col:nth-child(3n){ border-right: 0; }
+  .mandate-grid .col .roman{
+    font-family: var(--serif); font-style: italic; font-size: 15px;
+    color: var(--accent-2); font-weight: 300;
+  }
+  .mandate-grid .col h3{
+    font-family: var(--serif); font-weight: 300; font-size: 22px;
+    line-height: 1.2; letter-spacing: -0.005em; margin: 0;
+    color: var(--fg);
+  }
+  .mandate-grid .col h3 em{ font-style: italic; color: var(--muted); font-weight: 300; }
+  .mandate-grid .col p{
+    color: var(--muted); font-size: 14px; line-height: 1.7;
+    margin: 0; max-width: 32ch;
+  }
+  .mandate-grid .col .footnote{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted-2);
+    margin-top: auto; padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex; gap: 14px; align-items: baseline;
+  }
+  .mandate-grid .col .footnote .dot{
+    width: 4px; height: 4px; background: var(--accent-2); border-radius: 0;
+    display: inline-block; flex-shrink: 0;
+  }
+  /* legacy tags hidden under v5.1 */
+  .mandate-grid .col .tags{ display: none; }
+  .mandate-grid .col .tag{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted-2);
+    padding: 4px 8px; border: 1px solid var(--rule);
+  }
+
+  /* PRINCIPLES — invert section: paper-mode shows on tinted bg, slate already dark */
+  .invert{ background: var(--bg-2); }
+  .principles{
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--rule);
+  }
+  .principle{
+    padding: 36px;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    display: grid; grid-template-columns: 64px 1fr; gap: 24px;
+    transition: background .25s ease;
+  }
+  .principle:nth-child(2n){ border-right: 0; }
+  .principle:hover{ background: var(--tint); }
+  .principle .pn{ font-family: var(--mono); font-size: 11px; color: var(--accent-2); letter-spacing: 0.1em; padding-top: 6px; }
+  .principle h4{ font-family: var(--serif); font-weight: 400; font-size: 22px; letter-spacing: -0.005em; margin-bottom: 8px; color: var(--fg); }
+  .principle h4 em{ font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .principle p{ font-size: 13.5px; line-height: 1.7; color: var(--muted); }
+  .principle .axiom{
+    font-family: var(--mono); font-size: 11px; color: var(--muted-2);
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--rule);
+    letter-spacing: 0.04em;
+  }
+
+  /* Σ AXIOM INDEX (P1.2) */
+  .axiom-index{
+    display: grid; grid-template-columns: 200px 1fr;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    align-items: stretch;
+  }
+  .axiom-index .ax-sigma{
+    padding: 22px 24px; border-right: 1px solid var(--rule);
+    display: flex; align-items: center; gap: 14px;
+    background: var(--tint);
+  }
+  .axiom-index .ax-glyph{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 32px; color: var(--accent-2); line-height: 1;
+  }
+  .axiom-index .ax-glyph-label{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted-2);
+  }
+  .axiom-index .ax-list{
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(6, 1fr);
+  }
+  .axiom-index .ax-list li{
+    border-right: 1px solid var(--rule);
+  }
+  .axiom-index .ax-list li:last-child{ border-right: 0; }
+  .axiom-index .ax-list a{
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 18px 16px;
+    color: var(--fg); text-decoration: none;
+    transition: background .18s;
+    height: 100%;
+  }
+  .axiom-index .ax-list a:hover{ background: var(--tint); }
+  .axiom-index .ax-list .k{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em;
+    color: var(--accent-2);
+  }
+  .axiom-index .ax-list .v{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 15px; line-height: 1.25; color: var(--muted);
+    letter-spacing: -0.005em;
+  }
+  html[lang="zh"] .axiom-index .ax-list .v{ font-style: normal; }
+
+  /* Σ axiom summary line (above pullquote) */
+  .axiom-summary{
+    margin-top: 56px; padding: 18px 0;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.16em; color: var(--muted-2);
+    text-transform: uppercase;
+  }
+
+  .pullquote{
+    margin-top: 80px; padding: 64px 0;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+  .pullquote q{
+    quotes: none; display: block; max-width: 1000px; margin: 0 auto;
+    font-family: var(--serif); font-weight: 300; font-style: italic;
+    font-size: clamp(28px, 3.4vw, 44px); line-height: 1.3;
+    color: var(--fg); letter-spacing: -0.005em;
+  }
+  .pullquote q::before, .pullquote q::after{ color: var(--accent-2); font-size: 1.4em; line-height: 0; vertical-align: -0.25em; }
+  .pullquote q::before{ content: "“"; margin-right: 6px; }
+  .pullquote q::after{ content: "”"; margin-left: 6px; }
+  .pullquote .cite{
+    margin-top: 24px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase;
+  }
+
+  /* METHOD */
+  .method{ display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+  .method .legend{ position: sticky; top: 100px; display: flex; flex-direction: column; gap: 24px; }
+  .method .legend .key{ display: flex; align-items: flex-start; gap: 14px; }
+  .method .legend .k{ font-family: var(--mono); font-size: 11px; color: var(--accent-2); letter-spacing: 0.1em; padding-top: 4px; min-width: 28px; }
+  .method .legend .v{ font-family: var(--serif); font-size: 16px; color: var(--fg); }
+
+  /* P1.3 · funnel data block */
+  .method .funnel{
+    margin-top: 12px; padding: 22px 0 22px;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .method .funnel-h{
+    display: flex; align-items: center; gap: 12px;
+  }
+  .method .funnel-h .fh-tag{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent-2);
+  }
+  .method .funnel-h .fh-rule{
+    flex: 1; height: 1px; background: var(--rule);
+  }
+  .method .funnel-rows{
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .method .fr{
+    display: grid; grid-template-columns: 1fr auto;
+    grid-template-areas: "l v" "bar bar";
+    gap: 4px 12px; align-items: baseline;
+  }
+  .method .fr-l{
+    grid-area: l;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted-2);
+  }
+  .method .fr-v{
+    grid-area: v;
+    font-family: var(--serif); font-weight: 300; font-size: 22px;
+    line-height: 1; color: var(--fg);
+  }
+  .method .fr.retired .fr-v{ color: var(--muted); }
+  .method .fr-bar{
+    grid-area: bar;
+    height: 2px; background: var(--rule); position: relative;
+    margin-top: 6px;
+  }
+  .method .fr-bar span{
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: var(--w, 0%); background: var(--accent-2);
+  }
+  .method .fr.retired .fr-bar span{ background: var(--muted-2); }
+  .method .funnel-foot{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em;
+    color: var(--muted); line-height: 1.6;
+  }
+  .phases{ display: flex; flex-direction: column; }
+  .phase{
+    display: grid; grid-template-columns: 56px 1fr auto; gap: 28px;
+    padding: 36px 0; border-top: 1px solid var(--rule); align-items: start;
+  }
+  .phase:last-child{ border-bottom: 1px solid var(--rule); }
+  .phase .pn{ font-family: var(--mono); font-size: 12px; color: var(--accent-2); letter-spacing: 0.1em; }
+  .phase h4{ font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 6px; color: var(--fg); }
+  .phase h4 em{ font-style: italic; color: var(--muted); font-weight: 300; }
+  .phase .desc{ color: var(--muted); font-size: 14.5px; line-height: 1.65; max-width: 520px; }
+  .phase .meta{
+    display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em;
+    color: var(--muted-2); text-transform: uppercase;
+  }
+  .phase .meta .v{ color: var(--fg); }
+  .phase .arts{
+    grid-column: 2 / span 2; margin-top: 16px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+  }
+  .phase .arts .art{
+    border: 1px solid var(--rule); padding: 10px 12px;
+    display: flex; justify-content: space-between; gap: 12px;
+  }
+  .phase .arts .art span:last-child{ color: var(--accent-2); }
+
+  /* ECOSYSTEM · v5.1 — research lab vs trading floor duality */
+  .eco-duo{
+    display: grid;
+    grid-template-columns: 1fr 120px 1fr;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    align-items: stretch;
+  }
+  .eco-side{
+    padding: 56px 48px;
+    display: flex; flex-direction: column; gap: 22px;
+    background: var(--bg);
+    transition: background .25s;
+  }
+  .eco-lab{ border-right: 1px solid var(--rule); }
+  .eco-floor{ border-left: 1px solid var(--rule); text-align: right; align-items: flex-end; }
+  .eco-side:hover{ background: var(--bg-2); }
+
+  .es-h{
+    display: flex; justify-content: space-between; align-items: flex-start;
+    width: 100%; gap: 24px;
+  }
+  .eco-floor .es-h{ flex-direction: row-reverse; }
+  .es-glyph{
+    color: var(--accent-2); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .es-meta{
+    display: flex; flex-direction: column; gap: 6px;
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted-2);
+  }
+  .eco-floor .es-meta{ align-items: flex-end; }
+  .es-status.ok{ color: var(--up); }
+
+  .es-name h3{
+    font-family: var(--serif); font-weight: 300; font-size: 38px;
+    line-height: 1.05; letter-spacing: -0.012em; color: var(--fg);
+    margin: 0;
+  }
+  .es-name h3 em{ font-style: italic; color: var(--accent-2); font-weight: 300; }
+  html[lang="zh"] .es-name h3 em{ font-style: normal; }
+  .es-role{
+    margin-top: 8px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted-2);
+  }
+  .es-body{
+    color: var(--muted); font-size: 14.5px; line-height: 1.7;
+    max-width: 460px; margin: 0;
+  }
+
+  .es-spec{
+    margin: 0; padding: 18px 0 0;
+    border-top: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 10px;
+    width: 100%;
+  }
+  .es-spec > div{
+    display: grid; grid-template-columns: 110px 1fr; gap: 18px;
+    align-items: baseline;
+  }
+  .eco-floor .es-spec > div{
+    grid-template-columns: 1fr 110px; direction: rtl;
+  }
+  .eco-floor .es-spec > div *{ direction: ltr; }
+  .es-spec dt{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted-2);
+  }
+  .es-spec dd{
+    margin: 0;
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 15px; color: var(--fg); line-height: 1.4;
+  }
+  html[lang="zh"] .es-spec dd{ font-style: normal; }
+
+  .es-link{
+    margin-top: auto;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+    color: var(--accent-2); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .18s;
+  }
+  .es-link:hover{ border-bottom-color: var(--accent-2); }
+
+  /* Bridge between the two arms */
+  .eco-bridge{
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .eb-line{
+    position: absolute; left: 50%; top: 56px; bottom: 56px;
+    width: 1px; background: var(--rule);
+  }
+  .eb-arrows{
+    display: flex; flex-direction: column; align-items: center; gap: 22px;
+    z-index: 1;
+  }
+  .eb-arrow{
+    background: var(--bg-2); padding: 8px 0;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em;
+    color: var(--accent-2); text-transform: uppercase;
+    writing-mode: vertical-rl; text-orientation: mixed;
+  }
+  .eb-down .eb-l{ transform: rotate(180deg); display: inline-block; }
+  .eb-node{
+    width: 60px; height: 60px;
+    border: 1px solid var(--accent-2);
+    background: var(--bg-2);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 2px;
+  }
+  .eb-aleph{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 28px; line-height: 1; color: var(--accent-2);
+  }
+  .eb-aleph-l{
+    font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.14em;
+    color: var(--muted-2); text-transform: uppercase;
+  }
+
+  .eco-foot{
+    margin-top: 28px; text-align: center;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    color: var(--muted); text-transform: uppercase;
+  }
+
+  /* legacy .eco rules (kept under the old class) — left untouched for now */
+  .eco{ display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); }
+  .eco .card{
+    padding: 48px; border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 20px;
+    background: var(--bg); transition: background .25s ease;
+  }
+  .eco .card:last-child{ border-right: 0; }
+  .eco .card:hover{ background: var(--bg-2); }
+  .eco .top{ display: flex; justify-content: space-between; align-items: flex-start; }
+  .eco .logo{
+    width: 88px; height: 88px;
+    background: var(--bar-bg);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--rule);
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    color: var(--bar-fg); font-size: 38px; letter-spacing: -0.02em;
+  }
+  .eco .meta{ text-align: right; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); line-height: 1.7; }
+  .eco .meta .ok{ color: var(--up); }
+  .eco h3{ font-family: var(--serif); font-weight: 400; font-size: 36px; letter-spacing: -0.01em; margin-top: 4px; color: var(--fg); }
+  .eco h3 em{ font-style: italic; color: var(--accent-2); font-weight: 300; }
+  .eco .role{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); }
+  .eco p{ color: var(--muted); font-size: 14.5px; line-height: 1.7; max-width: 520px; }
+  .eco .link{
+    font-family: var(--mono); font-size: 12px; color: var(--fg);
+    border-bottom: 1px solid var(--accent-2); padding-bottom: 2px;
+    align-self: flex-start; margin-top: 8px;
+  }
+  .eco .link::after{ content: " ↗"; color: var(--accent-2); }
+  .eco .link:hover{ color: var(--accent-2); }
+
+  /* PRESS */
+  .press{
+    display: grid; grid-template-columns: auto 1fr; gap: 64px; align-items: center;
+    padding: 56px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .press .label{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-2); }
+  .press .row{
+    display: flex; gap: 56px; flex-wrap: wrap; align-items: center;
+    font-family: var(--serif); font-style: italic; font-size: 22px;
+    color: var(--muted); font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer{ background: var(--bar-bg); color: var(--bar-fg); padding: 80px 0 32px; }
+  footer .top{
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  footer .brand-block .name{ font-family: var(--sans); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+  footer .brand-block .tag{ font-family: var(--serif); font-style: italic; color: var(--accent-2); font-size: 16px; margin-top: 12px; }
+  footer .brand-block p{ color: rgba(255,255,255,.55); font-size: 13px; line-height: 1.7; margin-top: 20px; max-width: 360px; }
+  footer h5{ font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 20px; font-weight: 500; }
+  footer ul{ list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  footer ul a{ font-size: 13px; color: rgba(255,255,255,.7); }
+  footer ul a:hover{ color: var(--accent-2); }
+  footer .colophon-head{
+    margin-top: 48px;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+  }
+  footer .colophon-head .ornament{ height: 1px; background: rgba(255,255,255,.18); }
+  footer .colophon-head .glyph{ color: var(--accent-2); font-family: var(--serif); font-style: italic; font-size: 14px; letter-spacing: 0; text-transform: none; }
+  footer .bottom{
+    margin-top: 16px; padding-top: 0;
+    border-top: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    font-family: var(--mono); font-size: 10.5px; color: rgba(255,255,255,.5); letter-spacing: 0.08em;
+  }
+  footer .bottom .col{ display: flex; flex-direction: column; gap: 6px; }
+  footer .bottom .col .k{ color: rgba(255,255,255,.32); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  footer .bottom .col .v{ color: rgba(255,255,255,.78); font-size: 11.5px; letter-spacing: 0.04em; }
+  footer .bottom .col.signature .v{ font-family: var(--serif); font-style: italic; font-size: 13px; letter-spacing: 0; color: var(--accent-2); }
+  footer .legalbar{
+    margin-top: 24px; padding-top: 16px;
+    border-top: 1px dashed rgba(255,255,255,.1);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: 0.1em;
+  }
+  footer .legalbar .seal{
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 4px 10px; border: 1px solid rgba(255,255,255,.18);
+    color: rgba(255,255,255,.6);
+  }
+  footer .legalbar .seal::before{
+    content:""; width:6px; height:6px; background: var(--accent-2); border-radius: 50%;
+  }
+
+  /* CONTACT card in footer */
+  footer .contact-card{
+    margin-top: 24px;
+    display: inline-flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255,255,255,.18);
+    color: var(--bar-fg);
+    transition: all .2s ease;
+  }
+  footer .contact-card:hover{ border-color: var(--accent-2); }
+  footer .contact-card__label{
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent-2);
+    border-right: 1px solid rgba(255,255,255,.18);
+    padding-right: 14px;
+  }
+  footer .contact-card__addr{
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.02em;
+  }
+  footer .contact-card__arrow{ color: var(--accent-2); font-size: 14px; }
+
+  /* RESEARCH — quarterly letter, journal-style table of contents */
+  .research .toc-shell{
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    margin-top: 8px;
+  }
+  .research .toc-masthead{
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .research .toc-masthead > *{
+    padding: 18px 24px; border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .research .toc-masthead > *:last-child{ border-right: 0; }
+  .research .toc-masthead .k{
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted-2);
+  }
+  .research .toc-masthead .v{
+    font-family: var(--serif); font-size: 17px; line-height: 1.25; color: var(--fg);
+  }
+  .research .toc-masthead .v.mono{
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--fg);
+  }
+  .research .toc-masthead .v .acc{ color: var(--accent); }
+  .research .toc-rule{
+    display: grid; grid-template-columns: 56px 1fr 96px 92px 70px;
+    padding: 10px 24px; gap: 24px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--muted-2);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .research .toc-list{ list-style: none; }
+  .research .toc-row{
+    display: grid; grid-template-columns: 56px 1fr 96px 92px 70px;
+    gap: 24px; align-items: baseline;
+    padding: 22px 24px;
+    border-bottom: 1px dotted var(--rule);
+    color: var(--fg);
+    transition: background .15s ease;
+    position: relative;
+  }
+  .research .toc-row:last-child{ border-bottom: 0; }
+  .research .toc-row:hover{ background: var(--paper); }
+  .research .toc-row:hover .toc-folio{ color: var(--accent); }
+  .research .toc-row .toc-folio{
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+    color: var(--muted-2);
+  }
+  .research .toc-row .toc-body{ display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .research .toc-row .toc-body .tag{
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .research .toc-row .toc-body h4{
+    font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.3;
+    letter-spacing: -0.005em; color: var(--fg);
+  }
+  .research .toc-row .toc-body h4 em{ font-style: italic; color: var(--muted); }
+  .research .toc-row .toc-body .author{
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted-2);
+    letter-spacing: 0.04em; margin-top: 2px;
+  }
+  .research .toc-row .toc-meta{
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .research .toc-row .toc-meta.right{ text-align: right; }
+  .research .toc-row .toc-page{
+    font-family: var(--mono); font-size: 13px; color: var(--fg);
+    letter-spacing: 0.04em; text-align: right;
+    border-bottom: 1px solid transparent;
+  }
+  .research .toc-row:hover .toc-page{ border-bottom-color: var(--accent); color: var(--accent); }
+  .research .toc-foot{
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 24px;
+    padding: 20px 24px;
+    border-top: 1px solid var(--rule);
+    background: var(--paper);
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .research .toc-foot .archive{
+    color: var(--fg); border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+  .research .toc-foot .archive:hover{ color: var(--accent); }
+  .research .toc-subscribe{
+    margin-top: 28px;
+    display: grid; grid-template-columns: 1.5fr 1fr auto;
+    gap: 24px; align-items: center;
+    padding: 22px 28px;
+    border: 1px solid var(--fg);
+    background: var(--fg);
+    color: #fff;
+  }
+  .research .toc-subscribe .head{
+    font-family: var(--serif); font-size: 18px; line-height: 1.4; color: #fff;
+  }
+  .research .toc-subscribe .head em{ font-style: italic; color: var(--accent-2); }
+  .research .toc-subscribe .body{
+    font-family: var(--mono); font-size: 11px; line-height: 1.6;
+    color: rgba(255,255,255,.7); letter-spacing: 0.04em;
+  }
+  .research .toc-subscribe .cta{
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 18px;
+    border: 1px solid rgba(255,255,255,.3);
+    color: #fff;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .research .toc-subscribe .cta:hover{ background: rgba(255,255,255,.08); border-color: var(--accent-2); }
+  .research .toc-subscribe .cta::after{ content: "→"; font-size: 13px; transition: transform .15s ease; }
+  .research .toc-subscribe .cta:hover::after{ transform: translateX(3px); }
+
+  /* In dark/slate mode, --fg is light — invert the subscribe slab so it reads as a dark CTA on light surface */
+  [data-theme="slate"] .research .toc-subscribe{
+    background: #0E1218;
+    border-color: #0E1218;
+  }
+
+  @media (max-width: 1024px){
+    .research .toc-masthead{ grid-template-columns: 1fr 1fr; }
+    .research .toc-masthead > *{ border-right: 0; border-bottom: 1px solid var(--rule); }
+    .research .toc-masthead > *:nth-last-child(-n+2){ border-bottom: 0; }
+    .research .toc-masthead > *:nth-child(odd){ border-right: 1px solid var(--rule); }
+    .research .toc-rule{ display: none; }
+    .research .toc-row{
+      grid-template-columns: 48px 1fr auto;
+      grid-template-areas: "folio body page" "folio meta meta";
+      row-gap: 8px;
+    }
+    .research .toc-row .toc-folio{ grid-area: folio; }
+    .research .toc-row .toc-body{ grid-area: body; }
+    .research .toc-row .toc-page{ grid-area: page; align-self: start; }
+    .research .toc-row .toc-meta{ grid-area: meta; text-align: left; }
+    .research .toc-row .toc-meta.right{ display: none; }
+    .research .toc-subscribe{ grid-template-columns: 1fr; gap: 14px; }
+  }
+  @media (max-width: 640px){
+    .research .toc-masthead{ grid-template-columns: 1fr; }
+    .research .toc-masthead > *{ border-right: 0 !important; border-bottom: 1px solid var(--rule); padding: 14px 18px; }
+    .research .toc-masthead > *:last-child{ border-bottom: 0; }
+    .research .toc-row{ padding: 18px; gap: 14px; }
+    .research .toc-row .toc-body h4{ font-size: 17px; }
+    .research .toc-foot{ grid-template-columns: 1fr; gap: 12px; }
+    .research .toc-subscribe{ padding: 18px; }
+  }
+
+  /* =====================================================
+     v5 ADDITIONS
+     ===================================================== */
+
+  /* HERO v5 — question + vocation, restrained */
+  .hero-v5{
+    padding: 80px 0 0;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .hero-question{
+    padding: 56px 0 96px;
+    max-width: 1180px;
+  }
+  .q-tag{
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.22em; color: var(--accent-2);
+    margin-bottom: 28px;
+  }
+  .q-tag::before{
+    content: ""; display: inline-block; width: 28px; height: 1px;
+    background: var(--accent-2); vertical-align: 4px; margin-right: 12px;
+  }
+  /* The question itself — italic, restrained, in muted tone */
+  .q-prompt{
+    font-family: var(--serif);
+    font-style: italic; font-weight: 300;
+    font-size: clamp(26px, 3.4vw, 44px);
+    line-height: 1.18; letter-spacing: -0.01em;
+    color: var(--muted); text-wrap: balance;
+    max-width: 880px;
+    margin: 0;
+  }
+  .q-prompt em{ font-style: italic; color: var(--accent-2); font-weight: 300; }
+  html[lang="zh"] .q-prompt{ font-style: normal; line-height: 1.32; letter-spacing: 0.01em; }
+  html[lang="zh"] .q-prompt em{ font-style: normal; }
+
+  /* Bridge — a hairline + small tag separating question from declaration */
+  .q-bridge{
+    display: flex; align-items: center; gap: 16px;
+    margin: 36px 0 28px;
+  }
+  .q-bridge .bridge-line{
+    flex: 0 0 56px; height: 1px; background: var(--accent-2);
+  }
+  .q-bridge .bridge-tag{
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.22em; color: var(--accent-2);
+  }
+
+  /* The declaration — large, in primary color */
+  .q-h1{
+    font-family: var(--serif); font-weight: var(--serif-weight);
+    font-size: calc(clamp(44px, 7.6vw, 120px) * var(--display-scale));
+    line-height: 0.98; letter-spacing: -0.024em;
+    color: var(--fg); text-wrap: balance;
+    margin: 0;
+  }
+  .q-h1 em{
+    font-style: italic; color: var(--accent-2); font-weight: var(--serif-weight);
+  }
+  html[lang="zh"] .q-h1{ letter-spacing: 0.005em; line-height: 1.12; }
+  html[lang="zh"] .q-h1 em{ font-style: normal; }
+  .q-foot{
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 48px; align-items: end;
+    padding-top: 28px; border-top: 1px solid var(--rule);
+  }
+  .q-lede{
+    font-family: var(--serif); font-size: 19px; line-height: 1.5;
+    font-weight: 400; color: var(--muted); max-width: 540px;
+  }
+
+  /* INTERLUDE / Prolegomenon — § 00 */
+  .interlude{
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--rule);
+    padding: 56px 0;
+  }
+  .int-row{
+    display: grid; grid-template-columns: 200px 1fr 200px;
+    gap: 56px; align-items: center;
+  }
+  .int-mark{ display: flex; flex-direction: column; gap: 6px; }
+  .int-mark .num{
+    font-family: var(--mono); font-size: 12px; color: var(--accent-2);
+    letter-spacing: 0.1em;
+  }
+  .int-mark .sub{
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted-2);
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .int-quote{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(20px, 2.2vw, 26px); line-height: 1.5;
+    color: var(--fg); letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  html[lang="zh"] .int-quote{ font-style: normal; }
+  .int-sig{
+    text-align: right;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; color: var(--muted-2); text-transform: uppercase;
+  }
+
+  /* CAPACITY & ENGAGEMENT — § 05 */
+  .engage-grid{
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "coverage capacity"
+      "terms    terms";
+    border-top: 1px solid var(--rule);
+  }
+  .engage-block{
+    padding: 40px 36px 44px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .engage-block.coverage{ grid-area: coverage; }
+  .engage-block.capacity{ grid-area: capacity; border-right: 0; }
+  .engage-block.terms{ grid-area: terms; border-right: 0; }
+
+  .engage-block .e-h{
+    display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px;
+  }
+  .engage-block .e-n{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    color: var(--accent-2); font-size: 22px;
+  }
+  .engage-block .e-t{
+    font-family: var(--mono); font-size: 11.5px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-2);
+  }
+  .engage-block .e-deck{
+    font-family: var(--serif); font-size: 17px; line-height: 1.5;
+    color: var(--fg); margin: 8px 0 28px; font-weight: 400;
+    max-width: 520px;
+  }
+
+  /* Coverage table */
+  .cov-table{ display: flex; flex-direction: column; }
+  .cov-row{
+    display: grid; grid-template-columns: 180px 1fr;
+    padding: 14px 0; gap: 24px;
+    border-top: 1px solid var(--rule);
+    align-items: center;
+  }
+  .cov-row:last-child{ border-bottom: 1px solid var(--rule); }
+  .cov-row .cov-k{
+    font-family: var(--serif); font-size: 16px; color: var(--fg);
+  }
+  .cov-row .cov-v{
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .cov-row.off .cov-k{ color: var(--muted-2); font-style: italic; }
+  .cov-row.off .cov-v{ color: var(--muted-2); }
+  html[lang="zh"] .cov-row.off .cov-k{ font-style: normal; }
+
+  /* Capacity stats — v5.1 fact cards */
+  .cap-cards{
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .cap-card{
+    padding: 28px 24px 26px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 14px;
+    background: var(--bg);
+    transition: background .25s;
+  }
+  .cap-card:hover{ background: var(--tint); }
+  .cap-card-h{
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .cap-card-i{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 14px; color: var(--accent-2);
+  }
+  .cap-card-l{
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted-2);
+  }
+  .cap-card-v{
+    display: flex; align-items: baseline; gap: 6px;
+    color: var(--fg); line-height: 1;
+  }
+  .cap-card-v .cap-prefix{
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted-2); padding-right: 4px;
+  }
+  .cap-card-v .cap-figure{
+    font-family: var(--serif); font-weight: 300;
+    font-size: 64px; letter-spacing: -0.02em;
+    color: var(--fg); line-height: 0.9;
+  }
+  .cap-card-v .cap-unit{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 24px; color: var(--accent-2);
+    align-self: flex-start; padding-top: 6px;
+  }
+  .cap-card-bar{
+    height: 2px; background: var(--rule); position: relative;
+  }
+  .cap-card-bar span{
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: var(--w, 0%); background: var(--accent-2);
+  }
+  .cap-card-f{
+    font-size: 12.5px; line-height: 1.6; color: var(--muted);
+    margin-top: 2px;
+  }
+  /* legacy cap-stats kept */
+  .cap-stats{
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .cap-stat{
+    padding-top: 18px; border-top: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .cap-stat .cap-l{
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2);
+  }
+  .cap-stat .cap-v{
+    font-family: var(--serif); font-weight: 300; font-size: 32px;
+    line-height: 1; letter-spacing: -0.015em; color: var(--fg);
+  }
+  .cap-stat .cap-f{
+    font-size: 12.5px; line-height: 1.6; color: var(--muted);
+    max-width: 360px;
+  }
+
+  /* Terms — Do / Don't columns */
+  .terms-cols{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .terms-col{ padding: 28px 28px 28px 0; }
+  .terms-col + .terms-col{ padding-left: 36px; border-left: 1px solid var(--rule); }
+  .terms-col .tc-h{
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-2); margin-bottom: 18px;
+  }
+  .terms-col.dont .tc-h{ color: var(--muted-2); }
+  .terms-col ul{ list-style: none; padding: 0; margin: 0; }
+  .terms-col li{
+    font-family: var(--serif); font-size: 16px; line-height: 1.5;
+    color: var(--fg); padding: 12px 0 12px 28px;
+    border-top: 1px dashed var(--rule); position: relative;
+  }
+  .terms-col li::before{
+    position: absolute; left: 0; top: 11px;
+    font-family: var(--mono); font-size: 13px; line-height: 1;
+  }
+  .terms-col.do li::before{ content: "+"; color: var(--accent-2); }
+  .terms-col.dont li::before{ content: "−"; color: var(--muted-2); }
+  .terms-col li:last-child{ border-bottom: 1px dashed var(--rule); }
+
+  /* Engage CTA bar */
+  .engage-cta{
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 32px; align-items: center;
+    padding: 28px 0; border-top: 1px solid var(--rule);
+  }
+  .engage-cta .ec-tag{
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  .engage-cta .ec-text{
+    margin-top: 6px; font-size: 13.5px; color: var(--muted); line-height: 1.6;
+    max-width: 640px;
+  }
+
+  /* =====================================================
+     RESPONSIVE — three breakpoints
+     ===================================================== */
+  /* Tablet 1024 and below */
+  @media (max-width: 1024px){
+    :root{ --gutter: 24px; --section-pad: 72px; }
+    .hero-deck{ grid-template-columns: 1fr; gap: 32px; }
+    .stats{ grid-template-columns: repeat(2, 1fr); }
+    .stats .stat:nth-child(2n){ border-right: 0; }
+    .stats .stat:nth-child(-n+2){ border-bottom: 1px solid var(--rule); }
+    .mandate-grid, .principles, .eco{ grid-template-columns: 1fr; }
+    .mandate-grid .col, .principle, .eco .card{ border-right: 0 !important; }
+    .eco-duo{ grid-template-columns: 1fr; }
+    .eco-lab{ border-right: 0; border-bottom: 1px solid var(--rule); }
+    .eco-floor{ border-left: 0; text-align: left; align-items: stretch; }
+    .eco-floor .es-h{ flex-direction: row; }
+    .eco-floor .es-meta{ align-items: flex-start; }
+    .eco-floor .es-spec > div{ grid-template-columns: 110px 1fr; direction: ltr; }
+    .eco-bridge{ padding: 24px 0; }
+    .eb-line{ left: 0; right: 0; top: 50%; bottom: auto; width: auto; height: 1px; }
+    .eb-arrows{ flex-direction: row; gap: 14px; }
+    .eb-arrow{ writing-mode: horizontal-tb; padding: 0 10px; }
+    .eb-down .eb-l{ transform: none; }
+    .method{ grid-template-columns: 1fr; gap: 32px; }
+    .method .legend{ position: static; }
+    footer .top{ grid-template-columns: 1fr 1fr; }
+    footer .bottom{ grid-template-columns: 1fr 1fr; gap: 22px; }
+    .navlinks{ display: none; }
+    .nav .wrap{ grid-template-columns: auto auto; gap: 16px; }
+    .s-head{ grid-template-columns: 1fr; gap: 24px; padding-bottom: 40px; margin-bottom: 40px; }
+
+    /* v5 blocks */
+    .q-foot{ grid-template-columns: 1fr; gap: 28px; align-items: start; }
+    .int-row{ grid-template-columns: 1fr; gap: 20px; text-align: left; }
+    .int-mark{ flex-direction: row; gap: 14px; }
+    .int-sig{ text-align: left; }
+    .engage-grid{
+      grid-template-columns: 1fr;
+      grid-template-areas: "coverage" "capacity" "terms";
+    }
+    .engage-block{ border-right: 0; padding: 32px 24px 36px; }
+    .cov-row{ grid-template-columns: 140px 1fr; }
+    .engage-cta{ grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  /* Phone 640 and below */
+  @media (max-width: 640px){
+    :root{ --gutter: 18px; --section-pad: 56px; }
+    body{ font-size: 14.5px; }
+
+    /* topbar collapses to brand-only */
+    .topbar .wrap{ height: 28px; }
+    .topbar .left{ gap: 14px; font-size: 10px; }
+    .topbar .left .live{ display: none; }
+    .topbar .right{ display: none; }
+
+    /* nav: lighter, no contact button text */
+    .nav .wrap{ height: 60px; gap: 10px; }
+    .brand .sub{ display: none; }
+    .brand .div{ display: none; }
+    .nav-right{ gap: 8px; }
+    .lang-toggle button{ padding: 4px 6px; }
+    .nav-rule{ display: none; }
+    .nav-right .btn{ height: 32px; padding: 0 12px; font-size: 11px; }
+
+    /* hero meta wraps */
+    .hero-v5{ padding: 32px 0 0; }
+    .hero-meta{ grid-template-columns: 1fr; gap: 6px; text-align: left; font-size: 10px; }
+    .hero-meta .center{ justify-content: flex-start; }
+    .hero-meta .center::before, .hero-meta .center::after{ display: none; }
+    .hero-meta .right{ text-align: left; }
+    .hero-question{ padding: 28px 0 56px; }
+    .q-tag{ font-size: 10px; margin-bottom: 18px; }
+    .q-tag::before{ width: 18px; }
+    .q-prompt{ font-size: clamp(22px, 5vw, 28px); }
+    .q-bridge{ margin: 24px 0 18px; }
+    .q-bridge .bridge-line{ flex: 0 0 32px; }
+    .q-h1{ font-size: clamp(40px, 11vw, 64px); line-height: 1.0; }
+    .q-foot{ margin-top: 28px; padding-top: 18px; }
+    .q-lede{ font-size: 16px; }
+    .hero-cta{ flex-direction: column; gap: 10px; align-items: stretch; }
+    .hero-cta .btn{ justify-content: center; }
+
+    /* interlude */
+    .interlude{ padding: 32px 0; }
+    .int-quote{ font-size: 18px; }
+
+    /* section heads */
+    .s-head{ padding-bottom: 28px; margin-bottom: 28px; }
+    .s-head .title{ font-size: clamp(28px, 6.5vw, 40px); }
+
+    /* stats — single column on phone */
+    .stats{ grid-template-columns: 1fr; }
+    .stats .stat{ border-right: 0; border-bottom: 1px solid var(--rule); padding: 20px 0; }
+    .stats .stat:last-child{ border-bottom: 0; }
+
+    /* mandate cards padding */
+    .mandate-grid .col{ padding: 28px 20px; }
+    .principle{ padding: 24px 20px; grid-template-columns: 48px 1fr; gap: 16px; }
+    .principle h4{ font-size: 19px; }
+    .axiom-index{ grid-template-columns: 1fr; }
+    .axiom-index .ax-sigma{ border-right: 0; border-bottom: 1px solid var(--rule); padding: 14px 20px; }
+    .axiom-index .ax-list{ grid-template-columns: repeat(2, 1fr); }
+    .axiom-index .ax-list li{ border-bottom: 1px solid var(--rule); }
+    .axiom-index .ax-list li:nth-child(2n){ border-right: 0; }
+    .axiom-index .ax-list li:nth-last-child(-n+2){ border-bottom: 0; }
+    .axiom-index .ax-list a{ padding: 14px 16px; }
+    .axiom-summary{ font-size: 9.5px; letter-spacing: 0.12em; padding: 14px 0; margin-top: 32px; }
+
+    /* method */
+    .phase{ grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
+    .phase .meta{ flex-direction: row; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+    .phase .arts{ grid-column: 1 / -1; grid-template-columns: 1fr; }
+    .phase h4{ font-size: 24px; }
+
+    /* eco cards */
+    .eco .card{ padding: 28px 22px; gap: 16px; }
+    .eco h3{ font-size: 26px; }
+    .eco .logo{ width: 64px; height: 64px; font-size: 28px; }
+    .eco-side{ padding: 32px 22px; gap: 18px; }
+    .es-name h3{ font-size: 28px; }
+    .es-spec > div{ grid-template-columns: 90px 1fr; gap: 12px; }
+    .eco-foot{ font-size: 9.5px; letter-spacing: 0.1em; }
+
+    /* engage — stack everything */
+    .engage-block{ padding: 28px 18px 30px; }
+    .engage-block .e-deck{ font-size: 15px; margin-bottom: 18px; }
+    .cov-row{ grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+    .cov-row .cov-k{ font-size: 14px; }
+    .cov-row .cov-v{ font-size: 11.5px; }
+    .terms-cols{ grid-template-columns: 1fr; }
+    .terms-col{ padding: 0; }
+    .terms-col + .terms-col{ padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--rule); margin-top: 24px; }
+    .terms-col li{ font-size: 14.5px; padding: 10px 0 10px 22px; }
+    .cap-stat .cap-v{ font-size: 26px; }
+    .cap-cards{ grid-template-columns: 1fr; border-left: 0; }
+    .cap-card{ border-right: 0; padding: 22px 18px 22px; }
+    .cap-card-v .cap-figure{ font-size: 52px; }
+    .cap-card-v .cap-unit{ font-size: 20px; }
+
+    /* research */
+    .research .toc-masthead{ grid-template-columns: 1fr; }
+    .research .toc-masthead > *{ padding: 12px 16px; }
+    .research .toc-row{ padding: 16px; }
+    .research .toc-row .toc-body h4{ font-size: 16px; }
+    .research .toc-subscribe{ padding: 16px; }
+
+    /* footer */
+    footer{ padding: 48px 0 24px; }
+    footer .top{ grid-template-columns: 1fr; gap: 28px; padding-bottom: 32px; }
+    footer .bottom{ grid-template-columns: 1fr 1fr; gap: 18px; }
+    footer .legalbar{ font-size: 9.5px; gap: 12px; }
+  }
+
+  /* ============ PRINT — institutional research letter style ============ */
+  @media print{
+    @page { size: A4; margin: 18mm 16mm 22mm; }
+    :root{
+      --bg:#fff; --fg:#111; --muted:#333; --muted-2:#555; --rule:#bbb;
+      --bar-bg:#fff; --bar-fg:#111; --accent:#7a1f1f; --accent-2:#7a5a2a;
+      --paper:#fff; --grid:#e6e6e6;
+    }
+    html, body{ background:#fff !important; color:#111 !important; }
+    body::before, body::after{ display:none !important; }
+    /* Hide live chrome that doesn't belong on paper */
+    .nav, .ticker, .hero .meta, .hero-cta, .pause, .nav-right,
+    .lang-toggle, .theme-switch, .scroll-cue,
+    .ecosystem .visit-cta, .engage-cta, .tweaks-panel, .research .preview-pill,
+    iframe, video{ display:none !important; }
+    /* Tighter rhythm for paper */
+    section, .section, footer{ break-inside: avoid; page-break-inside: avoid; padding: 18mm 0 !important; }
+    h1, h2, h3, .section-title{ break-after: avoid; page-break-after: avoid; }
+    .hero{ min-height: 0 !important; padding: 0 0 24mm !important; }
+    .hero h1{ font-size: 36pt !important; line-height: 1.1 !important; }
+    .hero .strap, .hero .lede{ font-size: 11pt !important; line-height: 1.55 !important; }
+    .wrap{ max-width: none !important; padding: 0 !important; }
+    /* Force light backgrounds on dark blocks */
+    .ecosystem, .engage, .method, footer{ background:#fff !important; color:#111 !important; }
+    footer *{ color:#111 !important; }
+    footer a{ color:#111 !important; text-decoration: none !important; }
+    /* Show full URLs after links (research papers) */
+    .research a[href]:not([href^="#"])::after{
+      content: " <" attr(href) ">";
+      font-family: ui-monospace, monospace; font-size: 8.5pt; color:#666; word-break: break-all;
+    }
+    /* Letterhead — appears once at top of first page */
+    .print-letterhead{ display:block !important; }
+    /* Footer mark */
+    footer .legalbar{ border-top: 1px solid #999 !important; }
+    /* Avoid breaking grids awkwardly */
+    .principles-grid, .mandate-grid, .method, .engage-grid, .ecosystem-grid{
+      display:block !important;
+    }
+    .principles-grid > *, .mandate-grid > *, .engage-grid > *, .ecosystem-grid > *{
+      break-inside: avoid; page-break-inside: avoid; margin-bottom: 8mm;
+    }
+  }
+  .print-letterhead{ display: none; }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="container nav-container">
-            <a href="#top" class="nav-logo">
-                <img src="images/logo.svg" alt="The Alephain Guild Logo" width="44" height="44">
-                <span class="nav-logo-text" data-lang="en">The Alephain Guild</span>
-                <span class="nav-logo-text" data-lang="zh" style="display: none;">阿莱夫行会</span>
-            </a>
-            
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <div class="nav-links" id="navLinks">
-                <a href="#essence" class="nav-link">
-                    <span data-lang="en">Essence</span>
-                    <span data-lang="zh" style="display: none;">本源</span>
-                </a>
-                <a href="#principles" class="nav-link">
-                    <span data-lang="en">Principles</span>
-                    <span data-lang="zh" style="display: none;">原理</span>
-                </a>
-                <a href="#method" class="nav-link">
-                    <span data-lang="en">Method</span>
-                    <span data-lang="zh" style="display: none;">方法</span>
-                </a>
-                <a href="#ecosystem" class="nav-link">
-                    <span data-lang="en">Ecosystem</span>
-                    <span data-lang="zh" style="display: none;">生态</span>
-                </a>
-                <button class="lang-toggle" id="langToggle">
-                    <span data-lang="en">EN / 中文</span>
-                    <span data-lang="zh" style="display: none;">EN / 中文</span>
-                </button>
-            </div>
+
+<!-- =================== TOPBAR =================== -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="left">
+      <span data-i18n-html="topbar.est">EST. <span class="num">2024</span></span>
+      <span data-i18n="topbar.cities">HONG KONG · SINGAPORE · LONDON</span>
+      <span class="live" data-i18n="topbar.live">MARKETS OPEN — SESSION ASIA/NY</span>
+    </div>
+    <div class="right">
+      <span data-i18n-html="topbar.note">RESEARCH NOTE №<span class="num">047</span> — APR <span class="num">2026</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- =================== NAV =================== -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="name">ALEPHAIN</span>
+      <span class="div"></span>
+      <span class="sub" data-i18n="nav.brand.sub">Quantitative · Guild</span>
+    </a>
+    <div class="navlinks">
+      <a href="#mandate"><span class="idx">01</span><span data-i18n="nav.01">Response</span></a>
+      <a href="#principles"><span class="idx">02</span><span data-i18n="nav.02">Principles</span></a>
+      <a href="#method"><span class="idx">03</span><span data-i18n="nav.03">Method</span></a>
+      <a href="#ecosystem"><span class="idx">04</span><span data-i18n="nav.04">Ecosystem</span></a>
+      <a href="#engage"><span class="idx">05</span><span data-i18n="nav.05">Engage</span></a>
+      <a href="#research"><span class="idx">06</span><span data-i18n="nav.06">Research</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle" id="langToggle" role="tablist" aria-label="Language">
+        <button data-lang="en" title="English">EN</button>
+        <span class="sep" aria-hidden="true"></span>
+        <button data-lang="zh" title="中文">中</button>
+      </div>
+      <span class="nav-rule" aria-hidden="true"></span>
+      <button class="theme-switch" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+        <span class="icon sun" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+        </span>
+        <span class="icon moon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+      <a class="btn solid" href="mailto:contact@alephain.com?subject=Inquiry%20·%20Alephain" data-i18n="nav.contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HERO · v5 (interrogative) =================== -->
+<section class="hero hero-v5" id="top">
+  <div class="wrap">
+    <div class="hero-meta">
+      <div class="left" data-i18n-html="hero.meta.left">VOL. <span class="num">II</span> — ISSUE <span class="num">02</span></div>
+      <div class="center"><span data-i18n="hero.meta.center">An Account of First Principles</span></div>
+      <div class="right">
+        <span data-i18n="hero.meta.right.prefix">FILED</span>
+        <span class="num" id="filedDate">29.04.2026</span> · <span id="filedTime">06:14:00</span>
+        <span data-i18n="hero.meta.right.suffix">UTC</span>
+      </div>
+    </div>
+    <div class="hero-question">
+      <div class="q-tag" data-i18n="hero.qtag">A QUESTION, FIRST.</div>
+      <h2 class="q-prompt">
+        <span data-i18n="hero.q.line1">Can the market,</span><br>
+        <span data-i18n="hero.q.line2.pre">as a single object,</span>
+        <em data-i18n="hero.q.line2.em">be charted</em><span data-i18n="hero.q.line2.post">?</span>
+      </h2>
+      <div class="q-bridge">
+        <span class="bridge-line"></span>
+        <span class="bridge-tag" data-i18n="hero.bridge">OUR VOCATION</span>
+      </div>
+      <h1 class="q-h1">
+        <span data-i18n="hero.h1.line1.pre">We translate the market's</span>
+        <em data-i18n="hero.h1.line1.em">infinite</em>
+        <span data-i18n="hero.h1.line1.post">chaos</span><br>
+        <span data-i18n="hero.h1.line2.pre">into</span>
+        <em data-i18n="hero.h1.line2.em">finite</em><span data-i18n="hero.h1.line2.post">, deterministic alpha.</span>
+      </h1>
+      <div class="q-foot">
+        <p class="q-lede" data-i18n="hero.q.lede">A research-led systematic trading firm. We treat the market as a single object — and devote our craft to charting it.</p>
+        <div class="hero-cta">
+          <a class="btn solid" href="#mandate" data-i18n="hero.cta.primary">How we respond →</a>
+          <a class="btn" href="#method" data-i18n="hero.cta.secondary">View Methodology</a>
         </div>
-    </nav>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section id="top" class="hero">
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-title" data-lang="en">We are translators and explorers of the market's Aleph</h1>
-                    <h1 class="hero-title" data-lang="zh" style="display: none;">我们是市场"阿莱夫"的译者与探索者</h1>
-                    
-                    <p class="hero-subtitle" data-lang="en">
-                        Through rigorous mathematics and computation, we translate infinite market chaos into finite, actionable alpha. 
-                        We are not merely participants, but contemplators and engineers dedicated to deciphering its deep code.
-                    </p>
-                    <p class="hero-subtitle" data-lang="zh" style="display: none;">
-                        通过严谨的数学与计算，将市场的无限混沌，翻译为可理解、可操作的有限阿尔法。
-                        我们不仅是参与者，更是致力于破译其深层密码的沉思者与工程师。
-                    </p>
-                    
-                    <div class="hero-actions">
-                        <a href="#essence" class="btn btn-primary">
-                            <span data-lang="en">Explore Our Philosophy</span>
-                            <span data-lang="zh" style="display: none;">探索我们的哲学</span>
-                        </a>
-                        <a href="#principles" class="btn btn-secondary">
-                            <span data-lang="en">First Principles</span>
-                            <span data-lang="zh" style="display: none;">第一性原理</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="hero-scroll">
-                    <a href="#essence" class="scroll-down" aria-label="Scroll down">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 5v14M5 12l7 7 7-7"/>
-                        </svg>
-                    </a>
-                </div>
+<!-- =================== §00 · INTERLUDE (breath / prolegomenon) =================== -->
+<section class="interlude" aria-label="Prolegomenon">
+  <div class="wrap">
+    <div class="int-row">
+      <div class="int-mark">
+        <span class="num">§ 00</span>
+        <span class="sub" data-i18n="interlude.label">PROLEGOMENON</span>
+      </div>
+      <blockquote class="int-quote">
+        <span data-i18n="interlude.q">Below is the working order of the firm — neither a manifesto nor a marketing brochure. Read it as you would a research note.</span>
+      </blockquote>
+      <div class="int-sig">
+        <span class="num" data-i18n="interlude.sig">— H. K. · APR 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MANDATE · v5 (response) =================== -->
+<section class="s" id="mandate">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="label"><span class="num">§ 01</span><span class="txt" data-i18n="mandate.label">The Response</span></div>
+      <div>
+        <h2 class="title">
+          <span data-i18n="mandate.title.pre">We do not</span>
+          <em data-i18n="mandate.title.em">answer</em><span data-i18n="mandate.title.post">. We discharge the question across three mandates.</span>
+        </h2>
+        <p class="deck" data-i18n="mandate.deck">An honest practice cannot promise an answer to so wide a question. It can, however, structure its labour around it. Below are the three mandates that organise our work.</p>
+      </div>
+    </div>
+    <div class="mandate-grid">
+      <div class="col">
+        <div class="roman">i.</div>
+        <h3>
+          <span data-i18n="mandate.1.title.pre">Exploration</span> <em data-i18n="mandate.1.title.em">of fundamental structure</em>
+        </h3>
+        <p data-i18n="mandate.1.body">We investigate liquidity, reflexivity, and information flow with the patience of a research institute. Findings advance the canon, not the next trade.</p>
+        <div class="footnote"><span class="dot"></span><span data-i18n="mandate.1.foot">DOMAIN · MICROSTRUCTURE</span></div>
+      </div>
+      <div class="col">
+        <div class="roman">ii.</div>
+        <h3>
+          <span data-i18n="mandate.2.title.pre">Alchemy</span> <em data-i18n="mandate.2.title.em">of insight into engine</em>
+        </h3>
+        <p data-i18n="mandate.2.body">Hypotheses become production systems through formal modeling, statistical adjudication, and software engineering held to research standards.</p>
+        <div class="footnote"><span class="dot"></span><span data-i18n="mandate.2.foot">DOMAIN · MODELING</span></div>
+      </div>
+      <div class="col">
+        <div class="roman">iii.</div>
+        <h3>
+          <span data-i18n="mandate.3.title.pre">Guardianship</span> <em data-i18n="mandate.3.title.em">of capital and reputation</em>
+        </h3>
+        <p data-i18n="mandate.3.body">Risk is treated as a first-class research object. We engineer redundancy, enforce drawdown discipline, and decline mandates outside our edge.</p>
+        <div class="footnote"><span class="dot"></span><span data-i18n="mandate.3.foot">DOMAIN · RISK</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PRINCIPLES =================== -->
+<section class="s invert" id="principles">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="label"><span class="num">§ 02</span><span class="txt" data-i18n="principles.label">First Principles</span></div>
+      <div>
+        <h2 class="title">
+          <span data-i18n="principles.title.pre">Six</span>
+          <em data-i18n="principles.title.em">axioms</em><span data-i18n="principles.title.post">. Every model we ship is a corollary of them.</span>
+        </h2>
+        <p class="deck" data-i18n="principles.deck">First principles are not slogans. They are pre-conditions of inquiry — the ground on which our methodology stands. We publish them so our work can be challenged on its terms.</p>
+      </div>
+    </div>
+    <!-- Σ axiom index — top rail -->
+    <div class="axiom-index" aria-label="Axiom index">
+      <div class="ax-sigma">
+        <span class="ax-glyph">Σ</span>
+        <span class="ax-glyph-label" data-i18n="principles.sigma">AXIOMATA</span>
+      </div>
+      <ol class="ax-list">
+        <li><a href="#p1"><span class="k">P.01</span><span class="v" data-i18n="p.1.short">Finiteness</span></a></li>
+        <li><a href="#p2"><span class="k">P.02</span><span class="v" data-i18n="p.2.short">Falsifiability</span></a></li>
+        <li><a href="#p3"><span class="k">P.03</span><span class="v" data-i18n="p.3.short">Liquidity</span></a></li>
+        <li><a href="#p4"><span class="k">P.04</span><span class="v" data-i18n="p.4.short">Drawdown</span></a></li>
+        <li><a href="#p5"><span class="k">P.05</span><span class="v" data-i18n="p.5.short">Code-as-research</span></a></li>
+        <li><a href="#p6"><span class="k">P.06</span><span class="v" data-i18n="p.6.short">Compounding</span></a></li>
+      </ol>
+    </div>
+    <div class="principles">
+      <div class="principle" id="p1"><div class="pn">P.01</div><div>
+        <h4>
+          <span data-i18n="p.1.h.pre">The market is a</span>
+          <em data-i18n="p.1.h.em">finite</em>
+          <span data-i18n="p.1.h.post">object in an infinite space.</span>
+        </h4>
+        <p data-i18n="p.1.body">At any instant, prices, flows, and beliefs occupy a single bounded geometry. Alpha is the projection of that geometry onto a tradable plane.</p>
+        <div class="axiom">⟨ ∀ t ∈ T : M(t) ⊂ ℝⁿ, n &lt; ∞ ⟩</div>
+      </div></div>
+      <div class="principle" id="p2"><div class="pn">P.02</div><div>
+        <h4>
+          <span data-i18n="p.2.h.pre">Falsifiability</span>
+          <em data-i18n="p.2.h.em">precedes</em>
+          <span data-i18n="p.2.h.post">profit.</span>
+        </h4>
+        <p data-i18n="p.2.body">A hypothesis that cannot fail in backtest, in forward, or in attribution does not earn capital. Beauty is not a defense.</p>
+        <div class="axiom">⟨ H ∈ Strategy ⇒ ∃ K : H is rejectable by K ⟩</div>
+      </div></div>
+      <div class="principle" id="p3"><div class="pn">P.03</div><div>
+        <h4>
+          <span data-i18n="p.3.h.pre">Liquidity is the</span>
+          <em data-i18n="p.3.h.em">medium</em><span data-i18n="p.3.h.post">, not the message.</span>
+        </h4>
+        <p data-i18n="p.3.body">We model the cost of presence — slippage, impact, queue position — before we estimate signal. Most edges die in execution, not in theory.</p>
+        <div class="axiom">⟨ E[α] − E[c(q,τ,L)] ≥ 0 ⟩</div>
+      </div></div>
+      <div class="principle" id="p4"><div class="pn">P.04</div><div>
+        <h4>
+          <span data-i18n="p.4.h.pre">Drawdown is a</span>
+          <em data-i18n="p.4.h.em">physical</em>
+          <span data-i18n="p.4.h.post">quantity.</span>
+        </h4>
+        <p data-i18n="p.4.body">It is bounded, attributable, and forecast-able. We size positions to survive the worst plausible regime, not the average one.</p>
+        <div class="axiom">⟨ DD₉₅ ≤ ⅔ · DD_kill ⟩</div>
+      </div></div>
+      <div class="principle" id="p5"><div class="pn">P.05</div><div>
+        <h4>
+          <span data-i18n="p.5.h.pre">Code is the</span>
+          <em data-i18n="p.5.h.em">final</em>
+          <span data-i18n="p.5.h.post">form of research.</span>
+        </h4>
+        <p data-i18n="p.5.body">An idea that cannot be executed cleanly does not exist for us. Reproducibility, modularity, and audit trails are non-negotiable.</p>
+        <div class="axiom">⟨ research ≡ code ; code ≡ artefact ⟩</div>
+      </div></div>
+      <div class="principle" id="p6"><div class="pn">P.06</div><div>
+        <h4>
+          <span data-i18n="p.6.h.pre">Time</span>
+          <em data-i18n="p.6.h.em">compounds</em>
+          <span data-i18n="p.6.h.post">the disciplined.</span>
+        </h4>
+        <p data-i18n="p.6.body">Edge is not extracted in heroic days; it is accrued by surviving ordinary ones. Our horizon is decades, our frequency is daily.</p>
+        <div class="axiom">⟨ lim_{T→∞} (1 + e_t)ᵀ , e_t ≥ 0 ⟩</div>
+      </div></div>
+    </div>
+    <div class="axiom-summary" aria-hidden="true">
+      <span data-i18n="principles.summary">⟨ Σ axiomata : 6 · corollaries published quarterly · last review 11.04.2026 ⟩</span>
+    </div>
+    <div class="pullquote">
+      <q data-i18n="pullquote.q">Begin with principles, end with performance. Be loyal to logic, reverent to the unknown.</q>
+      <div class="cite" data-i18n="pullquote.cite">— Maxim of the Guild</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== METHOD =================== -->
+<section class="s" id="method">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="label"><span class="num">§ 03</span><span class="txt" data-i18n="method.label">Methodology</span></div>
+      <div>
+        <h2 class="title">
+          <span data-i18n="method.title.pre">Alpha Alchemy &mdash; a</span>
+          <em data-i18n="method.title.em">four-phase</em>
+          <span data-i18n="method.title.post">closed loop.</span>
+        </h2>
+        <p class="deck" data-i18n="method.deck">Every strategy traverses the same cycle, in the same order. The cycle is enforced; nothing reaches production by exception.</p>
+      </div>
+    </div>
+    <div class="method">
+      <aside class="legend">
+        <div class="key"><div class="k" data-i18n="method.legend.cycle.k">CYCLE</div><div class="v" data-i18n="method.legend.cycle.v">Insight → Modeling → Refinement → Verification → ↻</div></div>
+        <div class="key"><div class="k" data-i18n="method.legend.cadence.k">CADENCE</div><div class="v" data-i18n="method.legend.cadence.v">Median 14 weeks from question to capital, 6 weeks from capital to attribution.</div></div>
+        <div class="key"><div class="k" data-i18n="method.legend.gate.k">GATE</div><div class="v" data-i18n="method.legend.gate.v">A unanimous research committee — no asymmetric upside without an asymmetric kill criterion.</div></div>
+
+        <!-- P1.3 · process funnel data -->
+        <div class="funnel">
+          <div class="funnel-h">
+            <span class="fh-tag" data-i18n="method.funnel.tag">RESEARCH RECORD · 2024</span>
+            <span class="fh-rule"></span>
+          </div>
+          <div class="funnel-rows">
+            <div class="fr">
+              <div class="fr-l" data-i18n="method.funnel.1.l">PROPOSALS LOGGED</div>
+              <div class="fr-v num">412</div>
+              <div class="fr-bar"><span style="--w:100%"></span></div>
             </div>
-        </section>
-
-        <!-- Essence Section -->
-        <section id="essence" class="section section-essence">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-lang="en">What is The Alephain Guild?</h2>
-                    <h2 data-lang="zh" style="display: none;">The Alephain Guild 是什么？</h2>
-                    <p class="section-subtitle" data-lang="en">
-                        We begin with a shared vision. In the endless noise and data deluge of the market, 
-                        we glimpse a hidden geometric structure—not mere trends or patterns, but a singularity 
-                        like Borges' "Aleph": a point in finite space that simultaneously contains all prices, 
-                        all emotions, all information, and all possibilities.
-                    </p>
-                    <p class="section-subtitle" data-lang="zh" style="display: none;">
-                        我们始于一个共同的看见。在市场的无尽喧嚣与数据洪流中，我们窥见了一个隐秘的几何结构——
-                        它并非简单的趋势或模式，而是一个如同博尔赫斯笔下的"阿莱夫"般的奇点：
-                        一个在有限空间中，同时包含了所有价格、所有情绪、所有信息与所有可能性的点。
-                    </p>
-                </div>
-
-                <!-- Vision Card -->
-                <div class="card card-highlight">
-                    <div class="card-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                            <circle cx="12" cy="12" r="10"/>
-                            <circle cx="12" cy="12" r="4"/>
-                            <line x1="12" y1="2" x2="12" y2="6"/>
-                            <line x1="12" y1="18" x2="12" y2="22"/>
-                            <line x1="2" y1="12" x2="6" y2="12"/>
-                            <line x1="18" y1="12" x2="22" y2="12"/>
-                        </svg>
-                    </div>
-                    <h3 data-lang="en">Vision</h3>
-                    <h3 data-lang="zh" style="display: none;">愿景</h3>
-                    <p data-lang="en">
-                        <strong>Our ultimate pursuit is to infinitely approach the fundamental structure of the market's "Aleph."</strong><br>
-                        We are not satisfied with describing phenomena; we seek to understand principles. 
-                        We do not chase transient trends; we search for enduring patterns. Our vision is to construct 
-                        an evolving cognitive and computational framework that can:
-                    </p>
-                    <p data-lang="zh" style="display: none;">
-                        <strong>我们的终极追求，是无限逼近市场这个"阿莱夫"的本源结构。</strong><br>
-                        我们不满足于描述现象，我们渴望理解原理。我们不追逐短暂的趋势，我们探寻持续的规律。
-                        我们的愿景是构建一套不断演进的认知与计算框架，使之能够：
-                    </p>
-                    
-                    <div class="vision-points">
-                        <div class="vision-point">
-                            <span class="vision-number">1</span>
-                            <div>
-                                <h4 data-lang="en">Translate Chaos</h4>
-                                <h4 data-lang="zh" style="display: none;">翻译混沌</h4>
-                                <p data-lang="en">Transform market surface noise into understandable, computable signal structures.</p>
-                                <p data-lang="zh" style="display: none;">将市场表象的噪声，翻译为可理解、可计算的信号结构。</p>
-                            </div>
-                        </div>
-                        <div class="vision-point">
-                            <span class="vision-number">2</span>
-                            <div>
-                                <h4 data-lang="en">Measure Infinity</h4>
-                                <h4 data-lang="zh" style="display: none;">度量无限</h4>
-                                <p data-lang="en">Define and quantify the finite, sustainable "alpha" region within infinite possibility space.</p>
-                                <p data-lang="zh" style="display: none;">在无限的可能性空间中，定义并量化那有限且可持续的"阿尔法"区域。</p>
-                            </div>
-                        </div>
-                        <div class="vision-point">
-                            <span class="vision-number">3</span>
-                            <div>
-                                <h4 data-lang="en">Forge Artifacts</h4>
-                                <h4 data-lang="zh" style="display: none;">铸造圣器</h4>
-                                <p data-lang="en">Temper our cognition into automated alchemical tools with exceptional robustness and adaptability.</p>
-                                <p data-lang="zh" style="display: none;">将我们的认知，锻造为具有卓越稳健性与适应性的自动化炼金工具。</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p class="card-footer" data-lang="en">
-                        Our ultimate goal is not to be a boat drifting with the market currents, 
-                        but to be those who chart the sea, understand the ocean currents, and even predict the climate.
-                    </p>
-                    <p class="card-footer" data-lang="zh" style="display: none;">
-                        我们最终的目标，不是成为市场中随波逐流的船只，而是成为绘制海图、理解洋流、乃至预测气候的人。
-                    </p>
-                </div>
-
-                <!-- Threefold Mission -->
-                <div class="mission-cards">
-                    <div class="card mission-card">
-                        <div class="mission-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                                <circle cx="10" cy="10" r="7"/>
-                                <line x1="15" y1="15" x2="21" y2="21"/>
-                            </svg>
-                        </div>
-                        <h4 data-lang="en">Mission of Exploration</h4>
-                        <h4 data-lang="zh" style="display: none;">探索之使命</h4>
-                        <p data-lang="en">
-                            We dedicate ourselves to fundamental market research. We ask: "What fundamentally drives price movement?" 
-                            "How does liquidity generate and annihilate within structures?" "How can herding effects and reflexivity be mathematized?" 
-                            Our research does not necessarily point to immediate trading, but aims to deepen fundamental understanding of market cosmology.
-                        </p>
-                        <p data-lang="zh" style="display: none;">
-                            我们致力于基础性的市场研究。我们提问："价格运动的根本驱动是什么？"
-                            "流动性如何在结构中生成与湮灭？""羊群效应与反身性如何数学化？"
-                            我们的研究不必然指向立即的交易，而旨在深化对市场宇宙学的根本理解。
-                        </p>
-                    </div>
-                    
-                    <div class="card mission-card">
-                        <div class="mission-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                                <path d="M9 3h6v6l4 9H5l4-9V3z"/>
-                                <line x1="9" y1="3" x2="15" y2="3"/>
-                                <line x1="7" y1="15" x2="17" y2="15"/>
-                            </svg>
-                        </div>
-                        <h4 data-lang="en">Mission of Alchemy</h4>
-                        <h4 data-lang="zh" style="display: none;">炼金之使命</h4>
-                        <p data-lang="en">
-                            We temper the insights gained from exploration into "philosopher's stones"—our quantitative strategies 
-                            and trading systems—through rigorous mathematical modeling and computational engineering. 
-                            This process adheres to the alchemical laws of falsifiability, traceability, and explainability.
-                        </p>
-                        <p data-lang="zh" style="display: none;">
-                            我们将探索所得的认知，通过严谨的数学建模与计算工程，炼成可以自主运行的"哲人石"——
-                            即我们的量化策略与交易系统。此过程恪守可证伪、可回溯、可解释的炼金术法则。
-                        </p>
-                    </div>
-                    
-                    <div class="card mission-card">
-                        <div class="mission-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                                <path d="M12 3L4 7v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-4z"/>
-                                <path d="M12 8v8"/>
-                                <path d="M8 12h8"/>
-                            </svg>
-                        </div>
-                        <h4 data-lang="en">Mission of Guardianship</h4>
-                        <h4 data-lang="zh" style="display: none;">守护之使命</h4>
-                        <p data-lang="en">
-                            We guard our knowledge, our capital, and our reputation. Through extreme risk management, 
-                            strict operational discipline, and technical redundancy design, we ensure the Guild's ship 
-                            of exploration preserves its core and continues sailing through any market storm.
-                        </p>
-                        <p data-lang="zh" style="display: none;">
-                            我们守护我们的知识、我们的资本与我们的声誉。我们通过极致的风险管理、严格的操作纪律
-                            与技术上的冗余设计，确保行会的探索之船能在任何市场风暴中保全其核心，并持续航行。
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Core Values -->
-                <div class="values-section">
-                    <h3 data-lang="en">Core Values</h3>
-                    <h3 data-lang="zh" style="display: none;">核心价值</h3>
-                    
-                    <div class="values-grid">
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                                    <path d="M12 4a4 4 0 0 0-4 4c0 2 1 3 2 4l-2 8h8l-2-8c1-1 2-2 2-4a4 4 0 0 0-4-4z"/>
-                                    <circle cx="12" cy="8" r="2"/>
-                                    <line x1="10" y1="20" x2="14" y2="20"/>
-                                </svg>
-                            </div>
-                            <h4 data-lang="en">Rationality First</h4>
-                            <h4 data-lang="zh" style="display: none;">理性至上</h4>
-                            <p data-lang="en">Data and logic are the only yardstick, overcoming all intuition and bias.</p>
-                            <p data-lang="zh" style="display: none;">数据与逻辑是唯一的准绳，战胜一切直觉与偏见。</p>
-                        </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                                    <circle cx="12" cy="8" r="4"/>
-                                    <circle cx="12" cy="8" r="1.5"/>
-                                    <line x1="12" y1="12" x2="12" y2="18"/>
-                                    <line x1="8" y1="18" x2="16" y2="18"/>
-                                    <line x1="9" y1="21" x2="15" y2="21"/>
-                                    <line x1="10" y1="18" x2="10" y2="21"/>
-                                    <line x1="14" y1="18" x2="14" y2="21"/>
-                                </svg>
-                            </div>
-                            <h4 data-lang="en">Source Inquiry</h4>
-                            <h4 data-lang="zh" style="display: none;">本源探究</h4>
-                            <p data-lang="en">Never satisfied with phenomena, always asking deeper "why".</p>
-                            <p data-lang="zh" style="display: none;">不满足于现象，永远追问更深层的"为什么"。</p>
-                        </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                                    <circle cx="12" cy="12" r="3"/>
-                                    <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-                                </svg>
-                            </div>
-                            <h4 data-lang="en">Discipline Forged</h4>
-                            <h4 data-lang="zh" style="display: none;">纪律炼成</h4>
-                            <p data-lang="en">Transform cognition into repeatable, verifiable automated processes.</p>
-                            <p data-lang="zh" style="display: none;">将认知转化为可重复、可验证的自动化流程。</p>
-                        </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                                    <path d="M7 11l3 3 7-7"/>
-                                    <circle cx="12" cy="12" r="9"/>
-                                    <path d="M17 8l-1-1"/>
-                                    <path d="M8 15l-1 1"/>
-                                </svg>
-                            </div>
-                            <h4 data-lang="en">Wisdom Symbiosis</h4>
-                            <h4 data-lang="zh" style="display: none;">智慧共生</h4>
-                            <p data-lang="en">Establish rigorous, collaborative ethics between human intelligence and artificial intelligence.</p>
-                            <p data-lang="zh" style="display: none;">在人类智慧与人工智能间建立严谨、共进的协作伦理。</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="fr">
+              <div class="fr-l" data-i18n="method.funnel.2.l">ADMITTED TO MODELING</div>
+              <div class="fr-v num">38</div>
+              <div class="fr-bar"><span style="--w:9.2%"></span></div>
             </div>
-        </section>
-
-        <!-- First Principles Section -->
-        <section id="principles" class="section section-principles">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-lang="en">First Principles</h2>
-                    <h2 data-lang="zh" style="display: none;">第一性原理</h2>
-                    <p class="section-subtitle" data-lang="en">
-                        First principles are the indisputable starting points for all our reasoning, modeling, and decision-making. 
-                        They are not derived from empirical induction but from metacognition of market essence. 
-                        Like axioms in Euclidean geometry, they are self-evident and support our entire methodological edifice.
-                    </p>
-                    <p class="section-subtitle" data-lang="zh" style="display: none;">
-                        第一性原理是我们所有推理、建模与决策不容辩驳的出发点。
-                        它们不是来自经验归纳，而是源自对市场本质的元认知。
-                        它们像欧几里得几何中的公理，不证自明，并支撑起我们整个方法论大厦。
-                    </p>
-                </div>
-
-                <!-- Principles will be inserted here by JavaScript -->
-                <div class="principles-container" id="principlesContainer">
-                    <!-- Principles will be loaded dynamically -->
-                </div>
-                
-                <div class="principles-conclusion">
-                    <blockquote>
-                        <p data-lang="en">"Begin with principles, end with performance; be loyal to logic, reverent to the unknown."</p>
-                        <p data-lang="zh" style="display: none;">"始于原理，终于绩效；忠于逻辑，敬于未知。"</p>
-                        <cite data-lang="en">— Principles Maxim</cite>
-                        <cite data-lang="zh" style="display: none;">— 原理箴言</cite>
-                    </blockquote>
-                </div>
+            <div class="fr">
+              <div class="fr-l" data-i18n="method.funnel.3.l">DEPLOYED TO LIVE</div>
+              <div class="fr-v num">23</div>
+              <div class="fr-bar"><span style="--w:5.6%"></span></div>
             </div>
-        </section>
-
-        <!-- Method Section -->
-        <section id="method" class="section section-method">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-lang="en">Alpha Alchemy: The Four-Phase Cycle</h2>
-                    <h2 data-lang="zh" style="display: none;">阿尔法炼金术：四相循环</h2>
-                    <p class="section-subtitle" data-lang="en">
-                        Our research process is modeled as a closed-loop alchemical four-phase cycle, 
-                        with each phase corresponding to core methodological documents.
-                    </p>
-                    <p class="section-subtitle" data-lang="zh" style="display: none;">
-                        我们的研究流程被建模为一个闭环的炼金术四相循环，
-                        每一相都对应核心方法论文档。
-                    </p>
-                </div>
-
-                <!-- Cycle Visualization -->
-                <div class="cycle-diagram-container">
-                    <div class="cycle-diagram">
-                        <!-- SVG will be inserted here -->
-                    </div>
-                    
-                    <div class="cycle-phases">
-                        <div class="phase-card" data-phase="insight">
-                            <div class="phase-header">
-                                <span class="phase-number">1</span>
-                                <h4 data-lang="en">Insight</h4>
-                                <h4 data-lang="zh" style="display: none;">洞察</h4>
-                            </div>
-                            <p data-lang="en">Identify anomalies and define falsifiable "true problems" from chaos.</p>
-                            <p data-lang="zh" style="display: none;">从混沌中识别"异常"，定义可证伪的"真问题"。</p>
-                        </div>
-                        
-                        <div class="phase-card" data-phase="modeling">
-                            <div class="phase-header">
-                                <span class="phase-number">2</span>
-                                <h4 data-lang="en">Modeling</h4>
-                                <h4 data-lang="zh" style="display: none;">建模</h4>
-                            </div>
-                            <p data-lang="en">Translate hypotheses into precise mathematical models and computable logic.</p>
-                            <p data-lang="zh" style="display: none;">将假设翻译为精确的数学模型与可计算逻辑。</p>
-                        </div>
-                        
-                        <div class="phase-card" data-phase="refinement">
-                            <div class="phase-header">
-                                <span class="phase-number">3</span>
-                                <h4 data-lang="en">Refinement</h4>
-                                <h4 data-lang="zh" style="display: none;">炼成</h4>
-                            </div>
-                            <p data-lang="en">Forge strategies in historical backtesting, embedding risk management.</p>
-                            <p data-lang="zh" style="display: none;">在历史回测中锻造策略，内嵌风险管理。</p>
-                        </div>
-                        
-                        <div class="phase-card" data-phase="verification">
-                            <div class="phase-header">
-                                <span class="phase-number">4</span>
-                                <h4 data-lang="en">Verification</h4>
-                                <h4 data-lang="zh" style="display: none;">验证</h4>
-                            </div>
-                            <p data-lang="en">Real-market adjudication, strict attribution, distinguishing alpha from luck.</p>
-                            <p data-lang="zh" style="display: none;">实盘裁决，严格归因，区分阿尔法与运气。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Technical Philosophy -->
-                <div class="tech-philosophy">
-                    <h3 data-lang="en">Technical Philosophy</h3>
-                    <h3 data-lang="zh" style="display: none;">技术哲学</h3>
-                    
-                    <div class="philosophy-points">
-                        <div class="philosophy-point">
-                            <h4 data-lang="en">Algorithm Ethics</h4>
-                            <h4 data-lang="zh" style="display: none;">算法伦理</h4>
-                            <p data-lang="en">Avoid exacerbating market fragility, beware of "golem" backlash, consider fairness implications.</p>
-                            <p data-lang="zh" style="display: none;">避免加剧市场脆弱性，警惕"魔像"反噬，考量公平性。</p>
-                        </div>
-                        
-                        <div class="philosophy-point">
-                            <h4 data-lang="en">Code as Research</h4>
-                            <h4 data-lang="zh" style="display: none;">代码即研究</h4>
-                            <p data-lang="en">Reproducibility as sacred principle, clarity above cleverness, modularity and testability.</p>
-                            <p data-lang="zh" style="display: none;">可复现性为神圣准则，清晰性高于机巧性，模块化与可测试性。</p>
-                        </div>
-                        
-                        <div class="philosophy-point">
-                            <h4 data-lang="en">Data Reverence</h4>
-                            <h4 data-lang="zh" style="display: none;">数据敬畏</h4>
-                            <p data-lang="en">Understand data lineage and scars, beware of "numerical alchemy", respect privacy and compliance.</p>
-                            <p data-lang="zh" style="display: none;">理解数据谱系与伤痕，警惕"数字炼金术"，严守隐私与合规红线。</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="fr retired">
+              <div class="fr-l" data-i18n="method.funnel.4.l">RETIRED IN-YEAR</div>
+              <div class="fr-v num">6</div>
+              <div class="fr-bar"><span style="--w:1.5%"></span></div>
             </div>
-        </section>
-
-        <!-- Ecosystem Section -->
-        <section id="ecosystem" class="section section-ecosystem">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-lang="en">Brand Ecosystem</h2>
-                    <h2 data-lang="zh" style="display: none;">品牌生态</h2>
-                    <p class="section-subtitle" data-lang="en">
-                        Within a unified philosophical framework, specialized entities each fulfill their roles.
-                    </p>
-                    <p class="section-subtitle" data-lang="zh" style="display: none;">
-                        在统一的哲学框架下，专业实体各司其职。
-                    </p>
-                </div>
-
-                <div class="ecosystem-cards">
-                    <!-- Alchymia Labs -->
-                    <div class="ecosystem-card">
-                        <div class="ecosystem-logo">
-                            <img src="images/alchymia-labs.png" alt="Alchymia Labs Logo" width="120" height="120">
-                        </div>
-                        <h3>Alchymia Labs</h3>
-                        <p class="ecosystem-subtitle" data-lang="en">Quantitative Alchemy Laboratory</p>
-                        <p class="ecosystem-subtitle" data-lang="zh" style="display: none;">量化炼金实验室</p>
-                        
-                        <p class="ecosystem-description" data-lang="en">
-                            Alchymia Labs is responsible for "translating" market chaos into actionable alpha, 
-                            much like ancient alchemists sought to transform base metals into gold. 
-                            The logo incorporates imagery of retort flasks and transformation, symbolizing the process 
-                            of quantitative refinement that ultimately yields the "philosopher's stone" of alpha.
-                        </p>
-                        <p class="ecosystem-description" data-lang="zh" style="display: none;">
-                            Alchymia Labs 负责将市场混沌"翻译"为可操作的阿尔法，这正如古代炼金术士寻求将贱金属转化为黄金的过程。
-                            标志设计在"א"的基础上融入了炼金术烧瓶与转化的意象，象征经过复杂的量化提炼后，最终获得的真理与超额收益（Alpha）。
-                        </p>
-                        
-                        <div class="ecosystem-status">
-                            <span class="status-label" data-lang="en">Website:</span>
-                            <span class="status-label" data-lang="zh" style="display: none;">网站：</span>
-                            <a href="https://alchymia.alephain.com" target="_blank" class="status-value ecosystem-link">
-                                <span data-lang="en">alchymia.alephain.com</span>
-                                <span data-lang="zh" style="display: none;">alchymia.alephain.com</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Tesseract Trading -->
-                    <div class="ecosystem-card">
-                        <div class="ecosystem-logo">
-                            <img src="images/tesseract-trading.png" alt="Tesseract Trading Logo" width="120" height="120">
-                        </div>
-                        <h3>Tesseract Trading</h3>
-                        <p class="ecosystem-subtitle" data-lang="en">High-Dimensional Execution</p>
-                        <p class="ecosystem-subtitle" data-lang="zh" style="display: none;">高维交易执行</p>
-                        
-                        <p class="ecosystem-description" data-lang="en">
-                            Tesseract Trading specializes in high-dimensional, precise trading execution. 
-                            The logo abstracts the Aleph lines into a tesseract (hypercube) projection, 
-                            representing the ability to understand and operate in market dimensions invisible to ordinary participants, 
-                            utilizing geometric structures for execution.
-                        </p>
-                        <p class="ecosystem-description" data-lang="zh" style="display: none;">
-                            Tesseract Trading 专注于高维、精密的交易执行。
-                            标志设计将"א"的线条抽象为超立方体的投影，体现该实体在更高维度上理解和操作市场的能力，
-                            利用普通人看不见的结构进行交易。
-                        </p>
-                        
-                        <div class="ecosystem-status">
-                            <span class="status-label" data-lang="en">Website:</span>
-                            <span class="status-label" data-lang="zh" style="display: none;">网站：</span>
-                            <a href="https://tesseract.alephain.com" target="_blank" class="status-value ecosystem-link">
-                                <span data-lang="en">tesseract.alephain.com</span>
-                                <span data-lang="zh" style="display: none;">tesseract.alephain.com</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="ecosystem-note">
-                    <p data-lang="en">
-                        <strong>Design Principle:</strong> All sub-brand logos are philosophical and aesthetic derivatives 
-                        of the parent "Seal of Aleph," maintaining structural unity (golden outer circle), 
-                        core unity (Aleph letter variant), color unity (black background, gold lines), 
-                        and typographic unity (Inter Bold).
-                    </p>
-                    <p data-lang="zh" style="display: none;">
-                        <strong>设计原则：</strong>所有的设计都必须是母体"阿莱夫之印"的哲学与美学衍生。
-                        设计保持了高度的统一性：结构统一（金色外圆环）、核心统一（"א"字母变体）、
-                        色彩统一（本源黑背景与哲思金线条）、字体统一（Inter Bold）。
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="images/logo.svg" alt="The Alephain Guild Logo" width="36" height="36">
-                    <div>
-                        <h4>The Alephain Guild</h4>
-                        <p class="footer-tagline" data-lang="en">Translators and explorers of the market's Aleph</p>
-                        <p class="footer-tagline" data-lang="zh" style="display: none;">市场"阿莱夫"的译者与探索者</p>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="#essence">
-                        <span data-lang="en">Essence</span>
-                        <span data-lang="zh" style="display: none;">本源</span>
-                    </a>
-                    <a href="#principles">
-                        <span data-lang="en">Principles</span>
-                        <span data-lang="zh" style="display: none;">原理</span>
-                    </a>
-                    <a href="#method">
-                        <span data-lang="en">Method</span>
-                        <span data-lang="zh" style="display: none;">方法</span>
-                    </a>
-                    <a href="#ecosystem">
-                        <span data-lang="en">Ecosystem</span>
-                        <span data-lang="zh" style="display: none;">生态</span>
-                    </a>
-                </div>
-                
-                <div class="footer-legal">
-                    <p>© 2025 The Alephain Guild. All rights reserved.</p>
-                    <p class="footer-brand-compliance" data-lang="en">
-                        This website strictly adheres to <em>The Alephain Guild Brand Guide</em>
-                    </p>
-                    <p class="footer-brand-compliance" data-lang="zh" style="display: none;">
-                        本网站严格遵循《The Alephain Guild 品牌指南》
-                    </p>
-                </div>
-            </div>
-            
-            <div class="footer-back-to-top">
-                <a href="#top" class="back-to-top">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 19V5M5 12l7-7 7 7"/>
-                    </svg>
-                    <span data-lang="en">Back to top</span>
-                    <span data-lang="zh" style="display: none;">回到顶部</span>
-                </a>
-            </div>
+          </div>
+          <div class="funnel-foot" data-i18n="method.funnel.foot">Pass-through: 5.6% · Median time-to-kill: 11 wk · Reviewed quarterly.</div>
         </div>
-    </footer>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+        <div class="key"><div class="k" data-i18n="method.legend.doc.k">DOC</div><div class="v" style="font-family: var(--mono); font-size: 12.5px; color: var(--muted);" data-i18n="method.legend.doc.v">Methodology v3.4 · last revised 11.04.2026</div></div>
+      </aside>
+      <div class="phases">
+        <div class="phase">
+          <div class="pn">P / 01</div>
+          <div>
+            <h4><span data-i18n="ph.1.h.pre">Insight</span> <em data-i18n="ph.1.h.em">— from chaos, a question</em></h4>
+            <div class="desc" data-i18n="ph.1.desc">We isolate anomalies in the data manifold and translate them into falsifiable problems. Most candidates die here, by design.</div>
+            <div class="arts">
+              <div class="art"><span>anomaly-log</span><span>active</span></div>
+              <div class="art"><span>research-brief</span><span>v2</span></div>
+              <div class="art"><span>literature-trace</span><span>open</span></div>
+            </div>
+          </div>
+          <div class="meta">
+            <div data-i18n="ph.duration">DURATION</div><div class="v">2 — 6 wk</div>
+            <div style="margin-top:10px" data-i18n="ph.passthrough">PASS-THROUGH</div><div class="v">≈ 18%</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="pn">P / 02</div>
+          <div>
+            <h4><span data-i18n="ph.2.h.pre">Modeling</span> <em data-i18n="ph.2.h.em">— hypothesis as machine</em></h4>
+            <div class="desc" data-i18n="ph.2.desc">Hypotheses are translated into mathematical objects: estimators, distributions, optimization programs. Specification precedes simulation.</div>
+            <div class="arts">
+              <div class="art"><span>spec-doc</span><span>signed</span></div>
+              <div class="art"><span>estimator</span><span>v1.2</span></div>
+              <div class="art"><span>baseline</span><span>locked</span></div>
+            </div>
+          </div>
+          <div class="meta">
+            <div data-i18n="ph.duration">DURATION</div><div class="v">3 — 5 wk</div>
+            <div style="margin-top:10px" data-i18n="ph.passthrough">PASS-THROUGH</div><div class="v">≈ 41%</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="pn">P / 03</div>
+          <div>
+            <h4><span data-i18n="ph.3.h.pre">Refinement</span> <em data-i18n="ph.3.h.em">— the forge</em></h4>
+            <div class="desc" data-i18n="ph.3.desc">Strategies are tempered against historical data with risk, costs, and capacity embedded in the same loss function. Beauty is forbidden.</div>
+            <div class="arts">
+              <div class="art"><span>backtest-rig</span><span>v9</span></div>
+              <div class="art"><span>capacity-curve</span><span>fitted</span></div>
+              <div class="art"><span>risk-budget</span><span>bound</span></div>
+            </div>
+          </div>
+          <div class="meta">
+            <div data-i18n="ph.duration">DURATION</div><div class="v">2 — 4 wk</div>
+            <div style="margin-top:10px" data-i18n="ph.passthrough">PASS-THROUGH</div><div class="v">≈ 62%</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="pn">P / 04</div>
+          <div>
+            <h4><span data-i18n="ph.4.h.pre">Verification</span> <em data-i18n="ph.4.h.em">— the live court</em></h4>
+            <div class="desc" data-i18n="ph.4.desc">Live capital, strict attribution. Alpha and luck are separated by pre-registered tests; failures are deconstructed and returned to insight.</div>
+            <div class="arts">
+              <div class="art"><span>attribution</span><span>weekly</span></div>
+              <div class="art"><span>kill-trigger</span><span>armed</span></div>
+              <div class="art"><span>postmortem</span><span>open</span></div>
+            </div>
+          </div>
+          <div class="meta">
+            <div data-i18n="ph.duration">DURATION</div><div class="v" data-i18n="ph.4.duration.v">∞ (in production)</div>
+            <div style="margin-top:10px" data-i18n="ph.retirement">RETIREMENT</div><div class="v" data-i18n="ph.4.retirement.v">on falsification</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ECOSYSTEM =================== -->
+<section class="s invert" id="ecosystem">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="label"><span class="num">§ 04</span><span class="txt" data-i18n="eco.label">The Ecosystem</span></div>
+      <div>
+        <h2 class="title">
+          <span data-i18n="eco.title.pre">Two specialised entities,</span>
+          <em data-i18n="eco.title.em">one</em>
+          <span data-i18n="eco.title.post">philosophical core.</span>
+        </h2>
+        <p class="deck" data-i18n="eco.deck">Each operating company inherits the Guild's mandate and methodology, and extends it into a distinct domain — one of insight, one of execution.</p>
+      </div>
+    </div>
+    <div class="eco-duo">
+      <!-- LEFT · the Lab -->
+      <div class="eco-side eco-lab">
+        <div class="es-h">
+          <div class="es-glyph" aria-hidden="true">
+            <!-- Alchymia · A-route mark · pyramid + still-pipe + droplet -->
+            <svg viewBox="0 0 64 64" width="52" height="52" aria-label="Alchymia Labs mark">
+              <path d="M32 10 L52 50 L46 50 L42 41 L22 41 L18 50 L13 50 Z M27 33 L37 33 L34 38 L30 38 Z" fill="currentColor" fill-rule="evenodd"/>
+              <ellipse cx="32" cy="55.5" rx="2.6" ry="3.2" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="es-meta">
+            <div class="es-tag"><span data-i18n="eco.entity">ENTITY</span> · 01</div>
+            <div class="es-status ok"><span data-i18n="eco.operating">● OPERATING</span></div>
+          </div>
+        </div>
+        <div class="es-name">
+          <h3><span data-i18n="eco.1.h.pre">Alchymia</span> <em data-i18n="eco.1.h.em">Labs</em></h3>
+          <div class="es-role" data-i18n="eco.1.role">QUANTITATIVE ALCHEMY LABORATORY</div>
+        </div>
+        <p class="es-body" data-i18n="eco.1.body">The Guild's research arm. Converts market chaos into deployable strategy through mathematical modeling and statistical adjudication.</p>
+        <dl class="es-spec">
+          <div><dt data-i18n="eco.1.spec.1.k">DOMAIN</dt><dd data-i18n="eco.1.spec.1.v">Insight</dd></div>
+          <div><dt data-i18n="eco.1.spec.2.k">DELIVERABLE</dt><dd data-i18n="eco.1.spec.2.v">Models · papers · methodology</dd></div>
+          <div><dt data-i18n="eco.1.spec.3.k">CADENCE</dt><dd data-i18n="eco.1.spec.3.v">Continuous · quarterly review</dd></div>
+        </dl>
+        <a class="es-link" href="https://alchymia.alephain.com">alchymia.alephain.com ↗</a>
+      </div>
+
+      <!-- CENTER · exchange ribbon -->
+      <div class="eco-bridge" aria-hidden="true">
+        <div class="eb-line"></div>
+        <div class="eb-arrows">
+          <div class="eb-arrow eb-down">
+            <span class="eb-l" data-i18n="eco.bridge.down">INSIGHTS  →</span>
+          </div>
+          <div class="eb-node">
+            <span class="eb-aleph">ℵ</span>
+            <span class="eb-aleph-l" data-i18n="eco.bridge.core">GUILD CORE</span>
+          </div>
+          <div class="eb-arrow eb-up">
+            <span class="eb-l" data-i18n="eco.bridge.up">←  CAPITAL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT · the Floor -->
+      <div class="eco-side eco-floor">
+        <div class="es-h">
+          <div class="es-glyph" aria-hidden="true">
+            <!-- Tesseract · A-route mark · Schlegel diagram (4-cube projection) -->
+            <svg viewBox="0 0 64 64" width="52" height="52" stroke="currentColor" fill="none" stroke-width="2.6" stroke-linejoin="round" aria-label="Tesseract Trading mark">
+              <rect x="10" y="10" width="44" height="44"/>
+              <rect x="22" y="22" width="20" height="20"/>
+              <line x1="10" y1="10" x2="22" y2="22"/>
+              <line x1="54" y1="10" x2="42" y2="22"/>
+              <line x1="10" y1="54" x2="22" y2="42"/>
+              <line x1="54" y1="54" x2="42" y2="42"/>
+            </svg>
+          </div>
+          <div class="es-meta">
+            <div class="es-tag"><span data-i18n="eco.entity">ENTITY</span> · 02</div>
+            <div class="es-status ok"><span data-i18n="eco.operating">● OPERATING</span></div>
+          </div>
+        </div>
+        <div class="es-name">
+          <h3><span data-i18n="eco.2.h.pre">Tesseract</span> <em data-i18n="eco.2.h.em">Trading</em></h3>
+          <div class="es-role" data-i18n="eco.2.role">HIGH-DIMENSIONAL EXECUTION</div>
+        </div>
+        <p class="es-body" data-i18n="eco.2.body">The Guild's execution arm. Trades the geometry that ordinary participants cannot see — operating in dimensions of liquidity invisible to surface-level price.</p>
+        <dl class="es-spec">
+          <div><dt data-i18n="eco.2.spec.1.k">DOMAIN</dt><dd data-i18n="eco.2.spec.1.v">Execution</dd></div>
+          <div><dt data-i18n="eco.2.spec.2.k">DELIVERABLE</dt><dd data-i18n="eco.2.spec.2.v">Live PnL · attribution · capacity</dd></div>
+          <div><dt data-i18n="eco.2.spec.3.k">CADENCE</dt><dd data-i18n="eco.2.spec.3.v">24/5 · daily settle</dd></div>
+        </dl>
+        <a class="es-link" href="https://tesseract.alephain.com">tesseract.alephain.com ↗</a>
+      </div>
+    </div>
+
+    <div class="eco-foot" aria-hidden="true">
+      <span data-i18n="eco.foot">⟨ capital flows ←  →  insights · the two arms share neither books nor blame, only methodology ⟩</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== §05 · CAPACITY & ENGAGEMENT (new in v5) =================== -->
+<section class="s" id="engage">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="label"><span class="num">§ 05</span><span class="txt" data-i18n="engage.label">Capacity & Engagement</span></div>
+      <div>
+        <h2 class="title">
+          <span data-i18n="engage.title.pre">What we manage,</span>
+          <em data-i18n="engage.title.em">how</em><span data-i18n="engage.title.post"> we engage, and where we will not.</span>
+        </h2>
+        <p class="deck" data-i18n="engage.deck">For institutional counterparties: the shape of our mandate, the terms on which we operate, and the boundaries we hold. Capacity is finite by construction.</p>
+      </div>
+    </div>
+
+    <div class="engage-grid">
+      <!-- A · Coverage -->
+      <div class="engage-block coverage">
+        <div class="e-h">
+          <span class="e-n">A.</span>
+          <span class="e-t" data-i18n="engage.coverage.t">COVERAGE</span>
+        </div>
+        <p class="e-deck" data-i18n="engage.coverage.deck">Asset classes and venues we trade in production today.</p>
+        <div class="cov-table">
+          <div class="cov-row">
+            <div class="cov-k" data-i18n="engage.cov.1.k">Cash Equities</div>
+            <div class="cov-v" data-i18n="engage.cov.1.v">HK · US · JP — listed primary venues</div>
+          </div>
+          <div class="cov-row">
+            <div class="cov-k" data-i18n="engage.cov.2.k">Index Futures</div>
+            <div class="cov-v" data-i18n="engage.cov.2.v">CME · EUREX · OSE · HKFE</div>
+          </div>
+          <div class="cov-row">
+            <div class="cov-k" data-i18n="engage.cov.3.k">Commodities</div>
+            <div class="cov-v" data-i18n="engage.cov.3.v">Energy &amp; metals — selective</div>
+          </div>
+          <div class="cov-row">
+            <div class="cov-k" data-i18n="engage.cov.4.k">Digital Assets</div>
+            <div class="cov-v" data-i18n="engage.cov.4.v">Spot &amp; perpetuals · regulated venues only</div>
+          </div>
+          <div class="cov-row off">
+            <div class="cov-k" data-i18n="engage.cov.5.k">Out of scope</div>
+            <div class="cov-v" data-i18n="engage.cov.5.v">Single-name credit · OTC structured · private markets</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B · Capacity -->
+      <div class="engage-block capacity">
+        <div class="e-h">
+          <span class="e-n">B.</span>
+          <span class="e-t" data-i18n="engage.cap.t">CAPACITY</span>
+        </div>
+        <p class="e-deck" data-i18n="engage.cap.deck">Edge erodes with size. We size accordingly.</p>
+        <div class="cap-cards">
+          <div class="cap-card">
+            <div class="cap-card-h">
+              <span class="cap-card-i">i.</span>
+              <span class="cap-card-l" data-i18n="engage.cap.1.l">DEPLOYED · INTERNAL</span>
+            </div>
+            <div class="cap-card-v num">
+              <span class="cap-prefix">~ USD</span><span class="cap-figure">480</span><span class="cap-unit">M</span>
+            </div>
+            <div class="cap-card-bar"><span style="--w:88%"></span></div>
+            <div class="cap-card-f" data-i18n="engage.cap.1.f">Partner &amp; employee capital. Aligned with all external mandates.</div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-card-h">
+              <span class="cap-card-i">ii.</span>
+              <span class="cap-card-l" data-i18n="engage.cap.2.l">EXTERNAL · OPEN</span>
+            </div>
+            <div class="cap-card-v num">
+              <span class="cap-prefix">USD</span><span class="cap-figure">150</span><span class="cap-unit">M</span>
+            </div>
+            <div class="cap-card-bar"><span style="--w:32%"></span></div>
+            <div class="cap-card-f" data-i18n="engage.cap.2.f">Remaining capacity in the current vintage. Closes at hard cap.</div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-card-h">
+              <span class="cap-card-i">iii.</span>
+              <span class="cap-card-l" data-i18n="engage.cap.3.l">LIQUIDITY · TYPICAL</span>
+            </div>
+            <div class="cap-card-v num">
+              <span class="cap-prefix">redemption</span><span class="cap-figure">T+30</span><span class="cap-unit"></span>
+            </div>
+            <div class="cap-card-bar"><span style="--w:100%"></span></div>
+            <div class="cap-card-f" data-i18n="engage.cap.3.f">Monthly redemption with 30-day notice; no gates beyond legal.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C · Terms -->
+      <div class="engage-block terms">
+        <div class="e-h">
+          <span class="e-n">C.</span>
+          <span class="e-t" data-i18n="engage.terms.t">TERMS OF ENGAGEMENT</span>
+        </div>
+        <p class="e-deck" data-i18n="engage.terms.deck">Five commitments we make to every counterparty — and five things we decline.</p>
+        <div class="terms-cols">
+          <div class="terms-col do">
+            <div class="tc-h" data-i18n="engage.terms.do.h">WE DO</div>
+            <ul>
+              <li data-i18n="engage.terms.do.1">Publish the methodology that produces every strategy.</li>
+              <li data-i18n="engage.terms.do.2">Disclose retired strategies in the quarterly letter.</li>
+              <li data-i18n="engage.terms.do.3">Co-invest at material levels alongside external capital.</li>
+              <li data-i18n="engage.terms.do.4">Hold a hard capacity cap — and close to new capital at it.</li>
+              <li data-i18n="engage.terms.do.5">Provide attribution at strategy and factor level monthly.</li>
+            </ul>
+          </div>
+          <div class="terms-col dont">
+            <div class="tc-h" data-i18n="engage.terms.dont.h">WE DECLINE</div>
+            <ul>
+              <li data-i18n="engage.terms.dont.1">Discretionary overrides of the systematic book.</li>
+              <li data-i18n="engage.terms.dont.2">Bespoke vehicles below scale that compromise focus.</li>
+              <li data-i18n="engage.terms.dont.3">Side-letters that re-shape risk for individual investors.</li>
+              <li data-i18n="engage.terms.dont.4">Mandates outside published coverage and edge.</li>
+              <li data-i18n="engage.terms.dont.5">Performance fees without a high-water mark.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="engage-cta">
+      <div class="ec-l">
+        <div class="ec-tag" data-i18n="engage.cta.tag">FOR ALLOCATORS · FAMILY OFFICES · INSTITUTIONAL DESKS</div>
+        <p class="ec-text" data-i18n="engage.cta.text">Initial conversations are conducted under NDA. Materials are provided only to qualifying professional investors.</p>
+      </div>
+      <a class="btn solid" href="mailto:ir@alephain.com?subject=Engagement%20%C2%B7%20Initial%20Inquiry" data-i18n="engage.cta.btn">Initiate engagement →</a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== RESEARCH =================== -->
+<section class="s research" id="research">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="label"><span class="num">§ 06</span><span class="txt" data-i18n="research.label">Research Letter</span></div>
+      <div>
+        <h2 class="title">
+          <span data-i18n="research.title.pre">Selected</span>
+          <em data-i18n="research.title.em">writing</em>
+          <span data-i18n="research.title.post">— from the Guild's quarterly letter.</span>
+        </h2>
+        <p class="deck" data-i18n="research.deck">We publish a quarterly letter for our institutional counterparties — working notes from active research, retired strategies, and unresolved questions. Below are recent excerpts.</p>
+      </div>
+    </div>
+    <div class="research-toc">
+      <!-- Masthead: vol/issue/dateline/circulation -->
+      <div class="toc-shell">
+        <div class="toc-masthead">
+          <div>
+            <span class="k" data-i18n="research.toc.title.k">Title</span>
+            <span class="v"><em data-i18n="research.toc.title.v">Quarterly Letter</em></span>
+          </div>
+          <div>
+            <span class="k" data-i18n="research.toc.issue.k">Volume / Issue</span>
+            <span class="v mono"><span class="acc">VOL II</span> · No. 04</span>
+          </div>
+          <div>
+            <span class="k" data-i18n="research.toc.dateline.k">Dateline</span>
+            <span class="v mono" data-i18n="research.toc.dateline.v">Q2 · 2026 — Hong Kong</span>
+          </div>
+          <div>
+            <span class="k" data-i18n="research.toc.circ.k">Circulation</span>
+            <span class="v mono" data-i18n="research.toc.circ.v">Institutional · 312 readers</span>
+          </div>
+        </div>
+
+        <!-- Column rule -->
+        <div class="toc-rule">
+          <div data-i18n="research.toc.col.no">Folio</div>
+          <div data-i18n="research.toc.col.title">Article</div>
+          <div data-i18n="research.toc.col.section">Section</div>
+          <div data-i18n="research.toc.col.length">Length</div>
+          <div data-i18n="research.toc.col.page" style="text-align:right">Page</div>
+        </div>
+
+        <!-- Entries -->
+        <ul class="toc-list">
+          <li><a class="toc-row" href="mailto:research@alephain.com?subject=Letter%20·%20Order-book%20half-life">
+            <span class="toc-folio">L / 04</span>
+            <span class="toc-body">
+              <span class="tag" data-i18n="research.1.tag">MICROSTRUCTURE</span>
+              <h4 data-i18n="research.1.title">On the half-life of order-book imbalance</h4>
+              <span class="author" data-i18n="research.1.author">— K. Yamada · M. Lieber · with commentary by the Editorial Board</span>
+            </span>
+            <span class="toc-meta" data-i18n="research.1.section">Empirical · L2</span>
+            <span class="toc-meta right" data-i18n="research.1.length">7,400 wd · 14 pp</span>
+            <span class="toc-page">p. 003</span>
+          </a></li>
+          <li><a class="toc-row" href="mailto:research@alephain.com?subject=Letter%20·%20Drawdown%20path">
+            <span class="toc-folio">L / 03</span>
+            <span class="toc-body">
+              <span class="tag" data-i18n="research.2.tag">REGIME</span>
+              <h4 data-i18n="research.2.title">Drawdown is not a tail — it is a <em>path</em></h4>
+              <span class="author" data-i18n="research.2.author">— I. Ravid, with appendix by R. Saito</span>
+            </span>
+            <span class="toc-meta" data-i18n="research.2.section">Risk · Theory</span>
+            <span class="toc-meta right" data-i18n="research.2.length">5,100 wd · 11 pp</span>
+            <span class="toc-page">p. 019</span>
+          </a></li>
+          <li><a class="toc-row" href="mailto:research@alephain.com?subject=Letter%20·%20Liquidity%20prior">
+            <span class="toc-folio">L / 02</span>
+            <span class="toc-body">
+              <span class="tag" data-i18n="research.3.tag">EXECUTION</span>
+              <h4 data-i18n="research.3.title">Liquidity as a Bayesian <em>prior</em></h4>
+              <span class="author" data-i18n="research.3.author">— Σ Execution Desk · with M. Petersen</span>
+            </span>
+            <span class="toc-meta" data-i18n="research.3.section">Methods · Note</span>
+            <span class="toc-meta right" data-i18n="research.3.length">3,200 wd · 8 pp</span>
+            <span class="toc-page">p. 031</span>
+          </a></li>
+          <li><a class="toc-row" href="mailto:research@alephain.com?subject=Letter%20·%20Retiring%20a%20strategy">
+            <span class="toc-folio">L / 01</span>
+            <span class="toc-body">
+              <span class="tag" data-i18n="research.4.tag">MEMO</span>
+              <h4 data-i18n="research.4.title">On retiring a strategy with <em>grace</em></h4>
+              <span class="author" data-i18n="research.4.author">— The Editorial Board</span>
+            </span>
+            <span class="toc-meta" data-i18n="research.4.section">Editorial · Memo</span>
+            <span class="toc-meta right" data-i18n="research.4.length">2,100 wd · 6 pp</span>
+            <span class="toc-page">p. 041</span>
+          </a></li>
+        </ul>
+
+        <!-- Footer: ISSN + archive -->
+        <div class="toc-foot">
+          <span data-i18n="research.toc.foot.issn">ISSN-style serial · Q2 2026 · 47 pages · Hong Kong &amp; London</span>
+          <a class="archive" href="mailto:research@alephain.com?subject=Research%20archive%20request" data-i18n="research.archive">View full archive →</a>
+        </div>
+      </div>
+
+      <!-- Subscribe slab -->
+      <div class="toc-subscribe">
+        <div class="head" data-i18n-html="research.toc.sub.head">Subscribe to <em>The Quarterly Letter</em>.</div>
+        <div class="body" data-i18n="research.toc.sub.body">Quarterly cadence · institutional readers only · no marketing copy ever sent.</div>
+        <a class="cta" href="mailto:research@alephain.com?subject=Research%20Letter%20%C2%B7%20Access%20Request" data-i18n="research.subscribe.cta">Request access</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand-block">
+        <div class="name">ALEPHAIN</div>
+        <div class="tag" data-i18n="footer.tag">— translators of the market's Aleph.</div>
+        <p data-i18n="footer.about">A research collective and systematic trading firm. We publish what we can, trade what we must, and steward what we have.</p>
+        <a class="contact-card" href="mailto:contact@alephain.com?subject=Inquiry%20·%20Alephain">
+          <span class="contact-card__label" data-i18n="nav.contact">Contact</span>
+          <span class="contact-card__addr">contact@alephain.com</span>
+          <span class="contact-card__arrow">↗</span>
+        </a>
+      </div>
+      <div><h5 data-i18n="footer.sections">Sections</h5><ul>
+        <li><a href="#mandate" data-i18n="nav.01">Response</a></li>
+        <li><a href="#principles" data-i18n="nav.02">Principles</a></li>
+        <li><a href="#method" data-i18n="nav.03">Method</a></li>
+        <li><a href="#ecosystem" data-i18n="nav.04">Ecosystem</a></li>
+        <li><a href="#engage" data-i18n="nav.05">Engage</a></li>
+      </ul></div>
+      <div><h5 data-i18n="footer.entities">Entities</h5><ul>
+        <li><a href="https://alchymia.alephain.com">Alchymia Labs ↗</a></li>
+        <li><a href="https://tesseract.alephain.com">Tesseract Trading ↗</a></li>
+        <li><a href="#research" data-i18n="footer.research">Research Letter</a></li>
+        <li><a href="#disclosures" data-i18n="footer.disclosures">Disclosures</a></li>
+      </ul></div>
+      <div><h5 data-i18n="footer.offices">Offices</h5><ul style="font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em;">
+        <li>Hong Kong — HKG</li>
+        <li>Singapore — SIN</li>
+        <li>London — LON</li>
+        <li><a href="mailto:contact@alephain.com">contact@alephain.com</a></li>
+        <li><a href="mailto:research@alephain.com">research@alephain.com</a></li>
+        <li><a href="mailto:careers@alephain.com">careers@alephain.com</a></li>
+      </ul></div>
+    </div>
+    <div class="colophon-head" aria-hidden="true">
+      <span data-i18n="footer.colophon">COLOPHON</span>
+      <span class="ornament"></span>
+      <span class="glyph">ℵ</span>
+    </div>
+    <div class="bottom">
+      <div class="col">
+        <span class="k" data-i18n="footer.meta.serial">SERIAL</span>
+        <span class="v">ALN·LTR/2026·Q2·001</span>
+      </div>
+      <div class="col">
+        <span class="k" data-i18n="footer.meta.dateline">DATELINE</span>
+        <span class="v" id="colophonDate">29 APR 2026 · HKG</span>
+      </div>
+      <div class="col">
+        <span class="k" data-i18n="footer.meta.imprint">IMPRINT</span>
+        <span class="v">ALEPHAIN GUILD · HK / SG / LON</span>
+      </div>
+      <div class="col signature">
+        <span class="k" data-i18n="footer.meta.signed">SIGNED</span>
+        <span class="v" data-i18n="footer.meta.signed.v">— The Editorial Board</span>
+      </div>
+    </div>
+    <div class="legalbar">
+      <span data-i18n="footer.copy">© 2026 ALEPHAIN GUILD · ALL RIGHTS RESERVED.</span>
+      <span class="seal" data-i18n="footer.legal">FOR PROFESSIONAL CLIENTS ONLY · NOT INVESTMENT ADVICE</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ============ I18N ============ */
+  window.I18N = {
+  "en": {
+    "topbar.cities": "HONG KONG · SINGAPORE · LONDON",
+    "topbar.live": "MARKETS OPEN — SESSION ASIA/NY",
+    "nav.brand.sub": "Quantitative · Guild",
+    "nav.01": "Response",
+    "nav.02": "Principles",
+    "nav.03": "Method",
+    "nav.04": "Ecosystem",
+    "nav.05": "Engage",
+    "nav.06": "Research",
+    "nav.contact": "Contact",
+    "hero.meta.center": "An Account of First Principles",
+    "hero.meta.right.prefix": "FILED",
+    "hero.meta.right.suffix": "UTC",
+    "hero.qtag": "A QUESTION, FIRST.",
+    "hero.q.line1": "Can the market,",
+    "hero.q.line2.pre": "as a single object,",
+    "hero.q.line2.em": "be charted",
+    "hero.q.line2.post": "?",
+    "hero.bridge": "OUR VOCATION",
+    "hero.h1.line1.pre": "We translate the market's",
+    "hero.h1.line1.em": "infinite",
+    "hero.h1.line1.post": "chaos",
+    "hero.h1.line2.pre": "into",
+    "hero.h1.line2.em": "finite",
+    "hero.h1.line2.post": ", deterministic alpha.",
+    "hero.q.lede": "A research-led systematic trading firm. We treat the market as a single object — and devote our craft to charting it.",
+    "hero.cta.primary": "How we respond →",
+    "hero.cta.secondary": "View Methodology",
+    "interlude.label": "PROLEGOMENON",
+    "interlude.q": "Below is the working order of the firm — neither a manifesto nor a marketing brochure. Read it as you would a research note.",
+    "interlude.sig": "— H. K. · APR 2026",
+    "mandate.label": "The Response",
+    "mandate.title.pre": "We do not",
+    "mandate.title.em": "answer",
+    "mandate.title.post": ". We discharge the question across three mandates.",
+    "mandate.deck": "An honest practice cannot promise an answer to so wide a question. It can, however, structure its labour around it. Below are the three mandates that organise our work.",
+    "mandate.1.title.pre": "Exploration",
+    "mandate.1.title.em": "of fundamental structure",
+    "mandate.1.body": "We investigate liquidity, reflexivity, and information flow with the patience of a research institute. Findings advance the canon, not the next trade.",
+    "mandate.1.foot": "DOMAIN · MICROSTRUCTURE",
+    "mandate.2.title.pre": "Alchemy",
+    "mandate.2.title.em": "of insight into engine",
+    "mandate.2.body": "Hypotheses become production systems through formal modeling, statistical adjudication, and software engineering held to research standards.",
+    "mandate.2.foot": "DOMAIN · MODELING",
+    "mandate.3.title.pre": "Guardianship",
+    "mandate.3.title.em": "of capital and reputation",
+    "mandate.3.body": "Risk is treated as a first-class research object. We engineer redundancy, enforce drawdown discipline, and decline mandates outside our edge.",
+    "mandate.3.foot": "DOMAIN · RISK",
+    "principles.label": "First Principles",
+    "principles.title.pre": "Six",
+    "principles.title.em": "axioms",
+    "principles.title.post": ". Every model we ship is a corollary of them.",
+    "principles.deck": "First principles are not slogans. They are pre-conditions of inquiry — the ground on which our methodology stands. We publish them so our work can be challenged on its terms.",
+    "principles.sigma": "AXIOMATA",
+    "p.1.short": "Finiteness",
+    "p.2.short": "Falsifiability",
+    "p.3.short": "Liquidity",
+    "p.4.short": "Drawdown",
+    "p.5.short": "Code-as-research",
+    "p.6.short": "Compounding",
+    "p.1.h.pre": "The market is a",
+    "p.1.h.em": "finite",
+    "p.1.h.post": "object in an infinite space.",
+    "p.1.body": "At any instant, prices, flows, and beliefs occupy a single bounded geometry. Alpha is the projection of that geometry onto a tradable plane.",
+    "p.2.h.pre": "Falsifiability",
+    "p.2.h.em": "precedes",
+    "p.2.h.post": "profit.",
+    "p.2.body": "A hypothesis that cannot fail in backtest, in forward, or in attribution does not earn capital. Beauty is not a defense.",
+    "p.3.h.pre": "Liquidity is the",
+    "p.3.h.em": "medium",
+    "p.3.h.post": ", not the message.",
+    "p.3.body": "We model the cost of presence — slippage, impact, queue position — before we estimate signal. Most edges die in execution, not in theory.",
+    "p.4.h.pre": "Drawdown is a",
+    "p.4.h.em": "physical",
+    "p.4.h.post": "quantity.",
+    "p.4.body": "It is bounded, attributable, and forecast-able. We size positions to survive the worst plausible regime, not the average one.",
+    "p.5.h.pre": "Code is the",
+    "p.5.h.em": "final",
+    "p.5.h.post": "form of research.",
+    "p.5.body": "An idea that cannot be executed cleanly does not exist for us. Reproducibility, modularity, and audit trails are non-negotiable.",
+    "p.6.h.pre": "Time",
+    "p.6.h.em": "compounds",
+    "p.6.h.post": "the disciplined.",
+    "p.6.body": "Edge is not extracted in heroic days; it is accrued by surviving ordinary ones. Our horizon is decades, our frequency is daily.",
+    "principles.summary": "⟨ Σ axiomata : 6 · corollaries published quarterly · last review 11.04.2026 ⟩",
+    "pullquote.q": "Begin with principles, end with performance. Be loyal to logic, reverent to the unknown.",
+    "pullquote.cite": "— Maxim of the Guild",
+    "method.label": "Methodology",
+    "method.title.pre": "Alpha Alchemy &mdash; a",
+    "method.title.em": "four-phase",
+    "method.title.post": "closed loop.",
+    "method.deck": "Every strategy traverses the same cycle, in the same order. The cycle is enforced; nothing reaches production by exception.",
+    "method.legend.cycle.k": "CYCLE",
+    "method.legend.cycle.v": "Insight → Modeling → Refinement → Verification → ↻",
+    "method.legend.cadence.k": "CADENCE",
+    "method.legend.cadence.v": "Median 14 weeks from question to capital, 6 weeks from capital to attribution.",
+    "method.legend.gate.k": "GATE",
+    "method.legend.gate.v": "A unanimous research committee — no asymmetric upside without an asymmetric kill criterion.",
+    "method.funnel.tag": "RESEARCH RECORD · 2024",
+    "method.funnel.1.l": "PROPOSALS LOGGED",
+    "method.funnel.2.l": "ADMITTED TO MODELING",
+    "method.funnel.3.l": "DEPLOYED TO LIVE",
+    "method.funnel.4.l": "RETIRED IN-YEAR",
+    "method.funnel.foot": "Pass-through: 5.6% · Median time-to-kill: 11 wk · Reviewed quarterly.",
+    "method.legend.doc.k": "DOC",
+    "method.legend.doc.v": "Methodology v3.4 · last revised 11.04.2026",
+    "ph.1.h.pre": "Insight",
+    "ph.1.h.em": "— from chaos, a question",
+    "ph.1.desc": "We isolate anomalies in the data manifold and translate them into falsifiable problems. Most candidates die here, by design.",
+    "ph.duration": "DURATION",
+    "ph.passthrough": "PASS-THROUGH",
+    "ph.2.h.pre": "Modeling",
+    "ph.2.h.em": "— hypothesis as machine",
+    "ph.2.desc": "Hypotheses are translated into mathematical objects: estimators, distributions, optimization programs. Specification precedes simulation.",
+    "ph.3.h.pre": "Refinement",
+    "ph.3.h.em": "— the forge",
+    "ph.3.desc": "Strategies are tempered against historical data with risk, costs, and capacity embedded in the same loss function. Beauty is forbidden.",
+    "ph.4.h.pre": "Verification",
+    "ph.4.h.em": "— the live court",
+    "ph.4.desc": "Live capital, strict attribution. Alpha and luck are separated by pre-registered tests; failures are deconstructed and returned to insight.",
+    "ph.4.duration.v": "∞ (in production)",
+    "ph.retirement": "RETIREMENT",
+    "ph.4.retirement.v": "on falsification",
+    "eco.label": "The Ecosystem",
+    "eco.title.pre": "Two specialised entities,",
+    "eco.title.em": "one",
+    "eco.title.post": "philosophical core.",
+    "eco.deck": "Each operating company inherits the Guild's mandate and methodology, and extends it into a distinct domain — one of insight, one of execution.",
+    "eco.entity": "ENTITY",
+    "eco.operating": "● OPERATING",
+    "eco.1.h.pre": "Alchymia",
+    "eco.1.h.em": "Labs",
+    "eco.1.role": "QUANTITATIVE ALCHEMY LABORATORY",
+    "eco.1.body": "The Guild's research arm. Converts market chaos into deployable strategy through mathematical modeling and statistical adjudication.",
+    "eco.1.spec.1.k": "DOMAIN",
+    "eco.1.spec.1.v": "Insight",
+    "eco.1.spec.2.k": "DELIVERABLE",
+    "eco.1.spec.2.v": "Models · papers · methodology",
+    "eco.1.spec.3.k": "CADENCE",
+    "eco.1.spec.3.v": "Continuous · quarterly review",
+    "eco.bridge.down": "INSIGHTS  →",
+    "eco.bridge.core": "GUILD CORE",
+    "eco.bridge.up": "←  CAPITAL",
+    "eco.2.h.pre": "Tesseract",
+    "eco.2.h.em": "Trading",
+    "eco.2.role": "HIGH-DIMENSIONAL EXECUTION",
+    "eco.2.body": "The Guild's execution arm. Trades the geometry that ordinary participants cannot see — operating in dimensions of liquidity invisible to surface-level price.",
+    "eco.2.spec.1.k": "DOMAIN",
+    "eco.2.spec.1.v": "Execution",
+    "eco.2.spec.2.k": "DELIVERABLE",
+    "eco.2.spec.2.v": "Live PnL · attribution · capacity",
+    "eco.2.spec.3.k": "CADENCE",
+    "eco.2.spec.3.v": "24/5 · daily settle",
+    "eco.foot": "⟨ capital flows ←  →  insights · the two arms share neither books nor blame, only methodology ⟩",
+    "engage.label": "Capacity & Engagement",
+    "engage.title.pre": "What we manage,",
+    "engage.title.em": "how",
+    "engage.title.post": " we engage, and where we will not.",
+    "engage.deck": "For institutional counterparties: the shape of our mandate, the terms on which we operate, and the boundaries we hold. Capacity is finite by construction.",
+    "engage.coverage.t": "COVERAGE",
+    "engage.coverage.deck": "Asset classes and venues we trade in production today.",
+    "engage.cov.1.k": "Cash Equities",
+    "engage.cov.1.v": "HK · US · JP — listed primary venues",
+    "engage.cov.2.k": "Index Futures",
+    "engage.cov.2.v": "CME · EUREX · OSE · HKFE",
+    "engage.cov.3.k": "Commodities",
+    "engage.cov.3.v": "Energy &amp; metals — selective",
+    "engage.cov.4.k": "Digital Assets",
+    "engage.cov.4.v": "Spot &amp; perpetuals · regulated venues only",
+    "engage.cov.5.k": "Out of scope",
+    "engage.cov.5.v": "Single-name credit · OTC structured · private markets",
+    "engage.cap.t": "CAPACITY",
+    "engage.cap.deck": "Edge erodes with size. We size accordingly.",
+    "engage.cap.1.l": "DEPLOYED · INTERNAL",
+    "engage.cap.1.f": "Partner &amp; employee capital. Aligned with all external mandates.",
+    "engage.cap.2.l": "EXTERNAL · OPEN",
+    "engage.cap.2.f": "Remaining capacity in the current vintage. Closes at hard cap.",
+    "engage.cap.3.l": "LIQUIDITY · TYPICAL",
+    "engage.cap.3.f": "Monthly redemption with 30-day notice; no gates beyond legal.",
+    "engage.terms.t": "TERMS OF ENGAGEMENT",
+    "engage.terms.deck": "Five commitments we make to every counterparty — and five things we decline.",
+    "engage.terms.do.h": "WE DO",
+    "engage.terms.do.1": "Publish the methodology that produces every strategy.",
+    "engage.terms.do.2": "Disclose retired strategies in the quarterly letter.",
+    "engage.terms.do.3": "Co-invest at material levels alongside external capital.",
+    "engage.terms.do.4": "Hold a hard capacity cap — and close to new capital at it.",
+    "engage.terms.do.5": "Provide attribution at strategy and factor level monthly.",
+    "engage.terms.dont.h": "WE DECLINE",
+    "engage.terms.dont.1": "Discretionary overrides of the systematic book.",
+    "engage.terms.dont.2": "Bespoke vehicles below scale that compromise focus.",
+    "engage.terms.dont.3": "Side-letters that re-shape risk for individual investors.",
+    "engage.terms.dont.4": "Mandates outside published coverage and edge.",
+    "engage.terms.dont.5": "Performance fees without a high-water mark.",
+    "engage.cta.tag": "FOR ALLOCATORS · FAMILY OFFICES · INSTITUTIONAL DESKS",
+    "engage.cta.text": "Initial conversations are conducted under NDA. Materials are provided only to qualifying professional investors.",
+    "engage.cta.btn": "Initiate engagement →",
+    "research.label": "Research Letter",
+    "research.title.pre": "Selected",
+    "research.title.em": "writing",
+    "research.title.post": "— from the Guild's quarterly letter.",
+    "research.deck": "We publish a quarterly letter for our institutional counterparties — working notes from active research, retired strategies, and unresolved questions. Below are recent excerpts.",
+    "research.toc.title.k": "Title",
+    "research.toc.title.v": "Quarterly Letter",
+    "research.toc.issue.k": "Volume / Issue",
+    "research.toc.dateline.k": "Dateline",
+    "research.toc.dateline.v": "Q2 · 2026 — Hong Kong",
+    "research.toc.circ.k": "Circulation",
+    "research.toc.circ.v": "Institutional · 312 readers",
+    "research.toc.col.no": "Folio",
+    "research.toc.col.title": "Article",
+    "research.toc.col.section": "Section",
+    "research.toc.col.length": "Length",
+    "research.toc.col.page": "Page",
+    "research.1.tag": "MICROSTRUCTURE",
+    "research.1.title": "On the half-life of order-book imbalance",
+    "research.1.author": "— K. Yamada · M. Lieber · with commentary by the Editorial Board",
+    "research.1.section": "Empirical · L2",
+    "research.1.length": "7,400 wd · 14 pp",
+    "research.2.tag": "REGIME",
+    "research.2.title": "Drawdown is not a tail — it is a ",
+    "research.2.author": "— I. Ravid, with appendix by R. Saito",
+    "research.2.section": "Risk · Theory",
+    "research.2.length": "5,100 wd · 11 pp",
+    "research.3.tag": "EXECUTION",
+    "research.3.title": "Liquidity as a Bayesian ",
+    "research.3.author": "— Σ Execution Desk · with M. Petersen",
+    "research.3.section": "Methods · Note",
+    "research.3.length": "3,200 wd · 8 pp",
+    "research.4.tag": "MEMO",
+    "research.4.title": "On retiring a strategy with ",
+    "research.4.author": "— The Editorial Board",
+    "research.4.section": "Editorial · Memo",
+    "research.4.length": "2,100 wd · 6 pp",
+    "research.toc.foot.issn": "ISSN-style serial · Q2 2026 · 47 pages · Hong Kong &amp; London",
+    "research.archive": "View full archive →",
+    "research.toc.sub.body": "Quarterly cadence · institutional readers only · no marketing copy ever sent.",
+    "research.subscribe.cta": "Request access",
+    "footer.tag": "— translators of the market's Aleph.",
+    "footer.about": "A research collective and systematic trading firm. We publish what we can, trade what we must, and steward what we have.",
+    "footer.sections": "Sections",
+    "footer.entities": "Entities",
+    "footer.research": "Research Letter",
+    "footer.disclosures": "Disclosures",
+    "footer.offices": "Offices",
+    "footer.colophon": "COLOPHON",
+    "footer.meta.serial": "SERIAL",
+    "footer.meta.dateline": "DATELINE",
+    "footer.meta.imprint": "IMPRINT",
+    "footer.meta.signed": "SIGNED",
+    "footer.meta.signed.v": "— The Editorial Board",
+    "footer.copy": "© 2026 ALEPHAIN GUILD · ALL RIGHTS RESERVED.",
+    "footer.legal": "FOR PROFESSIONAL CLIENTS ONLY · NOT INVESTMENT ADVICE",
+    "topbar.est": "EST. <span class=\"num\">2024</span>",
+    "topbar.note": "RESEARCH NOTE №<span class=\"num\">047</span> — APR <span class=\"num\">2026</span>",
+    "hero.meta.left": "VOL. <span class=\"num\">II</span> — ISSUE <span class=\"num\">02</span>",
+    "research.toc.sub.head": "Subscribe to <em>The Quarterly Letter</em>"
+  },
+  "zh": {
+    "topbar.cities": "香港 · 新加坡 · 伦敦",
+    "topbar.live": "市场进行中 — 亚 / 纽 时段",
+    "nav.brand.sub": "量化 · 行会",
+    "nav.01": "回应",
+    "nav.02": "公理",
+    "nav.03": "方法",
+    "nav.04": "生态",
+    "nav.05": "对接",
+    "nav.06": "研究",
+    "nav.contact": "联络",
+    "hero.meta.center": "一份关于第一性原理的论述",
+    "hero.meta.right.prefix": "存档于",
+    "hero.meta.right.suffix": "UTC",
+    "hero.qtag": "首先，一个问题。",
+    "hero.q.line1": "市场，作为一个整体，",
+    "hero.q.line2.pre": "是否",
+    "hero.q.line2.em": "可被勘绘",
+    "hero.q.line2.post": "？",
+    "hero.bridge": "我们的志业",
+    "hero.h1.line1.pre": "我们将市场",
+    "hero.h1.line1.em": "无穷",
+    "hero.h1.line1.post": "的混沌，",
+    "hero.h1.line2.pre": "翻译为",
+    "hero.h1.line2.em": "有限",
+    "hero.h1.line2.post": "且确定的 alpha。",
+    "hero.q.lede": "一家以研究为先导的系统化交易公司。我们将市场视为一个整体——并以毕生之业为之绘图。",
+    "hero.cta.primary": "我们如何回应 →",
+    "hero.cta.secondary": "查看方法论",
+    "interlude.label": "前言",
+    "interlude.q": "下文是本机构的工作秩序——既非宣言，亦非市场素材。请将其作为一份研究备忘来阅读。",
+    "interlude.sig": "— H. K. · 2026 年 4 月",
+    "mandate.label": "回 应",
+    "mandate.title.pre": "我们不",
+    "mandate.title.em": "回答",
+    "mandate.title.post": "。我们以三项使命来承担这一问题。",
+    "mandate.deck": "诚实的实务无法承诺回答如此宏大的问题，但它能够围绕这一问题来组织自己的劳作。下列三项使命，构成了我们工作的骨架。",
+    "mandate.1.title.pre": "勘探",
+    "mandate.1.title.em": "市场的基本结构",
+    "mandate.1.body": "我们以研究院的耐心，研究流动性、自反性与信息流动。所得发现服务于学理积累，而非下一笔交易。",
+    "mandate.1.foot": "领域 · 微观结构",
+    "mandate.2.title.pre": "炼成",
+    "mandate.2.title.em": "由洞见而至引擎",
+    "mandate.2.body": "假设须经形式化建模、统计检定与达研究标准的工程实现，方能成为生产级系统。",
+    "mandate.2.foot": "领域 · 建模",
+    "mandate.3.title.pre": "守护",
+    "mandate.3.title.em": "资本与声誉",
+    "mandate.3.body": "风险被视为一等研究对象。我们工程化冗余、严守回撤纪律，并拒绝超出能力边界的委托。",
+    "mandate.3.foot": "领域 · 风险",
+    "principles.label": "第一性原理",
+    "principles.title.pre": "六条",
+    "principles.title.em": "公理",
+    "principles.title.post": "。我们部署的每一个模型，皆为其推论。",
+    "principles.deck": "第一性原理不是口号，而是探究的前提——是我们方法论得以立足的基石。我们将其公开发布，以便我们的工作能在同样的尺度上接受检验。",
+    "principles.sigma": "公理集",
+    "p.1.short": "有限性",
+    "p.2.short": "可证伪",
+    "p.3.short": "流动性",
+    "p.4.short": "回撤",
+    "p.5.short": "代码即研究",
+    "p.6.short": "复利",
+    "p.1.h.pre": "市场是无穷空间中",
+    "p.1.h.em": "有限",
+    "p.1.h.post": "的对象。",
+    "p.1.body": "在任一瞬间，价格、资金流与共识，占据着唯一一组有界的几何形态。Alpha 即是这一几何在可交易平面上的投影。",
+    "p.2.h.pre": "可证伪性",
+    "p.2.h.em": "先于",
+    "p.2.h.post": "盈利能力。",
+    "p.2.body": "若一个假设在回测、前测与归因中皆无可能失败，它便不配被分配资本。优雅不能作为辩护。",
+    "p.3.h.pre": "流动性是",
+    "p.3.h.em": "介质",
+    "p.3.h.post": "，而非讯息本身。",
+    "p.3.body": "我们先建模存在的代价——滑点、冲击、队列位置——然后才估算信号。绝大多数 alpha 死于执行，而非死于理论。",
+    "p.4.h.pre": "回撤是一种",
+    "p.4.h.em": "物理",
+    "p.4.h.post": "量。",
+    "p.4.body": "它有界、可归因、可预测。我们以足以挺过最坏情境的尺度建仓，而非以平均情境。",
+    "p.5.h.pre": "代码是研究的",
+    "p.5.h.em": "最终",
+    "p.5.h.post": "形态。",
+    "p.5.body": "无法被洁净执行的想法，对我们而言并不存在。可重现性、模块化与审计追溯，皆不可妥协。",
+    "p.6.h.pre": "时间使有纪律者",
+    "p.6.h.em": "复利",
+    "p.6.h.post": "。",
+    "p.6.body": "Alpha 不在英雄式的日子里被攫取，而在平凡日子的存活中累积。我们的视野以十年计，而频率以日计。",
+    "principles.summary": "⟨ Σ 公理 : 6 · 推论按季度发布 · 上次复核 11.04.2026 ⟩",
+    "pullquote.q": "始于原理，终于业绩。忠于逻辑，敬于未知。",
+    "pullquote.cite": "— 行会箴言",
+    "method.label": "方法论",
+    "method.title.pre": "Alpha 的炼成 —— 一个",
+    "method.title.em": "四阶段",
+    "method.title.post": "的闭环。",
+    "method.deck": "每一项策略都遵循同一秩序穿越同一闭环。这一闭环是强制的；任何策略均不得以例外之名进入生产。",
+    "method.legend.cycle.k": "闭环",
+    "method.legend.cycle.v": "洞见 → 建模 → 锻造 → 检验 → ↻",
+    "method.legend.cadence.k": "节奏",
+    "method.legend.cadence.v": "由问题至资本，中位 14 周；由资本至归因，中位 6 周。",
+    "method.legend.gate.k": "门槛",
+    "method.legend.gate.v": "由研究委员会一致通过——没有不对称的击杀准则，便没有不对称的上行。",
+    "method.funnel.tag": "研究档案 · 2024",
+    "method.funnel.1.l": "登记提案",
+    "method.funnel.2.l": "进入建模",
+    "method.funnel.3.l": "投入实盘",
+    "method.funnel.4.l": "年内退役",
+    "method.funnel.foot": "通过率：5.6% · 中位击杀时长：11 周 · 每季复核。",
+    "method.legend.doc.k": "文档",
+    "method.legend.doc.v": "方法论 v3.4 · 上次修订 11.04.2026",
+    "ph.1.h.pre": "洞见",
+    "ph.1.h.em": "—— 自混沌中提出问题",
+    "ph.1.desc": "我们在数据流形中分离异常，并将其转译为可证伪的问题。绝大多数候选在此被淘汰——这是设计如此。",
+    "ph.duration": "时长",
+    "ph.passthrough": "通过率",
+    "ph.2.h.pre": "建模",
+    "ph.2.h.em": "—— 把假设造成机器",
+    "ph.2.desc": "假设被翻译为数学对象：估计量、分布、最优化方案。规范先于模拟。",
+    "ph.3.h.pre": "锻造",
+    "ph.3.h.em": "—— 熔炉",
+    "ph.3.desc": "策略在历史数据中经受锻打：风险、成本、容量被嵌入同一个损失函数。优雅在此被禁止。",
+    "ph.4.h.pre": "检验",
+    "ph.4.h.em": "—— 实盘的审判庭",
+    "ph.4.desc": "实盘资本，严格归因。Alpha 与运气以预先注册的检验加以分离；失败被解构后重返洞见阶段。",
+    "ph.4.duration.v": "∞（在产）",
+    "ph.retirement": "退 役",
+    "ph.4.retirement.v": "经证伪而退役",
+    "eco.label": "生态",
+    "eco.title.pre": "两个专业实体，",
+    "eco.title.em": "一个",
+    "eco.title.post": "哲学内核。",
+    "eco.deck": "每一家运营公司皆继承行会的使命与方法论，并将其延伸至独立的领域——一为洞见，一为执行。",
+    "eco.entity": "实体",
+    "eco.operating": "● 运营中",
+    "eco.1.h.pre": "Alchymia",
+    "eco.1.h.em": "实验室",
+    "eco.1.role": "量化炼金实验室",
+    "eco.1.body": "行会的研究分支。以数学建模与统计检定，将市场的混沌转化为可部署的策略。",
+    "eco.1.spec.1.k": "领域",
+    "eco.1.spec.1.v": "洞见",
+    "eco.1.spec.2.k": "交付",
+    "eco.1.spec.2.v": "模型 · 论文 · 方法论",
+    "eco.1.spec.3.k": "节奏",
+    "eco.1.spec.3.v": "持续 · 季度复核",
+    "eco.bridge.down": "洞见  →",
+    "eco.bridge.core": "行会内核",
+    "eco.bridge.up": "←  资本",
+    "eco.2.h.pre": "Tesseract",
+    "eco.2.h.em": "交易",
+    "eco.2.role": "高维执行",
+    "eco.2.body": "行会的执行分支。在普通参与者所不能见的几何中交易——在那些表层价格无从呈现的流动性维度中运作。",
+    "eco.2.spec.1.k": "领域",
+    "eco.2.spec.1.v": "执行",
+    "eco.2.spec.2.k": "交付",
+    "eco.2.spec.2.v": "实盘损益 · 归因 · 容量",
+    "eco.2.spec.3.k": "节奏",
+    "eco.2.spec.3.v": "24/5 · 日终结算",
+    "eco.foot": "⟨ 资本 ←  → 洞见 · 两翼不共账，亦不共罪，唯共方法 ⟩",
+    "engage.label": "容量与对接",
+    "engage.title.pre": "我们管理什么、",
+    "engage.title.em": "如何",
+    "engage.title.post": "对接、以及我们不为何事。",
+    "engage.deck": "致机构对手方：本机构使命的形状、我们运作的条款、以及我们所守的边界。容量在结构上即为有限。",
+    "engage.coverage.t": "覆盖范围",
+    "engage.coverage.deck": "下列为我们目前在生产环境中实盘交易的资产类别与场所。",
+    "engage.cov.1.k": "现货股票",
+    "engage.cov.1.v": "港 · 美 · 日 — 上市主场",
+    "engage.cov.2.k": "指数期货",
+    "engage.cov.2.v": "CME · EUREX · OSE · 港交所",
+    "engage.cov.3.k": "大宗商品",
+    "engage.cov.3.v": "能源与金属 — 选择性参与",
+    "engage.cov.4.k": "数字资产",
+    "engage.cov.4.v": "现货与永续 · 仅限合规场所",
+    "engage.cov.5.k": "不在范围",
+    "engage.cov.5.v": "单名信用 · 场外结构化 · 私募市场",
+    "engage.cap.t": "容量",
+    "engage.cap.deck": "Alpha 随规模而衰减，故我们以此节制规模。",
+    "engage.cap.1.l": "已部署 · 自有",
+    "engage.cap.1.f": "合伙人与员工资本。与所有外部委托一致对齐。",
+    "engage.cap.2.l": "外部 · 开放",
+    "engage.cap.2.f": "本期份额剩余容量。达到硬上限即关闭。",
+    "engage.cap.3.l": "流动性 · 一般",
+    "engage.cap.3.f": "月度赎回，提前 30 日通知；除法定事项外，无任何赎回门。",
+    "engage.terms.t": "对接条款",
+    "engage.terms.deck": "我们对每一位对手方所立的五项承诺，及我们所拒之五项。",
+    "engage.terms.do.h": "我们承诺",
+    "engage.terms.do.1": "公开每一项策略所依的方法论。",
+    "engage.terms.do.2": "在季度信中披露已退役的策略。",
+    "engage.terms.do.3": "以可观规模与外部资本同舟共济。",
+    "engage.terms.do.4": "持守容量硬上限——并在到达时关闭新增资金。",
+    "engage.terms.do.5": "按月提供策略级与因子级的归因。",
+    "engage.terms.dont.h": "我们婉拒",
+    "engage.terms.dont.1": "对系统化账簿的酌情干预。",
+    "engage.terms.dont.2": "规模不足、损害专注的定制载体。",
+    "engage.terms.dont.3": "为单一投资人重塑风险结构的边函。",
+    "engage.terms.dont.4": "超出已公布覆盖与能力的委托。",
+    "engage.terms.dont.5": "未设高水位线的业绩报酬。",
+    "engage.cta.tag": "致 配置者 · 家族办公室 · 机构席位",
+    "engage.cta.text": "初次接洽于保密协议下进行。相关材料仅向合资格的专业投资者提供。",
+    "engage.cta.btn": "发起对接 →",
+    "research.label": "研究通讯",
+    "research.title.pre": "选编",
+    "research.title.em": "文稿",
+    "research.title.post": "—— 摘自行会季刊。",
+    "research.deck": "我们为机构对手方发行季刊——记录在研课题、退役策略与未决问题的工作笔记。下列为近期摘选。",
+    "research.toc.title.k": "刊名",
+    "research.toc.title.v": "季刊",
+    "research.toc.issue.k": "卷 / 期",
+    "research.toc.dateline.k": "日期",
+    "research.toc.dateline.v": "Q2 · 2026 — 香港",
+    "research.toc.circ.k": "发行",
+    "research.toc.circ.v": "机构内部 · 312 位读者",
+    "research.toc.col.no": "编号",
+    "research.toc.col.title": "篇名",
+    "research.toc.col.section": "栏目",
+    "research.toc.col.length": "篇幅",
+    "research.toc.col.page": "页码",
+    "research.1.tag": "微观结构",
+    "research.1.title": "论订单簿失衡的半衰期",
+    "research.1.author": "— K. Yamada · M. Lieber · 编委会评注",
+    "research.1.section": "实证 · L2",
+    "research.1.length": "7,400 词 · 14 页",
+    "research.2.tag": "市场状态",
+    "research.2.title": "回撤不是尾部 —— 它是一种 ",
+    "research.2.author": "— I. Ravid，附录 R. Saito",
+    "research.2.section": "风险 · 理论",
+    "research.2.length": "5,100 词 · 11 页",
+    "research.3.tag": "执行",
+    "research.3.title": "把流动性当作一个贝叶斯 ",
+    "research.3.author": "— Σ 执行台 · 与 M. Petersen",
+    "research.3.section": "方法 · 札记",
+    "research.3.length": "3,200 词 · 8 页",
+    "research.4.tag": "备忘",
+    "research.4.title": "论以纪律退役一项策略：",
+    "research.4.author": "— 编委会",
+    "research.4.section": "社论 · 备忘",
+    "research.4.length": "2,100 词 · 6 页",
+    "research.toc.foot.issn": "ISSN 风格序列号 · 2026 第二季 · 47 页 · 香港 & 伦敦",
+    "research.archive": "查阅完整存档 →",
+    "research.toc.sub.body": "季度发行 · 仅供机构读者 · 永不发送营销内容。",
+    "research.subscribe.cta": "申请订阅",
+    "footer.tag": "—— 市场 Aleph 的译者。",
+    "footer.about": "一家研究集体与系统化交易公司。我们能公开者公开，必须交易者交易，受托守护者守护。",
+    "footer.sections": "栏目",
+    "footer.entities": "实体",
+    "footer.research": "研究通讯",
+    "footer.disclosures": "披露",
+    "footer.offices": "办公室",
+    "footer.colophon": "版本说明",
+    "footer.meta.serial": "序列",
+    "footer.meta.dateline": "日期",
+    "footer.meta.imprint": "印记",
+    "footer.meta.signed": "签署",
+    "footer.meta.signed.v": "—— 编委会",
+    "footer.copy": "© 2026 ALEPHAIN GUILD · 版权所有。",
+    "footer.legal": "仅限专业客户 · 不构成投资建议",
+    "topbar.est": "创立于 <span class=\"num\">2024</span>",
+    "topbar.note": "研究札记 № <span class=\"num\">047</span> — 2026 年 <span class=\"num\">4</span> 月",
+    "hero.meta.left": "卷 <span class=\"num\">II</span> · 期 <span class=\"num\">02</span>",
+    "research.toc.sub.head": "订阅 <em>季 刊</em>"
+  }
+};
+  
+  const LANG_KEY = 'alephain.lang';
+  function applyLang(lang){
+    if (!window.I18N || !window.I18N[lang]) lang = 'en';
+    const dict = window.I18N[lang];
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (dict[k] != null) el.textContent = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.getAttribute('data-i18n-html');
+      if (dict[k] != null) el.innerHTML = dict[k];
+    });
+    document.querySelectorAll('#langToggle button').forEach(b=>{
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    // Re-render filed timestamp in case its prefix/suffix changed
+    renderFiled();
+  }
+  document.getElementById('langToggle').addEventListener('click', e=>{
+    const btn = e.target.closest('button[data-lang]');
+    if (!btn) return;
+    const lang = btn.dataset.lang;
+    localStorage.setItem(LANG_KEY, lang);
+    applyLang(lang);
+  });
+
+  /* ============ THEME LOGIC ============ */
+  const KEY = 'alephain.theme';
+  const docEl = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  function autoTheme(){
+    const h = new Date().getHours();
+    return (h >= 7 && h < 19) ? 'paper' : 'slate';
+  }
+  function osTheme(){
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'slate' : 'paper';
+  }
+  function applyTheme(t){
+    docEl.setAttribute('data-theme', t);
+    // No inner buttons to mark active anymore — the icon swap is CSS-driven
+    // off [data-theme]. Update aria-pressed for a11y.
+    toggle.setAttribute('aria-pressed', t === 'slate' ? 'true' : 'false');
+    toggle.setAttribute('title', t === 'slate' ? 'Switch to day' : 'Switch to night');
+  }
+  let themeAutoMode = 'manual'; // 'manual' | 'auto' | 'os'
+  function resolveTheme(){
+    if (themeAutoMode === 'auto') return autoTheme();
+    if (themeAutoMode === 'os')   return osTheme();
+    return localStorage.getItem(KEY) || autoTheme();
+  }
+  function initTheme(){
+    applyTheme(resolveTheme());
+    setInterval(()=>{
+      if (themeAutoMode !== 'manual') applyTheme(resolveTheme());
+    }, 30*60*1000);
+  }
+  toggle.addEventListener('click', e=>{
+    // Single icon button — toggles between paper and slate
+    themeAutoMode = 'manual';
+    const next = (docEl.getAttribute('data-theme') === 'slate') ? 'paper' : 'slate';
+    localStorage.setItem(KEY, next);
+    applyTheme(next);
+    // Notify any listeners (Tweaks panel mirrors theme state)
+    document.dispatchEvent(new CustomEvent('alephain:theme', { detail: { theme: next } }));
+  });
+
+  /* ============ TICKER — removed in v5 ============ */
+
+  /* ============ FILED TIMESTAMP ============ */
+  function renderFiled(){
+    const now = new Date();
+    const dd = String(now.getUTCDate()).padStart(2,'0');
+    const mm = String(now.getUTCMonth()+1).padStart(2,'0');
+    const yyyy = now.getUTCFullYear();
+    const hh = String(now.getUTCHours()).padStart(2,'0');
+    const mi = String(now.getUTCMinutes()).padStart(2,'0');
+    const ss = String(now.getUTCSeconds()).padStart(2,'0');
+    const fd = document.getElementById('filedDate');
+    const ft = document.getElementById('filedTime');
+    if (fd) fd.textContent = `${dd}.${mm}.${yyyy}`;
+    if (ft) ft.textContent = `${hh}:${mi}:${ss}`;
+    // Colophon dateline (footer ISSN-style metadata)
+    const cd = document.getElementById('colophonDate');
+    if (cd){
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      cd.textContent = `${dd} ${months[now.getUTCMonth()]} ${yyyy} · HKG`;
+    }
+  }
+
+  // Init order: lang first (sets DOM text), then theme, then filed
+  const savedLang = localStorage.getItem(LANG_KEY) || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
+  applyLang(savedLang);
+  initTheme();
+  renderFiled();
+  setInterval(renderFiled, 1000);
+
+  /* ============ NAV SCROLLSPY ============ */
+  (function(){
+    const links = [...document.querySelectorAll('.navlinks a[href^="#"]')];
+    const map = new Map();
+    links.forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      const sec = document.getElementById(id);
+      if (sec) map.set(sec, a);
+    });
+    if (!map.size) return;
+    const io = new IntersectionObserver((entries) => {
+      // Find the entry with greatest visible ratio that is intersecting
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+      if (!visible.length) return;
+      const winner = map.get(visible[0].target);
+      if (!winner) return;
+      links.forEach(a => a.classList.toggle('is-active', a === winner));
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+    map.forEach((_, sec) => io.observe(sec));
+  })();
+
+  /* ============ ANALYTICS · EVENT TRACKING ============
+     Tracks: contact_click (mailto), section_view (per section).
+     gtag is loaded async; the local stub queues calls until the real
+     library hydrates, so it's safe to fire events immediately.        */
+
+  // 1) contact_click — any mailto on the page
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="mailto:"]');
+    if (!a || typeof gtag !== 'function') return;
+    const href = a.getAttribute('href') || '';
+    const addr = (href.match(/^mailto:([^?]+)/) || [])[1] || '';
+    const subj = decodeURIComponent((href.match(/[?&]subject=([^&]+)/) || [])[1] || '');
+    gtag('event', 'contact_click', {
+      email: addr,
+      subject: subj,
+      // Where the click came from — narrow it down with the closest landmark
+      surface: a.closest('nav') ? 'nav'
+             : a.closest('footer') ? 'footer'
+             : a.closest('#research') ? 'research'
+             : a.closest('#engage') ? 'engage'
+             : 'inline'
+    });
+  });
+
+  // 2) section_view — fires the first time a section enters the viewport.
+  //    Fires once per session per section so funnel comparisons are clean.
+  if ('IntersectionObserver' in window){
+    const seen = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const id = en.target.id;
+        if (seen.has(id)) return;
+        seen.add(id);
+        if (typeof gtag === 'function'){
+          gtag('event', 'section_view', {
+            section: id,
+            language: document.documentElement.getAttribute('lang') || 'en',
+            theme:    document.documentElement.getAttribute('data-theme') || 'paper'
+          });
+        }
+      });
+    }, { threshold: 0.35 }); // ~1/3 of section visible — "actually read"
+
+    ['mandate','principles','method','ecosystem','engage','research'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+</script>
 </body>
 </html>
