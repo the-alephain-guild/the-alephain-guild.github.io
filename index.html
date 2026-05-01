@@ -1168,6 +1168,68 @@
     max-width: 640px;
   }
 
+  /* Engagement form — institutional-letter look, not "saas signup" */
+  .engage-form{
+    margin-top: 28px; padding: 32px;
+    border: 1px solid var(--rule); background: var(--bg);
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  .engage-form[hidden]{ display: none; }
+  .engage-form .ef-grid{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px;
+  }
+  .engage-form .ef-field{ display: flex; flex-direction: column; gap: 6px; }
+  .engage-form .ef-l{
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2);
+  }
+  .engage-form input,
+  .engage-form select,
+  .engage-form textarea{
+    font: inherit; font-size: 14.5px; line-height: 1.5; color: var(--fg);
+    background: transparent;
+    border: 0; border-bottom: 1px solid var(--rule);
+    padding: 8px 0; border-radius: 0;
+    transition: border-color .18s ease;
+    appearance: none;
+  }
+  .engage-form select{
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted-2) 50%),
+                      linear-gradient(135deg, var(--muted-2) 50%, transparent 50%);
+    background-position: calc(100% - 12px) 14px, calc(100% - 7px) 14px;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+    padding-right: 22px; cursor: pointer;
+  }
+  .engage-form textarea{ resize: vertical; min-height: 96px; }
+  .engage-form input:focus,
+  .engage-form select:focus,
+  .engage-form textarea:focus{
+    outline: none; border-bottom-color: var(--accent-2);
+  }
+  .engage-form input:invalid:not(:placeholder-shown),
+  .engage-form textarea:invalid:not(:placeholder-shown){
+    border-bottom-color: var(--dn);
+  }
+  .engage-form .ef-foot{
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+    padding-top: 18px; border-top: 1px solid var(--rule-soft);
+  }
+  .engage-form .ef-note{
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase;
+  }
+  .engage-form .ef-result{
+    font-family: var(--serif); font-size: 16px; line-height: 1.5;
+    color: var(--fg); margin-top: 4px;
+  }
+  .engage-form .ef-result.is-error{ color: var(--dn); }
+  .engage-form .ef-result.is-success{ color: var(--up); }
+  /* Honeypot — visually hidden, accessible to bots only */
+  .engage-form input[name="_gotcha"]{
+    position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;
+  }
+
   /* =====================================================
      RESPONSIVE — three breakpoints
      ===================================================== */
@@ -1207,6 +1269,7 @@
     .engage-block{ border-right: 0; padding: 32px 24px 36px; }
     .cov-row{ grid-template-columns: 140px 1fr; }
     .engage-cta{ grid-template-columns: 1fr; gap: 20px; }
+    .engage-form{ padding: 24px; }
   }
 
   /* Phone 640 and below */
@@ -1294,6 +1357,10 @@
     .cap-card{ border-right: 0; padding: 22px 18px 22px; }
     .cap-card-v .cap-figure{ font-size: 52px; }
     .cap-card-v .cap-unit{ font-size: 20px; }
+    .engage-form{ padding: 18px; gap: 18px; margin-top: 20px; }
+    .engage-form .ef-grid{ grid-template-columns: 1fr; gap: 16px; }
+    .engage-form .ef-foot{ flex-direction: column; align-items: stretch; }
+    .engage-form .ef-foot .btn{ justify-content: center; }
 
     /* research */
     .research .toc-masthead{ grid-template-columns: 1fr; }
@@ -1321,7 +1388,7 @@
     body::before, body::after{ display:none !important; }
     /* Hide live chrome that doesn't belong on paper */
     .nav, .hero-cta, .nav-right, .lang-toggle, .theme-switch, .nav-burger,
-    .engage-cta, iframe, video{ display:none !important; }
+    .engage-cta, .engage-form, iframe, video{ display:none !important; }
     /* Tighter rhythm for paper */
     section, .section, footer{ break-inside: avoid; page-break-inside: avoid; padding: 18mm 0 !important; }
     h1, h2, h3, .section-title{ break-after: avoid; page-break-after: avoid; }
@@ -2054,8 +2121,49 @@
         <div class="ec-tag" data-i18n="engage.cta.tag">FOR ALLOCATORS · FAMILY OFFICES · INSTITUTIONAL DESKS</div>
         <p class="ec-text" data-i18n="engage.cta.text">Initial conversations are conducted under NDA. Materials are provided only to qualifying professional investors.</p>
       </div>
-      <a class="btn solid" href="mailto:ir@alephain.com?subject=Engagement%20%C2%B7%20Initial%20Inquiry" data-i18n="engage.cta.btn">Initiate engagement →</a>
+      <button class="btn solid" id="engageOpenBtn" type="button" data-i18n="engage.cta.btn" aria-controls="engageForm" aria-expanded="false">Initiate engagement →</button>
     </div>
+
+    <!-- Engagement form (Formspree) — replace YOUR_FORM_ID with the live id. -->
+    <form class="engage-form" id="engageForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" hidden novalidate>
+      <input type="hidden" name="_subject" value="Alephain · Initial Inquiry">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="ef-grid">
+        <label class="ef-field">
+          <span class="ef-l" data-i18n="engage.form.name.l">Name</span>
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label class="ef-field">
+          <span class="ef-l" data-i18n="engage.form.firm.l">Firm</span>
+          <input type="text" name="firm" autocomplete="organization">
+        </label>
+        <label class="ef-field">
+          <span class="ef-l" data-i18n="engage.form.email.l">Email</span>
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label class="ef-field">
+          <span class="ef-l" data-i18n="engage.form.aum.l">Mandate size (USD)</span>
+          <select name="mandate">
+            <option value=""></option>
+            <option value="<25M">&lt; 25M</option>
+            <option value="25-100M">25 – 100M</option>
+            <option value="100-500M">100 – 500M</option>
+            <option value=">500M">&gt; 500M</option>
+          </select>
+        </label>
+      </div>
+      <label class="ef-field ef-field-wide">
+        <span class="ef-l" data-i18n="engage.form.message.l">Message</span>
+        <textarea name="message" rows="4" required></textarea>
+      </label>
+
+      <div class="ef-foot">
+        <span class="ef-note" data-i18n="engage.form.note">Treated as confidential. We reply within 5 business days.</span>
+        <button type="submit" class="btn solid" data-i18n="engage.form.send">Send →</button>
+      </div>
+      <div class="ef-result" role="status" aria-live="polite"></div>
+    </form>
   </div>
 </section>
 
@@ -2435,6 +2543,16 @@
     "engage.cta.tag": "FOR ALLOCATORS · FAMILY OFFICES · INSTITUTIONAL DESKS",
     "engage.cta.text": "Initial conversations are conducted under NDA. Materials are provided only to qualifying professional investors.",
     "engage.cta.btn": "Initiate engagement →",
+    "engage.form.name.l": "Name",
+    "engage.form.firm.l": "Firm",
+    "engage.form.email.l": "Email",
+    "engage.form.aum.l": "Mandate size (USD)",
+    "engage.form.message.l": "Message",
+    "engage.form.note": "Treated as confidential. We reply within 5 business days.",
+    "engage.form.send": "Send →",
+    "engage.form.sending": "Sending…",
+    "engage.form.success": "Thank you. We have your note and will be in touch within 5 business days.",
+    "engage.form.error": "Something went wrong. Please try again, or write directly to ir@alephain.com.",
     "research.label": "Research Letter",
     "research.title.pre": "Selected",
     "research.title.em": "writing",
@@ -2693,6 +2811,16 @@
     "engage.cta.tag": "致 配置者 · 家族办公室 · 机构席位",
     "engage.cta.text": "初次接洽于保密协议下进行。相关材料仅向合资格的专业投资者提供。",
     "engage.cta.btn": "发起对接 →",
+    "engage.form.name.l": "姓名",
+    "engage.form.firm.l": "机构",
+    "engage.form.email.l": "邮箱",
+    "engage.form.aum.l": "委托规模（美元）",
+    "engage.form.message.l": "留言",
+    "engage.form.note": "信息保密处理。我们将在 5 个工作日内回复。",
+    "engage.form.send": "发送 →",
+    "engage.form.sending": "发送中…",
+    "engage.form.success": "已收到您的来信，我们将在 5 个工作日内与您联系。",
+    "engage.form.error": "提交失败，请重试，或直接邮件至 ir@alephain.com。",
     "research.label": "研究通讯",
     "research.title.pre": "选编",
     "research.title.em": "文稿",
@@ -2916,6 +3044,78 @@
       links.forEach(a => a.classList.toggle('is-active', a === winner));
     }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
     map.forEach((_, sec) => io.observe(sec));
+  })();
+
+  /* ============ ENGAGEMENT FORM ============
+     Reveal the form on CTA click, then submit it to Formspree as JSON.
+     Falls back gracefully: if JS is off, the button does nothing and
+     users can still reach ir@alephain.com via the footer mailto.    */
+  (function(){
+    const openBtn = document.getElementById('engageOpenBtn');
+    const form    = document.getElementById('engageForm');
+    if (!openBtn || !form) return;
+
+    const result = form.querySelector('.ef-result');
+    const submit = form.querySelector('button[type="submit"]');
+    const t = (k, fallback) => {
+      const lang = document.documentElement.getAttribute('lang') || 'en';
+      return (window.I18N && window.I18N[lang] && window.I18N[lang][k]) || fallback;
+    };
+
+    openBtn.addEventListener('click', () => {
+      form.hidden = false;
+      openBtn.setAttribute('aria-expanded', 'true');
+      openBtn.hidden = true;
+      const first = form.querySelector('input[name="name"]');
+      if (first) first.focus({ preventScroll: true });
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Honeypot trip — silently pretend success
+      if (form.querySelector('input[name="_gotcha"]').value) {
+        result.className = 'ef-result is-success';
+        result.textContent = t('engage.form.success', 'Thank you.');
+        return;
+      }
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      submit.disabled = true;
+      const originalLabel = submit.textContent;
+      submit.textContent = t('engage.form.sending', 'Sending…');
+      result.className = 'ef-result';
+      result.textContent = '';
+
+      try {
+        const r = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (r.ok) {
+          form.querySelector('.ef-grid').hidden = true;
+          form.querySelector('.ef-field-wide').hidden = true;
+          form.querySelector('.ef-foot').hidden = true;
+          result.className = 'ef-result is-success';
+          result.textContent = t('engage.form.success',
+            'Thank you. We will be in touch within 5 business days.');
+          if (typeof gtag === 'function') {
+            gtag('event', 'engage_form_submit', { surface: 'engage' });
+          }
+        } else {
+          throw new Error('HTTP ' + r.status);
+        }
+      } catch (err) {
+        result.className = 'ef-result is-error';
+        result.textContent = t('engage.form.error',
+          'Something went wrong. Please try again, or write to ir@alephain.com.');
+        submit.disabled = false;
+        submit.textContent = originalLabel;
+      }
+    });
   })();
 
   /* ============ ANALYTICS · EVENT TRACKING ============
