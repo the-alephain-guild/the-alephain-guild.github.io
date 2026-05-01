@@ -14,6 +14,24 @@
 <meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)">
 
+<!-- SEO & social card · OG/Twitter -->
+<meta name="description" content="A research-led systematic trading firm. We translate the market's infinite chaos into finite, deterministic alpha.">
+<link rel="canonical" href="https://alephain.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alephain.com/">
+<meta property="og:title" content="Alephain — Quantitative Research & Systematic Trading">
+<meta property="og:description" content="A research-led systematic trading firm. We translate the market's infinite chaos into finite, deterministic alpha.">
+<meta property="og:image" content="https://alephain.com/web-app-manifest-512x512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:site_name" content="Alephain Guild">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Alephain — Quantitative Research & Systematic Trading">
+<meta name="twitter:description" content="A research-led systematic trading firm. We translate the market's infinite chaos into finite, deterministic alpha.">
+<meta name="twitter:image" content="https://alephain.com/web-app-manifest-512x512.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Noto+Serif+SC:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1466,6 +1484,100 @@
     }
   }
   .print-letterhead{ display: none; }
+
+  /* ============ A11Y · keyboard focus rings ============
+     Visible across both Paper and Slate; uses the gold accent so it
+     stays inside the brand palette and is unmistakable on any surface. */
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex]:focus-visible{
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .btn:focus-visible{ outline-offset: 4px; }
+  .navlinks a:focus-visible{ outline-offset: 6px; }
+
+  /* ============ A11Y · reduced motion ============
+     Respect the OS-level vestibular preference. We keep the door open
+     by 0.01ms so JS that listens for transitionend/animationend still
+     fires; we just don't move the user. */
+  @media (prefers-reduced-motion: reduce){
+    *,
+    *::before,
+    *::after{
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ============ NAV BURGER (mobile drawer) ============
+     Hidden by default; shown ≤1024px. The lines morph into an X when
+     aria-expanded="true". Drawer uses the existing .navlinks element
+     (we override its mobile display:none below). */
+  .nav-burger{
+    display: none;
+    width: 36px; height: 36px;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 4px;
+    background: transparent; border: 0;
+    cursor: pointer; padding: 0;
+  }
+  .nav-burger .burger-bar{
+    display: block; width: 18px; height: 1.5px;
+    background: var(--fg);
+    transition: transform .25s ease, opacity .2s ease;
+    transform-origin: center;
+  }
+  .nav-burger[aria-expanded="true"] .burger-bar:nth-child(1){
+    transform: translateY(5.5px) rotate(45deg);
+  }
+  .nav-burger[aria-expanded="true"] .burger-bar:nth-child(2){
+    opacity: 0;
+  }
+  .nav-burger[aria-expanded="true"] .burger-bar:nth-child(3){
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+
+  @media (max-width: 1024px){
+    .nav-burger{ display: inline-flex; }
+
+    /* Re-purpose .navlinks as a slide-down drawer on mobile.
+       Default is closed (translated up + invisible to keyboard). */
+    .navlinks{
+      display: flex !important;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      padding: 8px 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      transform: translateY(-110%);
+      transition: transform .28s ease, visibility .28s;
+      visibility: hidden;
+      z-index: 49;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    }
+    .navlinks.is-open{
+      transform: translateY(0);
+      visibility: visible;
+    }
+    .navlinks a{
+      padding: 16px var(--gutter);
+      border-top: 1px solid var(--rule-soft);
+      width: 100%;
+    }
+    .navlinks a:first-child{ border-top: 0; }
+    .navlinks a.is-active::after{ display: none; }
+  }
+  /* Desktop never shows the burger, even if open class lingers. */
+  @media (min-width: 1025px){
+    .navlinks{ transform: none !important; visibility: visible !important; }
+  }
 </style>
 </head>
 <body>
@@ -1492,7 +1604,7 @@
       <span class="div"></span>
       <span class="sub" data-i18n="nav.brand.sub">Quantitative · Guild</span>
     </a>
-    <div class="navlinks">
+    <div class="navlinks" id="navMenu">
       <a href="#mandate"><span class="idx">01</span><span data-i18n="nav.01">Response</span></a>
       <a href="#principles"><span class="idx">02</span><span data-i18n="nav.02">Principles</span></a>
       <a href="#method"><span class="idx">03</span><span data-i18n="nav.03">Method</span></a>
@@ -1521,6 +1633,13 @@
         </span>
       </button>
       <a class="btn solid" href="mailto:contact@alephain.com?subject=Inquiry%20·%20Alephain" data-i18n="nav.contact">Contact</a>
+      <button class="nav-burger" id="navBurger" type="button"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false" aria-controls="navMenu">
+        <span class="burger-bar" aria-hidden="true"></span>
+        <span class="burger-bar" aria-hidden="true"></span>
+        <span class="burger-bar" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </nav>
@@ -2866,6 +2985,50 @@
   initTheme();
   renderFiled();
   setInterval(renderFiled, 1000);
+
+  /* ============ NAV BURGER (mobile drawer) ============
+     Toggles the .navlinks drawer at ≤1024px. Closes on link tap,
+     Escape, outside click, and viewport upscale to desktop.        */
+  (function(){
+    const burger = document.getElementById('navBurger');
+    const menu   = document.getElementById('navMenu');
+    if (!burger || !menu) return;
+
+    const setOpen = (open) => {
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.classList.toggle('is-open', open);
+    };
+    const isOpen = () => burger.getAttribute('aria-expanded') === 'true';
+
+    burger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!isOpen());
+    });
+    // Close after the user taps a section link
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a[href^="#"]')) setOpen(false);
+    });
+    // Escape closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        burger.focus();
+      }
+    });
+    // Click outside closes (mobile only — desktop drawer is irrelevant)
+    document.addEventListener('click', (e) => {
+      if (!isOpen()) return;
+      if (e.target.closest('#navMenu') || e.target.closest('#navBurger')) return;
+      setOpen(false);
+    });
+    // Reset on resize past the breakpoint so the drawer never sticks
+    // open in desktop layout after rotating a tablet.
+    const mql = window.matchMedia('(min-width: 1025px)');
+    (mql.addEventListener ? mql.addEventListener.bind(mql, 'change')
+                          : mql.addListener.bind(mql))(() => {
+      if (mql.matches) setOpen(false);
+    });
+  })();
 
   /* ============ NAV SCROLLSPY ============ */
   (function(){
