@@ -1112,6 +1112,16 @@
     font-size: 24px; color: var(--accent-2);
     align-self: flex-start; padding-top: 6px;
   }
+  /* Prose variant — used when the figure slot carries an NDA/disclosure
+     phrase instead of a number. Keeps card height in line with numeric
+     cards but flips voice to mono for an institutional-letter register. */
+  .cap-card-v.cap-card-v-prose{
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: 22px; line-height: 1.25; color: var(--fg);
+    letter-spacing: 0;
+    min-height: 64px; align-items: flex-end;
+  }
+  html[lang="zh"] .cap-card-v.cap-card-v-prose{ font-style: normal; }
   .cap-card-bar{
     height: 2px; background: var(--rule); position: relative;
   }
@@ -1525,7 +1535,7 @@
       <span class="live" data-i18n="topbar.live">DESK COVERAGE · ASIA & NY</span>
     </div>
     <div class="right">
-      <a href="#research" data-i18n-html="topbar.note">RESEARCH NOTE №<span class="num">047</span> — APR <span class="num">2026</span></a>
+      <a href="#research" data-i18n-html="topbar.note">RESEARCH LETTER — APR <span class="num">2026</span></a>
     </div>
   </div>
 </div>
@@ -1789,13 +1799,13 @@
     <div class="method">
       <aside class="legend">
         <div class="key"><div class="k" data-i18n="method.legend.cycle.k">CYCLE</div><div class="v" data-i18n="method.legend.cycle.v">Insight → Modeling → Refinement → Verification → ↻</div></div>
-        <div class="key"><div class="k" data-i18n="method.legend.cadence.k">CADENCE</div><div class="v" data-i18n="method.legend.cadence.v">Median 14 weeks from question to capital, 6 weeks from capital to attribution.</div></div>
+        <div class="key"><div class="k" data-i18n="method.legend.cadence.k">CADENCE</div><div class="v" data-i18n="method.legend.cadence.v">Typical cadence: question to capital in 12–16 weeks; attribution within 6 weeks of go-live.</div></div>
         <div class="key"><div class="k" data-i18n="method.legend.gate.k">GATE</div><div class="v" data-i18n="method.legend.gate.v">A unanimous research committee — no asymmetric upside without an asymmetric kill criterion.</div></div>
 
         <!-- P1.3 · process funnel data -->
         <div class="funnel">
           <div class="funnel-h">
-            <span class="fh-tag" data-i18n="method.funnel.tag">RESEARCH RECORD · 2024</span>
+            <span class="fh-tag" data-i18n="method.funnel.tag">RESEARCH RECORD · ILLUSTRATIVE</span>
             <span class="fh-rule"></span>
           </div>
           <div class="funnel-rows">
@@ -1820,10 +1830,10 @@
               <div class="fr-bar" aria-hidden="true"><span style="--w:1.5%"></span></div>
             </div>
           </div>
-          <div class="funnel-foot" data-i18n="method.funnel.foot">Pass-through: 5.6% · Median time-to-kill: 11 wk · Reviewed quarterly.</div>
+          <div class="funnel-foot" data-i18n="method.funnel.foot">Representative cohort. Specific year-over-year detail disclosed under NDA.</div>
         </div>
 
-        <div class="key"><div class="k" data-i18n="method.legend.doc.k">DOC</div><div class="v" style="font-family: var(--mono); font-size: 12.5px; color: var(--muted);" data-i18n="method.legend.doc.v">Methodology v3.4 · last revised 11.04.2026</div></div>
+        <div class="key"><div class="k" data-i18n="method.legend.doc.k">DOC</div><div class="v" style="font-family: var(--mono); font-size: 12.5px; color: var(--muted);" data-i18n="method.legend.doc.v">Methodology · revised on a quarterly cycle.</div></div>
       </aside>
       <div class="phases">
         <div class="phase">
@@ -2051,24 +2061,20 @@
           <div class="cap-card">
             <div class="cap-card-h">
               <span class="cap-card-i">i.</span>
-              <span class="cap-card-l" data-i18n="engage.cap.1.l">DEPLOYED · INTERNAL</span>
+              <span class="cap-card-l" data-i18n="engage.cap.1.l">CAPITAL · INTERNAL</span>
             </div>
-            <div class="cap-card-v num">
-              <span class="cap-prefix">~ USD</span><span class="cap-figure">480</span><span class="cap-unit">M</span>
-            </div>
-            <div class="cap-card-bar" aria-hidden="true"><span style="--w:88%"></span></div>
-            <div class="cap-card-f" data-i18n="engage.cap.1.f">Partner &amp; employee capital. Aligned with all external mandates.</div>
+            <div class="cap-card-v cap-card-v-prose" data-i18n="engage.cap.1.v">Partner &amp; staff co-investment</div>
+            <div class="cap-card-bar" aria-hidden="true"></div>
+            <div class="cap-card-f" data-i18n="engage.cap.1.f">Aligned with all external mandates. Quantum disclosed under NDA.</div>
           </div>
           <div class="cap-card">
             <div class="cap-card-h">
               <span class="cap-card-i">ii.</span>
-              <span class="cap-card-l" data-i18n="engage.cap.2.l">EXTERNAL · OPEN</span>
+              <span class="cap-card-l" data-i18n="engage.cap.2.l">CAPACITY · EXTERNAL</span>
             </div>
-            <div class="cap-card-v num">
-              <span class="cap-prefix">USD</span><span class="cap-figure">150</span><span class="cap-unit">M</span>
-            </div>
-            <div class="cap-card-bar" aria-hidden="true"><span style="--w:32%"></span></div>
-            <div class="cap-card-f" data-i18n="engage.cap.2.f">Remaining capacity in the current vintage. Closes at hard cap.</div>
+            <div class="cap-card-v cap-card-v-prose" data-i18n="engage.cap.2.v">By mandate · NDA</div>
+            <div class="cap-card-bar" aria-hidden="true"></div>
+            <div class="cap-card-f" data-i18n="engage.cap.2.f">Hard cap by construction. Current vintage status disclosed to qualifying counterparties.</div>
           </div>
           <div class="cap-card">
             <div class="cap-card-h">
@@ -2203,7 +2209,7 @@
           </div>
           <div>
             <span class="k" data-i18n="research.toc.circ.k">Circulation</span>
-            <span class="v mono" data-i18n="research.toc.circ.v">Institutional · 312 readers</span>
+            <span class="v mono" data-i18n="research.toc.circ.v">Institutional · request access</span>
           </div>
         </div>
 
@@ -2223,7 +2229,7 @@
             <span class="toc-body">
               <span class="tag" data-i18n="research.1.tag">MICROSTRUCTURE</span>
               <h4 data-i18n="research.1.title">On the half-life of order-book imbalance</h4>
-              <span class="author" data-i18n="research.1.author">— K. Yamada · M. Lieber · with commentary by the Editorial Board</span>
+              <span class="author" data-i18n="research.1.author">— Microstructure Desk · with commentary by the Editorial Board</span>
             </span>
             <span class="toc-meta" data-i18n="research.1.section">Empirical · L2</span>
             <span class="toc-meta right" data-i18n="research.1.length">7,400 wd · 14 pp</span>
@@ -2234,7 +2240,7 @@
             <span class="toc-body">
               <span class="tag" data-i18n="research.2.tag">REGIME</span>
               <h4 data-i18n="research.2.title">Drawdown is not a tail — it is a <em>path</em></h4>
-              <span class="author" data-i18n="research.2.author">— I. Ravid, with appendix by R. Saito</span>
+              <span class="author" data-i18n="research.2.author">— Risk Theory Desk · with the Editorial Board</span>
             </span>
             <span class="toc-meta" data-i18n="research.2.section">Risk · Theory</span>
             <span class="toc-meta right" data-i18n="research.2.length">5,100 wd · 11 pp</span>
@@ -2245,7 +2251,7 @@
             <span class="toc-body">
               <span class="tag" data-i18n="research.3.tag">EXECUTION</span>
               <h4 data-i18n="research.3.title">Liquidity as a Bayesian <em>prior</em></h4>
-              <span class="author" data-i18n="research.3.author">— Σ Execution Desk · with M. Petersen</span>
+              <span class="author" data-i18n="research.3.author">— Σ Execution Desk</span>
             </span>
             <span class="toc-meta" data-i18n="research.3.section">Methods · Note</span>
             <span class="toc-meta right" data-i18n="research.3.length">3,200 wd · 8 pp</span>
@@ -2446,17 +2452,17 @@
     "method.legend.cycle.k": "CYCLE",
     "method.legend.cycle.v": "Insight → Modeling → Refinement → Verification → ↻",
     "method.legend.cadence.k": "CADENCE",
-    "method.legend.cadence.v": "Median 14 weeks from question to capital, 6 weeks from capital to attribution.",
+    "method.legend.cadence.v": "Typical cadence: question to capital in 12–16 weeks; attribution within 6 weeks of go-live.",
     "method.legend.gate.k": "GATE",
     "method.legend.gate.v": "A unanimous research committee — no asymmetric upside without an asymmetric kill criterion.",
-    "method.funnel.tag": "RESEARCH RECORD · 2024",
+    "method.funnel.tag": "RESEARCH RECORD · ILLUSTRATIVE",
     "method.funnel.1.l": "PROPOSALS LOGGED",
     "method.funnel.2.l": "ADMITTED TO MODELING",
     "method.funnel.3.l": "DEPLOYED TO LIVE",
     "method.funnel.4.l": "RETIRED IN-YEAR",
-    "method.funnel.foot": "Pass-through: 5.6% · Median time-to-kill: 11 wk · Reviewed quarterly.",
+    "method.funnel.foot": "Representative cohort. Specific year-over-year detail disclosed under NDA.",
     "method.legend.doc.k": "DOC",
-    "method.legend.doc.v": "Methodology v3.4 · last revised 11.04.2026",
+    "method.legend.doc.v": "Methodology · revised on a quarterly cycle.",
     "ph.1.h.pre": "Insight",
     "ph.1.h.em": "— from chaos, a question",
     "ph.1.desc": "We isolate anomalies in the data manifold and translate them into falsifiable problems. Most candidates die here, by design.",
@@ -2524,10 +2530,12 @@
     "engage.cov.5.v": "Single-name credit · OTC structured · private markets",
     "engage.cap.t": "CAPACITY",
     "engage.cap.deck": "Edge erodes with size. We size accordingly.",
-    "engage.cap.1.l": "DEPLOYED · INTERNAL",
-    "engage.cap.1.f": "Partner &amp; employee capital. Aligned with all external mandates.",
-    "engage.cap.2.l": "EXTERNAL · OPEN",
-    "engage.cap.2.f": "Remaining capacity in the current vintage. Closes at hard cap.",
+    "engage.cap.1.l": "CAPITAL · INTERNAL",
+    "engage.cap.1.v": "Partner &amp; staff co-investment",
+    "engage.cap.1.f": "Aligned with all external mandates. Quantum disclosed under NDA.",
+    "engage.cap.2.l": "CAPACITY · EXTERNAL",
+    "engage.cap.2.v": "By mandate · NDA",
+    "engage.cap.2.f": "Hard cap by construction. Current vintage status disclosed to qualifying counterparties.",
     "engage.cap.3.l": "LIQUIDITY · TYPICAL",
     "engage.cap.3.f": "Monthly redemption with 30-day notice; no gates beyond legal.",
     "engage.terms.t": "TERMS OF ENGAGEMENT",
@@ -2568,7 +2576,7 @@
     "research.toc.dateline.k": "Dateline",
     "research.toc.dateline.v": "Q2 · 2026 — Hong Kong",
     "research.toc.circ.k": "Circulation",
-    "research.toc.circ.v": "Institutional · 312 readers",
+    "research.toc.circ.v": "Institutional · request access",
     "research.toc.col.no": "Folio",
     "research.toc.col.title": "Article",
     "research.toc.col.section": "Section",
@@ -2576,17 +2584,17 @@
     "research.toc.col.page": "Page",
     "research.1.tag": "MICROSTRUCTURE",
     "research.1.title": "On the half-life of order-book imbalance",
-    "research.1.author": "— K. Yamada · M. Lieber · with commentary by the Editorial Board",
+    "research.1.author": "— Microstructure Desk · with commentary by the Editorial Board",
     "research.1.section": "Empirical · L2",
     "research.1.length": "7,400 wd · 14 pp",
     "research.2.tag": "REGIME",
     "research.2.title": "Drawdown is not a tail — it is a ",
-    "research.2.author": "— I. Ravid, with appendix by R. Saito",
+    "research.2.author": "— Risk Theory Desk · with the Editorial Board",
     "research.2.section": "Risk · Theory",
     "research.2.length": "5,100 wd · 11 pp",
     "research.3.tag": "EXECUTION",
     "research.3.title": "Liquidity as a Bayesian ",
-    "research.3.author": "— Σ Execution Desk · with M. Petersen",
+    "research.3.author": "— Σ Execution Desk",
     "research.3.section": "Methods · Note",
     "research.3.length": "3,200 wd · 8 pp",
     "research.4.tag": "MEMO",
@@ -2614,7 +2622,7 @@
     "footer.copy": "© 2026 ALEPHAIN GUILD · ALL RIGHTS RESERVED.",
     "footer.legal": "FOR PROFESSIONAL CLIENTS ONLY · NOT INVESTMENT ADVICE",
     "topbar.est": "EST. <span class=\"num\">2024</span>",
-    "topbar.note": "RESEARCH NOTE №<span class=\"num\">047</span> — APR <span class=\"num\">2026</span>",
+    "topbar.note": "RESEARCH LETTER — APR <span class=\"num\">2026</span>",
     "hero.meta.left": "VOL. <span class=\"num\">II</span> — ISSUE <span class=\"num\">02</span>",
     "research.toc.sub.head": "Subscribe to <em>The Quarterly Letter</em>"
   },
@@ -2714,17 +2722,17 @@
     "method.legend.cycle.k": "闭环",
     "method.legend.cycle.v": "洞见 → 建模 → 锻造 → 检验 → ↻",
     "method.legend.cadence.k": "节奏",
-    "method.legend.cadence.v": "由问题至资本，中位 14 周；由资本至归因，中位 6 周。",
+    "method.legend.cadence.v": "典型节奏：由问题至资本约 12–16 周；上线后 6 周内出归因。",
     "method.legend.gate.k": "门槛",
     "method.legend.gate.v": "由研究委员会一致通过——没有不对称的击杀准则，便没有不对称的上行。",
-    "method.funnel.tag": "研究档案 · 2024",
+    "method.funnel.tag": "研究档案 · 代表性样本",
     "method.funnel.1.l": "登记提案",
     "method.funnel.2.l": "进入建模",
     "method.funnel.3.l": "投入实盘",
     "method.funnel.4.l": "年内退役",
-    "method.funnel.foot": "通过率：5.6% · 中位击杀时长：11 周 · 每季复核。",
+    "method.funnel.foot": "代表性样本。具体年度数据于保密协议下披露。",
     "method.legend.doc.k": "文档",
-    "method.legend.doc.v": "方法论 v3.4 · 上次修订 11.04.2026",
+    "method.legend.doc.v": "方法论 · 每季迭代修订。",
     "ph.1.h.pre": "洞见",
     "ph.1.h.em": "—— 自混沌中提出问题",
     "ph.1.desc": "我们在数据流形中分离异常，并将其转译为可证伪的问题。绝大多数候选在此被淘汰——这是设计如此。",
@@ -2792,10 +2800,12 @@
     "engage.cov.5.v": "单名信用 · 场外结构化 · 私募市场",
     "engage.cap.t": "容量",
     "engage.cap.deck": "Alpha 随规模而衰减，故我们以此节制规模。",
-    "engage.cap.1.l": "已部署 · 自有",
-    "engage.cap.1.f": "合伙人与员工资本。与所有外部委托一致对齐。",
-    "engage.cap.2.l": "外部 · 开放",
-    "engage.cap.2.f": "本期份额剩余容量。达到硬上限即关闭。",
+    "engage.cap.1.l": "资本 · 内部",
+    "engage.cap.1.v": "合伙人与员工跟投",
+    "engage.cap.1.f": "与所有外部委托一致对齐。规模于保密协议下披露。",
+    "engage.cap.2.l": "容量 · 外部",
+    "engage.cap.2.v": "按委托 · 保密协议",
+    "engage.cap.2.f": "硬上限内嵌于设计。本期份额状态仅向合资格交易对手披露。",
     "engage.cap.3.l": "流动性 · 一般",
     "engage.cap.3.f": "月度赎回，提前 30 日通知；除法定事项外，无任何赎回门。",
     "engage.terms.t": "对接条款",
@@ -2836,7 +2846,7 @@
     "research.toc.dateline.k": "日期",
     "research.toc.dateline.v": "Q2 · 2026 — 香港",
     "research.toc.circ.k": "发行",
-    "research.toc.circ.v": "机构内部 · 312 位读者",
+    "research.toc.circ.v": "机构内部 · 凭函索取",
     "research.toc.col.no": "编号",
     "research.toc.col.title": "篇名",
     "research.toc.col.section": "栏目",
@@ -2844,17 +2854,17 @@
     "research.toc.col.page": "页码",
     "research.1.tag": "微观结构",
     "research.1.title": "论订单簿失衡的半衰期",
-    "research.1.author": "— K. Yamada · M. Lieber · 编委会评注",
+    "research.1.author": "— 微观结构台 · 编委会评注",
     "research.1.section": "实证 · L2",
     "research.1.length": "7,400 词 · 14 页",
     "research.2.tag": "市场状态",
     "research.2.title": "回撤不是尾部 —— 它是一种 ",
-    "research.2.author": "— I. Ravid，附录 R. Saito",
+    "research.2.author": "— 风险理论台 · 编委会",
     "research.2.section": "风险 · 理论",
     "research.2.length": "5,100 词 · 11 页",
     "research.3.tag": "执行",
     "research.3.title": "把流动性当作一个贝叶斯 ",
-    "research.3.author": "— Σ 执行台 · 与 M. Petersen",
+    "research.3.author": "— Σ 执行台",
     "research.3.section": "方法 · 札记",
     "research.3.length": "3,200 词 · 8 页",
     "research.4.tag": "备忘",
@@ -2882,7 +2892,7 @@
     "footer.copy": "© 2026 ALEPHAIN GUILD · 版权所有。",
     "footer.legal": "仅限专业客户 · 不构成投资建议",
     "topbar.est": "创立于 <span class=\"num\">2024</span>",
-    "topbar.note": "研究札记 № <span class=\"num\">047</span> — 2026 年 <span class=\"num\">4</span> 月",
+    "topbar.note": "研究札记 — 2026 年 <span class=\"num\">4</span> 月",
     "hero.meta.left": "卷 <span class=\"num\">II</span> · 期 <span class=\"num\">02</span>",
     "research.toc.sub.head": "订阅 <em>季 刊</em>"
   }
