@@ -1,0 +1,324 @@
+{
+  "$schema_version": "2.0",
+  "generated_by": "manual — single source of truth for all Alephain Guild ecosystem landing pages",
+  "last_reviewed": "2026-07-19",
+  "consumers": [
+    "alephain.com",
+    "alchymia.alephain.com",
+    "tesseract.alephain.com",
+    "custos.alephain.com (planned)"
+  ],
+
+  "change_log": [
+    {
+      "version": "2.0",
+      "date": "2026-07-19",
+      "notes": "Restructured based on codex/projects/arx authoritative docs (vision v2, architecture v7.4). Added sub_layers, arx integration phases, visibility field, and full 8-subsystem coordination list per vision.md line 32."
+    },
+    {
+      "version": "1.0",
+      "date": "2026-07-19",
+      "notes": "Initial draft; assumed Guild-layer = open-source (later invalidated by crucible-rust proprietary status)."
+    }
+  ],
+
+  "status_vocabulary": {
+    "operating": "Publicly operating, stable, open for engagement",
+    "private-beta": "Under active development; invite-only or gated access; public registration coming",
+    "planned": "Announced or reserved; not yet publicly usable",
+    "unknown": "TODO — human to fill; do not ship with this status"
+  },
+
+  "visibility_vocabulary": {
+    "open-source": "Source code publicly available; license specified in `license` field",
+    "proprietary": "Internal-use software; source code not publicly available",
+    "unknown": "TODO — human to confirm before shipping"
+  },
+
+  "arx_integration_phases": {
+    "v1-entry": "Team-level live operations layer (currently operating). arx runtime-depends only on crucible-rust + custos.",
+    "phase-3-platform": "Engine-neutral standard + full execution domain. arx integrates speculum + athanor + argus + philosophers-stone.",
+    "phase-4-network": "talent+capital protocol network + AI autonomous loop. arx integrates synedrion + nummus + fama. Placeholder-only in current spec — strict P2+ discipline (see vision.md §8)."
+  },
+
+  "layers": {
+    "guild-systems": {
+      "description_en": "Neutral, cross-tenant infrastructure owned by The Alephain Guild. Composed of open-source and proprietary components. Consumed by any business tenant.",
+      "description_zh": "由 Alephain Guild 拥有的中立、跨租户基础设施。由开源与自有组件共同构成。任何业务租户均可消费。",
+
+      "sub_layers": {
+        "l1-foundation": "Foundation business capabilities and canonical state owners (crucible-rust, and Phase 3/4 integration targets: speculum, athanor, argus, synedrion, nummus, fama)",
+        "l2-kernel": "Authorization + orchestration kernel (arx). Composes L1 foundation capabilities and issues signed intent for L3 execution.",
+        "l3-edge": "Per-tenant local runtime (custos). Consumes signed commands from L1; runs on tenant hardware; never hosted by the Guild."
+      },
+
+      "items": [
+        {
+          "id": "arx",
+          "name": "ARX",
+          "domain": "arx.alephain.com",
+          "domain_access": "cloudflare-zero-trust",
+          "stack_layer": "l2-kernel",
+          "visibility": "unknown",
+          "license": null,
+          "status": "private-beta",
+          "tagline_en": "the neutral quant operating system",
+          "tagline_zh": "中立量化操作系统",
+          "one_liner_en": "Identity, tenants, and authorization for the Alephain Guild ecosystem. Coordinates independent canonical owners; holds no second business truth of its own.",
+          "one_liner_zh": "面向 Alephain Guild 生态的身份、租户与授权底座。协调各个独立的规范权威子系统,不持第二份业务真源。",
+          "github_repo_current": "tesseract-trading-ltd/arx",
+          "github_repo_target": "the-alephain-guild/arx",
+          "github_repo_migration_pending": true,
+          "migration_note": "Per 2026-07-19 decision (方案 2): arx migrates to the-alephain-guild GitHub org to preserve neutral-OS positioning. Tesseract Trading Ltd remains primary maintainer + first-party tenant via CODEOWNERS.",
+          "runtime_dependencies": ["crucible-rust", "custos"],
+          "planned_integrations": {
+            "phase-3-platform": ["speculum", "athanor", "argus"],
+            "phase-4-network": ["synedrion", "nummus", "fama"]
+          },
+          "public_access": {
+            "status": "invite-only",
+            "cta_en": "Request invite",
+            "cta_zh": "申请邀请",
+            "contact": "contact@alephain.com",
+            "subject_en": "ARX private beta · invite request",
+            "subject_zh": "ARX 内测 · 申请邀请"
+          },
+          "authority_docs": [
+            "codex/projects/arx/vision.md",
+            "codex/projects/arx/00-core/architecture.md (v7.4)",
+            "codex/projects/arx/00-core/data-ownership.md",
+            "codex/projects/arx/00-core/domain-model.md"
+          ]
+        },
+        {
+          "id": "custos",
+          "name": "custos",
+          "domain": "custos.alephain.com",
+          "domain_status": "planned — documentation site under construction (Track β)",
+          "stack_layer": "l3-edge",
+          "visibility": "open-source",
+          "license": "Apache-2.0",
+          "status": "operating",
+          "tagline_en": "the non-custodial execution runner",
+          "tagline_zh": "非托管执行 runner",
+          "one_liner_en": "Local daemon that holds your keys, runs your strategies, and reports signed execution facts. Runs on your machine; never hosted by the Guild.",
+          "one_liner_zh": "跑在你机器上的守护进程,本地持交易所密钥、跑经过回测的策略,并签名上报执行事实。永不托管于云端。",
+          "github_repo": "alchymia-labs/custos",
+          "runtime_dependencies": ["crucible-rust"],
+          "context_dependencies": ["arx"],
+          "context_dependencies_note": "arx tenant identity is carried in Crucible-signed commands as context metadata — not a direct runtime protocol dependency (per architecture.md v7.4: 'ARX is not on the Crucible-to-Custos command path').",
+          "current_version": "0.3.0",
+          "notes": "Public release deferred (v0.3.0 local Docker + code landed; remote publish scheduled)."
+        },
+        {
+          "id": "crucible-rust",
+          "name": "Crucible",
+          "domain": "crucible.alephain.com",
+          "domain_status": "referenced by alchymia.alephain.com but landing status unconfirmed",
+          "stack_layer": "l1-foundation",
+          "visibility": "proprietary",
+          "license": null,
+          "status": "operating",
+          "tagline_en": "TBD — suggested: \"the deployment forge\"",
+          "tagline_zh": "TBD — 建议: \"部署熔炉\"",
+          "one_liner_en": "Business state authority: strategy, deployment, risk, capital, settlement, reconciliation. Signs DeploymentSpec commands. Validates and persists RunnerFacts.",
+          "one_liner_zh": "业务状态权威:策略、部署、风控、资本、结算、对账。签发 DeploymentSpec,验证并持久化 RunnerFacts。",
+          "github_repo": "unknown (see migration_note)",
+          "migration_note": "Currently at tesseract-trading/crucible-rust in local monorepo; GitHub org not yet confirmed.",
+          "runtime_dependencies": [],
+          "notes": "PROPRIETARY per README first line: 'canonical production business owner ... proprietary, internal-use software'. Landing UI MUST visibly label as ▲ PROPRIETARY (D3 decision, 2026-07-19). Honesty over hiding — partial-open stack is the truth."
+        },
+        {
+          "id": "speculum",
+          "name": "Speculum",
+          "domain": null,
+          "stack_layer": "l1-foundation",
+          "visibility": "unknown",
+          "license": null,
+          "status": "planned",
+          "arx_integration_phase": "phase-3-platform",
+          "tagline_en": "the multi-engine backtesting platform",
+          "tagline_zh": "多引擎回测平台",
+          "one_liner_en": "Backtest strategies across NautilusTrader / Hummingbot engines. Consumed by arx from Phase 3 (platform segment) as the research-loop authority.",
+          "one_liner_zh": "跨 NautilusTrader / Hummingbot 引擎的策略回测平台。Phase 3(平台段)起接入 arx,承担研究闭环权威。",
+          "github_repo": "alchymia-labs/speculum",
+          "notes": "No public landing yet. Not an arx runtime dependency until Phase 3."
+        },
+        {
+          "id": "athanor",
+          "name": "Athanor",
+          "domain": null,
+          "stack_layer": "l1-foundation",
+          "visibility": "open-source",
+          "license": "MIT",
+          "status": "operating",
+          "arx_integration_phase": "phase-3-platform",
+          "tagline_en": "the MEV research and execution engine",
+          "tagline_zh": "MEV 研究与执行引擎",
+          "one_liner_en": "Rust-based MEV workspace. Becomes an arx ExecutionEngineAdapter implementation in Phase 3b (MEV execution domain).",
+          "one_liner_zh": "基于 Rust 的 MEV 工作区。Phase 3b(MEV 域)起作为 arx ExecutionEngineAdapter 的一个实现接入。",
+          "github_repo": "alchymia-labs/athanor",
+          "notes": "Operates independently today; arx integration deferred to Phase 3b per vision.md pillar-2."
+        },
+        {
+          "id": "argus",
+          "name": "Argus",
+          "domain": null,
+          "stack_layer": "l1-foundation",
+          "visibility": "unknown",
+          "license": null,
+          "status": "operating",
+          "arx_integration_phase": "phase-3-platform",
+          "tagline_en": "the Web3 security analysis platform",
+          "tagline_zh": "Web3 安全分析平台",
+          "one_liner_en": "Solidity / DeFi audit engine (Rust). Integrated into arx from Phase 3 (per D2 decision, 2026-07-19).",
+          "one_liner_zh": "Solidity / DeFi 审计引擎(Rust)。Phase 3 起接入 arx(D2 决策,2026-07-19)。",
+          "github_repo": "aegis-labs/argus",
+          "notes": "Under aegis-labs GitHub org. Phase 3 integration confirmed."
+        },
+        {
+          "id": "synedrion",
+          "name": "Synedrion",
+          "domain": "synedrion.alephain.com",
+          "domain_status": "referenced by alchymia.alephain.com but landing status unconfirmed",
+          "stack_layer": "l1-foundation",
+          "visibility": "unknown",
+          "license": null,
+          "status": "planned",
+          "arx_integration_phase": "phase-4-network",
+          "tagline_en": "TBD — suggested: \"the AI council\"",
+          "tagline_zh": "TBD — 建议: \"AI 议会\"",
+          "one_liner_en": "AI Council for research and hypothesis pipeline (pillar-4). Integrated into arx from Phase 4 (network segment).",
+          "one_liner_zh": "AI 议会,研究与假设生成流水线(支柱四)。Phase 4(网络段)起接入 arx。",
+          "github_repo": "the-alephain-guild/synedrion",
+          "notes": "arx integration is Phase 4 (network segment / P2+). Strict discipline per vision.md §8."
+        },
+        {
+          "id": "nummus",
+          "name": "Nummus",
+          "domain": null,
+          "stack_layer": "l1-foundation",
+          "visibility": "unknown",
+          "license": null,
+          "status": "planned",
+          "arx_integration_phase": "phase-4-network",
+          "tagline_en": "the on-chain settlement rails",
+          "tagline_zh": "链上结算通道",
+          "one_liner_en": "Settlement channel for the talent+capital protocol network (pillar-3). Placeholder — not started per P2+ discipline.",
+          "one_liner_zh": "撮合成交后的链上结算通道(支柱三)。占位 —— 严格 P2+ 纪律下未启动。",
+          "github_repo": null,
+          "adr": "ADR-013 payment-membership-subsystems",
+          "notes": "Placeholder for network-segment (P2+) infrastructure. Not started to avoid premature exposure. Do not surface on public landing until Phase 4 begins."
+        },
+        {
+          "id": "fama",
+          "name": "Fama",
+          "domain": null,
+          "stack_layer": "l1-foundation",
+          "visibility": "unknown",
+          "license": null,
+          "status": "planned",
+          "arx_integration_phase": "phase-4-network",
+          "tagline_en": "verifiable performance and reputation marketplace",
+          "tagline_zh": "业绩存证与声誉市场",
+          "one_liner_en": "Performance attestation, reputation, matching market for talent+capital (pillar-3). Placeholder — early launch would revive lemons-market risk (backdate performance, rank-gaming).",
+          "one_liner_zh": "业绩存证、声誉与人才-资本撮合市场(支柱三)。占位 —— 过早启动 = 复活柠檬市场(伪造业绩、刷分)。",
+          "github_repo": null,
+          "adr": "ADR-015 fama-reputation-marketplace",
+          "notes": "Placeholder for network-segment (P2+). Do not surface on public landing until Phase 4 begins."
+        }
+      ]
+    },
+
+    "labs": {
+      "description_en": "Research units of The Alephain Guild. Produce methodology and strategies; do not directly hold capital or trade.",
+      "description_zh": "Guild 的研究单元。产出方法论与策略,不直接托管资金或交易。",
+      "items": [
+        {
+          "id": "alchymia-labs",
+          "name": "Alchymia Labs",
+          "domain": "alchymia.alephain.com",
+          "status": "operating",
+          "tagline_en": "quantitative alchemy laboratory",
+          "tagline_zh": "量化炼金研究所",
+          "one_liner_en": "The Guild's research arm. Converts market chaos into deployable strategy through mathematical modeling and statistical adjudication.",
+          "one_liner_zh": "Guild 的研究臂。以数学建模与统计裁决,将市场混沌转化为可部署的策略。",
+          "github_org": "alchymia-labs",
+          "produced_artifacts": [
+            {
+              "id": "philosophers-stone",
+              "name": "Philosophers-Stone",
+              "kind": "strategy-incubator",
+              "github_repo": "alchymia-labs/philosophers-stone",
+              "one_liner_en": "Strategy incubator following the Alchymia four-phase methodology.",
+              "one_liner_zh": "策略孵化器,遵循炼金术四相方法论。",
+              "note": "Content library / strategy repository — not a Guild system. Consumed by arx from Phase 3 as strategy source, not as a running service."
+            }
+          ]
+        }
+      ]
+    },
+
+    "business-tenants": {
+      "description_en": "Legal / capital / settlement entities. Each is a tenant of ARX + Crucible; each runs its own custos daemons. First-party tenants are Guild-affiliated; future tenants may be external.",
+      "description_zh": "法律 / 资金 / 结算实体。每一个都是 ARX + Crucible 的租户,并自行运行 custos daemon。当前一方租户隶属 Guild,未来租户可能是外部机构。",
+      "items": [
+        {
+          "id": "tesseract-trading",
+          "name": "Tesseract Trading",
+          "domain": "tesseract.alephain.com",
+          "status": "operating",
+          "tenant_id": "tt",
+          "tenant_kind": "first-party",
+          "tagline_en": "high-dimensional execution",
+          "tagline_zh": "高维执行",
+          "one_liner_en": "The Guild's execution arm. Trades the geometry that ordinary participants cannot see.",
+          "one_liner_zh": "Guild 的执行臂。交易普通参与者看不见的几何结构。",
+          "github_org": "tesseract-trading-ltd"
+        }
+      ]
+    }
+  },
+
+  "cross_layer_invariants": [
+    {
+      "id": "custos-always-local",
+      "en": "custos is never hosted by the Guild. Every tenant — first-party or third-party — runs their own custos on their own machine. This is the non-custodial invariant.",
+      "zh": "custos 永远不由 Guild 托管。每个租户(一方或第三方)都在自己的机器上跑 custos。这是 non-custodial 承诺的基石。"
+    },
+    {
+      "id": "arx-crucible-shared",
+      "en": "ARX and Crucible are Guild-hosted shared infrastructure. Tenants consume them; they do not fork them (unless leaving the ecosystem entirely).",
+      "zh": "ARX 与 Crucible 是 Guild 托管的共享基础设施。租户消费它们,不需要自建(除非完全脱离生态)。"
+    },
+    {
+      "id": "tenant-scope-not-branding",
+      "en": "Being an ARX tenant is an architectural fact, not a branding one. Tenant landing pages MUST NOT use tenant vocabulary in public copy.",
+      "zh": "成为 ARX 租户是架构事实,不是品牌事实。租户的 landing 公开文案不得使用 tenant 术语。"
+    },
+    {
+      "id": "arx-integration-is-phased",
+      "en": "arx's 8 subsystem integrations happen in phases. Only crucible-rust and custos are runtime dependencies today. Speculum, athanor, argus enter in Phase 3; synedrion, nummus, fama enter in Phase 4. Public copy MUST NOT claim integrations that are not yet operating.",
+      "zh": "arx 对 8 个子系统的集成分阶段推进。当前(v1 入口段)仅 crucible-rust 与 custos 是运行时依赖;speculum / athanor / argus 于 Phase 3 平台段接入;synedrion / nummus / fama 于 Phase 4 网络段接入。公开文案不得宣称尚未运行的集成。"
+    },
+    {
+      "id": "guild-layer-is-not-open-source-layer",
+      "en": "Guild-layer infrastructure is composed of both open-source and proprietary components. crucible-rust is proprietary; custos is open-source; arx visibility is TBD. Do not conflate 'Guild-owned' with 'open source' in public copy.",
+      "zh": "Guild 层基础设施由开源与自有组件共同构成。crucible-rust 是自有;custos 是开源;arx 可见性待定。公开文案不得把'Guild 拥有'与'开源'混为一谈。"
+    },
+    {
+      "id": "proprietary-must-be-labeled",
+      "en": "Proprietary components (crucible-rust) MUST be visibly labeled ▲ PROPRIETARY on all public landing surfaces. Honesty over hiding — partial-open stack is the truth.",
+      "zh": "自有组件(crucible-rust)在所有公开 landing 上必须显示 ▲ PROPRIETARY 标签。诚实 > 隐藏 —— 部分开源是事实。"
+    }
+  ],
+
+  "open_items_pending_human_decision": [
+    "Crucible canonical positioning phrase (en + zh) — suggested: 'the deployment forge / 部署熔炉'",
+    "Synedrion canonical positioning phrase (en + zh) — suggested: 'the AI council / AI 议会'",
+    "arx visibility: open-source vs proprietary vs mixed — decisive answer needed before public landing",
+    "crucible-rust GitHub org confirmation (current path is local monorepo only)",
+    "speculum / synedrion visibility + license confirmation",
+    "argus visibility + license confirmation"
+  ]
+}
