@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand — The Alephain Guild</title>
+<meta name="description" content="Marks for The Alephain Guild, Alchymia Labs and Tesseract Trading, with the rules that govern their use.">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="alternate icon" href="/favicon-96x96.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&family=Noto+Serif+SC:wght@300;400;500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* Tokens copied from the main page rather than shared. The site keeps its
+     styles inline in one long file; extracting them would mean editing a page
+     in service to touch nothing it does. Contrast ratios are the ones already
+     measured there — do not introduce a value without measuring it. */
+  [data-theme="paper"]{
+    --bg:#FAFAF7; --bg-2:#F2F2EC; --paper:#F2EFE6;
+    --fg:#0F1115; --fg-2:#1B1E25; --muted:#6B727E; --muted-2:#767E8C;
+    --rule:#E1E1DA; --rule-soft:#ECECE5;
+    --bar-bg:#0F1115; --bar-fg:#FAFAF7;
+    --accent:#5A6270; --accent-2:#B8902F;
+  }
+  [data-theme="slate"]{
+    --bg:#1A1F26; --bg-2:#141921; --paper:#20262F;
+    --fg:#EDE9DD; --fg-2:#F5F2EA; --muted:#8C95A3; --muted-2:#A8B0BC;
+    --rule:#2E3540; --rule-soft:#232932;
+    --bar-bg:#0E1218; --bar-fg:#EDE9DD;
+    --accent:#C8A24A; --accent-2:#C8A24A;
+  }
+  :root{
+    --serif:"Newsreader","Source Serif Pro","Songti SC",Georgia,serif;
+    --sans:"Inter",-apple-system,"Segoe UI","PingFang SC",sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",Consolas,monospace;
+    --max:1320px; --gutter:32px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:var(--sans); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--gutter)}
+
+  /* ---- header ---- */
+  .nav{border-bottom:1px solid var(--rule); background:var(--bg); position:sticky; top:0; z-index:10}
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px; gap:20px}
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--fg)}
+  .brand .name{font-family:var(--sans); font-weight:500; letter-spacing:.14em; font-size:15px}
+  .brand .div{width:1px; height:16px; background:var(--rule)}
+  .brand .sub{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em;
+              text-transform:uppercase; color:var(--muted-2)}
+  .navright{display:flex; align-items:center; gap:18px}
+  .navright a{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em;
+              text-transform:uppercase; color:var(--muted-2); text-decoration:none}
+  .navright a:hover{color:var(--fg)}
+  .themebtn,.langbtn{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+    background:none; border:1px solid var(--rule); color:var(--muted-2);
+    padding:5px 10px; cursor:pointer;
+  }
+  .themebtn:hover,.langbtn:hover{color:var(--fg); border-color:var(--accent)}
+
+  /* ---- masthead ---- */
+  .masthead{padding:72px 0 40px; border-bottom:1px solid var(--rule)}
+  .label{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em;
+         text-transform:uppercase; color:var(--accent-2); margin-bottom:18px}
+  h1{font-family:var(--serif); font-weight:300; font-size:clamp(34px,5vw,56px);
+     line-height:1.12; letter-spacing:-.02em; margin:0 0 18px}
+  h1 em{font-style:italic; color:var(--accent-2)}
+  .deck{font-size:15px; line-height:1.7; color:var(--muted-2); max-width:62ch; margin:0}
+
+  section{padding:56px 0; border-bottom:1px solid var(--rule)}
+  h2{font-family:var(--serif); font-weight:300; font-size:clamp(24px,3vw,32px);
+     letter-spacing:-.01em; margin:0 0 10px}
+  .lede{font-size:14.5px; color:var(--muted-2); max-width:62ch; margin:0 0 32px}
+
+  /* Focus must stay visible on both grounds; accent is measured against each. */
+  a:focus-visible,button:focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px;
+  }
+
+  footer{padding:40px 0 64px; font-family:var(--mono); font-size:10.5px;
+         letter-spacing:.1em; text-transform:uppercase; color:var(--muted-2)}
+  footer a{color:var(--muted-2)}
+
+  @media (max-width:640px){
+    :root{--gutter:18px}
+    .nav .wrap{height:auto; padding-top:12px; padding-bottom:12px; flex-wrap:wrap}
+    .masthead{padding:48px 0 32px}
+    section{padding:40px 0}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="/" class="brand">
+      <span class="name">ALEPHAIN</span>
+      <span class="div"></span>
+      <span class="sub" data-i18n="brand.sub">Brand</span>
+    </a>
+    <div class="navright">
+      <a href="/" data-i18n="nav.home">← Main site</a>
+      <button class="langbtn" id="langBtn" type="button" aria-label="Switch language">中文</button>
+      <button class="themebtn" id="themeBtn" type="button" aria-label="Switch colour scheme">Slate</button>
+    </div>
+  </div>
+</nav>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="label" data-i18n="mh.label">Brand assets</div>
+    <h1><span data-i18n="mh.title.pre">The marks, and the rules that</span> <em data-i18n="mh.title.em">govern them</em><span data-i18n="mh.title.post">.</span></h1>
+    <p class="deck" data-i18n="mh.deck">Every mark below is served from this site at a stable address. Point at it directly rather than keeping a copy — a copy is a thing that drifts.</p>
+  </div>
+</header>
+
+<main id="assets"></main>
+
+<footer>
+  <div class="wrap">
+    <span data-i18n="foot.line">The Alephain Guild ·</span>
+    <a href="mailto:contact@alephain.com">contact@alephain.com</a>
+  </div>
+</footer>
+
+<script>
+const DICT = {
+  en:{
+    "brand.sub":"Brand","nav.home":"← Main site",
+    "mh.label":"Brand assets",
+    "mh.title.pre":"The marks, and the rules that","mh.title.em":"govern them","mh.title.post":".",
+    "mh.deck":"Every mark below is served from this site at a stable address. Point at it directly rather than keeping a copy — a copy is a thing that drifts.",
+    "foot.line":"The Alephain Guild ·"
+  },
+  zh:{
+    "brand.sub":"品牌","nav.home":"← 返回主站",
+    "mh.label":"品牌资产",
+    "mh.title.pre":"标志，以及","mh.title.em":"使用规则","mh.title.post":"。",
+    "mh.deck":"下列每个标志都由本站以固定地址提供。请直接引用，不要另存副本——副本是会漂移的东西。",
+    "foot.line":"The Alephain Guild ·"
+  }
+};
+
+function applyLang(lang){
+  document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = DICT[lang][el.getAttribute('data-i18n')];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.getElementById('langBtn').textContent = lang === 'zh' ? 'EN' : '中文';
+  localStorage.setItem('brand-lang', lang);
+}
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('themeBtn').textContent = theme === 'slate' ? 'Paper' : 'Slate';
+  localStorage.setItem('brand-theme', theme);
+}
+
+const startTheme = localStorage.getItem('brand-theme')
+  || (matchMedia('(prefers-color-scheme: dark)').matches ? 'slate' : 'paper');
+const startLang = localStorage.getItem('brand-lang')
+  || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+applyTheme(startTheme);
+applyLang(startLang);
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'slate' ? 'paper' : 'slate');
+});
+document.getElementById('langBtn').addEventListener('click', () => {
+  applyLang(document.documentElement.lang.startsWith('zh') ? 'en' : 'zh');
+});
+</script>
+
+</body>
+</html>
