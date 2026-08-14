@@ -88,6 +88,45 @@
     outline:2px solid var(--accent); outline-offset:3px;
   }
 
+
+  /* ---- asset grid ---- */
+  .entity{margin-bottom:48px}
+  .entity h3{font-family:var(--serif); font-weight:400; font-size:22px; margin:0 0 4px}
+  .entity .note{font-size:13.5px; color:var(--muted-2); margin:0 0 20px}
+  .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .card{border:1px solid var(--rule); display:flex; flex-direction:column}
+  /* The ground is fixed per colourway, not themed: judging a slate mark on a
+     light panel is the mistake this layout exists to prevent. */
+  .stage{display:flex; align-items:center; justify-content:center; padding:28px; min-height:132px}
+  .stage.paper{background:#FAFAF7}
+  .stage.slate{background:#1A1F26}
+  /* The adaptive variant is shown as its two rendered states side by side.
+     The SVG itself cannot demonstrate this in one view: prefers-color-scheme
+     follows the reader's system setting, not the panel it sits on, so two
+     copies on two grounds would render identically and prove nothing. */
+  .stage.split{padding:0}
+  .stage.split .half{flex:1; display:flex; align-items:center; justify-content:center;
+                     align-self:stretch; padding:28px 0}
+  .stage.split .half.paper{background:#FAFAF7}
+  .stage.split .half.slate{background:#1A1F26}
+  .stage img{width:56px; height:56px; display:block}
+  .meta{padding:12px 14px; border-top:1px solid var(--rule); background:var(--bg)}
+  .meta .file{font-family:var(--mono); font-size:11px; letter-spacing:.06em;
+              color:var(--fg); margin-bottom:2px}
+  .meta .use{font-size:12px; color:var(--muted-2); margin-bottom:10px}
+  /* The URL is what this page is for. It wraps rather than truncating: an
+     address you cannot read in full is not an address. */
+  .meta code{display:block; font-family:var(--mono); font-size:10.5px; line-height:1.5;
+             color:var(--muted-2); word-break:break-all; margin-bottom:10px;
+             user-select:all}
+  .copy{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+        background:none; border:1px solid var(--rule); color:var(--muted-2);
+        padding:6px 10px; cursor:pointer; min-height:32px}
+  .copy:hover{color:var(--fg); border-color:var(--accent)}
+  .copy[data-copied="1"]{color:var(--accent-2); border-color:var(--accent-2)}
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+           overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+
   footer{padding:40px 0 64px; font-family:var(--mono); font-size:10.5px;
          letter-spacing:.1em; text-transform:uppercase; color:var(--muted-2)}
   footer a{color:var(--muted-2)}
@@ -125,7 +164,217 @@
   </div>
 </header>
 
-<main id="assets"></main>
+<main id="assets">
+  <section>
+    <div class="wrap">
+      <h2 data-i18n="assets.h">The marks</h2>
+      <p class="lede" data-i18n="assets.lede"></p>
+    <div class="entity">
+      <h3>The Alephain Guild</h3>
+      <p class="note" data-i18n="ent.alephain"></p>
+      <div class="grid">
+        <div class="card">
+          <div class="stage paper">
+            <img src="/brand/v2/alephain/a-paper.svg" alt="The Alephain Guild — A · geometric, paper ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">a-paper.svg</div>
+            <div class="use" data-i18n="use.a"></div>
+            <code>https://alephain.com/brand/v2/alephain/a-paper.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alephain/a-paper.svg"
+                    aria-label="Copy address for The Alephain Guild a-paper.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage slate">
+            <img src="/brand/v2/alephain/a-slate.svg" alt="The Alephain Guild — A · geometric, slate ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">a-slate.svg</div>
+            <div class="use" data-i18n="use.a"></div>
+            <code>https://alephain.com/brand/v2/alephain/a-slate.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alephain/a-slate.svg"
+                    aria-label="Copy address for The Alephain Guild a-slate.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage paper">
+            <img src="/brand/v2/alephain/b-paper.svg" alt="The Alephain Guild — B · typographic, paper ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">b-paper.svg</div>
+            <div class="use" data-i18n="use.b"></div>
+            <code>https://alephain.com/brand/v2/alephain/b-paper.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alephain/b-paper.svg"
+                    aria-label="Copy address for The Alephain Guild b-paper.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage slate">
+            <img src="/brand/v2/alephain/b-slate.svg" alt="The Alephain Guild — B · typographic, slate ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">b-slate.svg</div>
+            <div class="use" data-i18n="use.b"></div>
+            <code>https://alephain.com/brand/v2/alephain/b-slate.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alephain/b-slate.svg"
+                    aria-label="Copy address for The Alephain Guild b-slate.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage split">
+            <span class="half paper"><img src="/brand/v2/alephain/favicon/paper/favicon-96x96.png" alt="The Alephain Guild favicon as it renders under a light system theme" width="56" height="56"></span>
+            <span class="half slate"><img src="/brand/v2/alephain/favicon/slate/favicon-96x96.png" alt="The Alephain Guild favicon as it renders under a dark system theme" width="56" height="56"></span>
+          </div>
+          <div class="meta">
+            <div class="file">favicon.svg</div>
+            <div class="use" data-i18n="use.f"></div>
+            <code>https://alephain.com/brand/v2/alephain/favicon.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alephain/favicon.svg"
+                    aria-label="Copy address for The Alephain Guild favicon.svg">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="entity">
+      <h3>Alchymia Labs</h3>
+      <p class="note" data-i18n="ent.alchymia"></p>
+      <div class="grid">
+        <div class="card">
+          <div class="stage paper">
+            <img src="/brand/v2/alchymia/a-paper.svg" alt="Alchymia Labs — A · geometric, paper ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">a-paper.svg</div>
+            <div class="use" data-i18n="use.a"></div>
+            <code>https://alephain.com/brand/v2/alchymia/a-paper.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alchymia/a-paper.svg"
+                    aria-label="Copy address for Alchymia Labs a-paper.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage slate">
+            <img src="/brand/v2/alchymia/a-slate.svg" alt="Alchymia Labs — A · geometric, slate ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">a-slate.svg</div>
+            <div class="use" data-i18n="use.a"></div>
+            <code>https://alephain.com/brand/v2/alchymia/a-slate.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alchymia/a-slate.svg"
+                    aria-label="Copy address for Alchymia Labs a-slate.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage paper">
+            <img src="/brand/v2/alchymia/b-paper.svg" alt="Alchymia Labs — B · typographic, paper ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">b-paper.svg</div>
+            <div class="use" data-i18n="use.b"></div>
+            <code>https://alephain.com/brand/v2/alchymia/b-paper.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alchymia/b-paper.svg"
+                    aria-label="Copy address for Alchymia Labs b-paper.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage slate">
+            <img src="/brand/v2/alchymia/b-slate.svg" alt="Alchymia Labs — B · typographic, slate ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">b-slate.svg</div>
+            <div class="use" data-i18n="use.b"></div>
+            <code>https://alephain.com/brand/v2/alchymia/b-slate.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alchymia/b-slate.svg"
+                    aria-label="Copy address for Alchymia Labs b-slate.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage split">
+            <span class="half paper"><img src="/brand/v2/alchymia/favicon/paper/favicon-96x96.png" alt="Alchymia Labs favicon as it renders under a light system theme" width="56" height="56"></span>
+            <span class="half slate"><img src="/brand/v2/alchymia/favicon/slate/favicon-96x96.png" alt="Alchymia Labs favicon as it renders under a dark system theme" width="56" height="56"></span>
+          </div>
+          <div class="meta">
+            <div class="file">favicon.svg</div>
+            <div class="use" data-i18n="use.f"></div>
+            <code>https://alephain.com/brand/v2/alchymia/favicon.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/alchymia/favicon.svg"
+                    aria-label="Copy address for Alchymia Labs favicon.svg">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="entity">
+      <h3>Tesseract Trading</h3>
+      <p class="note" data-i18n="ent.tesseract"></p>
+      <div class="grid">
+        <div class="card">
+          <div class="stage paper">
+            <img src="/brand/v2/tesseract/a-paper.svg" alt="Tesseract Trading — A · geometric, paper ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">a-paper.svg</div>
+            <div class="use" data-i18n="use.a"></div>
+            <code>https://alephain.com/brand/v2/tesseract/a-paper.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/tesseract/a-paper.svg"
+                    aria-label="Copy address for Tesseract Trading a-paper.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage slate">
+            <img src="/brand/v2/tesseract/a-slate.svg" alt="Tesseract Trading — A · geometric, slate ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">a-slate.svg</div>
+            <div class="use" data-i18n="use.a"></div>
+            <code>https://alephain.com/brand/v2/tesseract/a-slate.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/tesseract/a-slate.svg"
+                    aria-label="Copy address for Tesseract Trading a-slate.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage paper">
+            <img src="/brand/v2/tesseract/b-paper.svg" alt="Tesseract Trading — B · typographic, paper ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">b-paper.svg</div>
+            <div class="use" data-i18n="use.b"></div>
+            <code>https://alephain.com/brand/v2/tesseract/b-paper.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/tesseract/b-paper.svg"
+                    aria-label="Copy address for Tesseract Trading b-paper.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage slate">
+            <img src="/brand/v2/tesseract/b-slate.svg" alt="Tesseract Trading — B · typographic, slate ground" width="56" height="56">
+          </div>
+          <div class="meta">
+            <div class="file">b-slate.svg</div>
+            <div class="use" data-i18n="use.b"></div>
+            <code>https://alephain.com/brand/v2/tesseract/b-slate.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/tesseract/b-slate.svg"
+                    aria-label="Copy address for Tesseract Trading b-slate.svg">Copy</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stage split">
+            <span class="half paper"><img src="/brand/v2/tesseract/favicon/paper/favicon-96x96.png" alt="Tesseract Trading favicon as it renders under a light system theme" width="56" height="56"></span>
+            <span class="half slate"><img src="/brand/v2/tesseract/favicon/slate/favicon-96x96.png" alt="Tesseract Trading favicon as it renders under a dark system theme" width="56" height="56"></span>
+          </div>
+          <div class="meta">
+            <div class="file">favicon.svg</div>
+            <div class="use" data-i18n="use.f"></div>
+            <code>https://alephain.com/brand/v2/tesseract/favicon.svg</code>
+            <button class="copy" type="button" data-url="https://alephain.com/brand/v2/tesseract/favicon.svg"
+                    aria-label="Copy address for Tesseract Trading favicon.svg">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+</main>
+
+<div class="sr-only" role="status" aria-live="polite" id="copyStatus"></div>
 
 <footer>
   <div class="wrap">
@@ -141,14 +390,34 @@ const DICT = {
     "mh.label":"Brand assets",
     "mh.title.pre":"The marks, and the rules that","mh.title.em":"govern them","mh.title.post":".",
     "mh.deck":"Every mark below is served from this site at a stable address. Point at it directly rather than keeping a copy — a copy is a thing that drifts.",
-    "foot.line":"The Alephain Guild ·"
+    "foot.line":"The Alephain Guild ·",
+    "assets.h":"The marks",
+    "assets.lede":"Each entity carries two routes and a favicon variant. Paper marks are shown on a light ground and slate marks on a dark one, because that is where each belongs — a slate mark judged on white is being judged wrongly.",
+    "ent.alephain":"The parent. Route A is the geometric monogram; route B carries the italic aleph.",
+    "ent.alchymia":"The research arm. The A-route aperture is the distillation opening.",
+    "ent.tesseract":"The execution arm. The A-route is a Schlegel diagram of the 4-cube.",
+    "use.a":"Favicons, document mastheads, anything at or below 64px.",
+    "use.b":"App icons, avatars, anything at or above 64px.",
+    "use.f":"One file, both states — it follows the reader's system theme. Shown here as its two rendered results.",
+    "copy.done":"Address copied",
+    "copy.manual":"Address selected — press the copy shortcut to take it"
   },
   zh:{
     "brand.sub":"品牌","nav.home":"← 返回主站",
     "mh.label":"品牌资产",
     "mh.title.pre":"标志，以及","mh.title.em":"使用规则","mh.title.post":"。",
     "mh.deck":"下列每个标志都由本站以固定地址提供。请直接引用，不要另存副本——副本是会漂移的东西。",
-    "foot.line":"The Alephain Guild ·"
+    "foot.line":"The Alephain Guild ·",
+    "assets.h":"标志",
+    "assets.lede":"每个实体有两条路线和一个 favicon 变体。paper 版置于浅底、slate 版置于深底，因为那才是它们各自的归属——把 slate 版放在白底上评判，评判方式本身就错了。",
+    "ent.alephain":"母品牌。A 路线是几何 monogram，B 路线承载斜体 aleph。",
+    "ent.alchymia":"研究臂。A 路线中的开口是蒸馏口。",
+    "ent.tesseract":"执行臂。A 路线是四维立方体的 Schlegel 投影。",
+    "use.a":"favicon、文档头，以及一切 64px 及以下的场景。",
+    "use.b":"应用图标、头像，以及一切 64px 及以上的场景。",
+    "use.f":"一个文件，两种状态——它跟随读者的系统主题。此处并排展示它的两个渲染结果。",
+    "copy.done":"地址已复制",
+    "copy.manual":"地址已选中——按复制快捷键取走"
   }
 };
 
@@ -179,7 +448,52 @@ document.getElementById('themeBtn').addEventListener('click', () => {
 });
 document.getElementById('langBtn').addEventListener('click', () => {
   applyLang(document.documentElement.lang.startsWith('zh') ? 'en' : 'zh');
+  document.querySelectorAll('.copy').forEach(b => {
+    if (!b.dataset.copied) b.textContent = document.documentElement.lang.startsWith('zh') ? '复制' : 'Copy';
+  });
 });
+
+// The address is readable and selectable without this; the button only saves a
+// step. It is created here so a page without scripts shows no control that
+// would do nothing when pressed.
+const status = document.getElementById('copyStatus');
+const MOD_KEY = /Mac|iPhone|iPad/.test(navigator.userAgent) ? '\u2318C' : 'Ctrl+C';
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.hidden = false;
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.url);
+    } catch {
+      // Clipboard access can be refused. Select the address so the reader can
+      // take it with the keyboard, and say so — a highlight on its own is not
+      // an instruction, and conveys nothing to a screen reader.
+      const r = document.createRange();
+      r.selectNode(btn.previousElementSibling);
+      getSelection().removeAllRanges();
+      getSelection().addRange(r);
+      const lang2 = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+      btn.dataset.copied = '1';
+      btn.textContent = MOD_KEY;
+      status.textContent = DICT[lang2]['copy.manual'];
+      setTimeout(() => {
+        delete btn.dataset.copied;
+        btn.textContent = lang2 === 'zh' ? '复制' : 'Copy';
+        status.textContent = '';
+      }, 4000);
+      return;
+    }
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    btn.dataset.copied = '1';
+    btn.textContent = lang === 'zh' ? '已复制' : 'Copied';
+    status.textContent = DICT[lang]['copy.done'];
+    setTimeout(() => {
+      delete btn.dataset.copied;
+      btn.textContent = lang === 'zh' ? '复制' : 'Copy';
+      status.textContent = '';
+    }, 2000);
+  });
+});
+
 </script>
 
 </body>
