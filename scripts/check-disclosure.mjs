@@ -39,8 +39,18 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
 
-/** Extensions that end up in front of a reader. */
-const SCANNED = new Set(['.html', '.json', '.md', '.css', '.js', '.txt', '.xml']);
+/**
+ * Extensions that end up in front of a reader.
+ *
+ * SVG is here because it is markup, not a picture: a mark's <title> and <desc>
+ * travel with the file and are read by assistive technology and crawlers.
+ * Manifests and config are here because they ship too, and because a JSON file
+ * is no less legible for having an unusual extension.
+ */
+const SCANNED = new Set([
+  '.html', '.json', '.md', '.css', '.js', '.txt', '.xml',
+  '.svg', '.webmanifest', '.yml', '.yaml',
+]);
 
 /** Never scanned: build output, tooling, and this gate's own word list. */
 const SKIPPED_DIRS = new Set(['.git', 'node_modules', '_site', 'scripts', '.jekyll-cache']);
