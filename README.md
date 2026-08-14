@@ -1,96 +1,74 @@
-# The Alephain Guild Official Website
+# The Alephain Guild — official site
 
-This is the official website for **The Alephain Guild**, built as a static site and deployed via GitHub Pages.
+The public site for **The Alephain Guild**. Static HTML, no build step, deployed
+to GitHub Pages at **https://alephain.com**.
 
-## Purpose
-To clearly articulate "What is The Alephain Guild?" to the external world, presenting the brand's philosophy, first principles, and methodology in a minimalist, professional manner.
+## Before you write anything
 
-## Design Principles
-- **Brand Consistency**: Strict adherence to [The Alephain Guild Brand Guide](../brand-guide/)
-- **Minimalism**: Clean, geometric, data-centric visual language
-- **Bilingual Support**: English (default) and Chinese content
-- **Responsive Design**: Mobile-first approach with three breakpoints
+This site is read by customers, press, and anyone who finds us. What we publish
+about ourselves is deliberately narrower than what we know about ourselves, and
+that boundary is enforced by a check rather than by memory.
 
-## Technology Stack
-- Pure HTML5 / CSS3 / JavaScript (no frameworks)
-- GitHub Pages for hosting
-- Google Fonts (Inter) for typography
-- SVG/PNG for logos and graphics
+**Run it before you commit:**
 
-## Project Structure
+```bash
+npm run verify
+```
+
+It fails on internal system names, storage identifiers, architecture vocabulary,
+and links into repositories an outside reader cannot open. The check reads whole
+files including code blocks and JSON — an internal identifier pasted into a
+sample payload discloses exactly as much as one written in a sentence.
+
+**Where copy comes from.** Draw it from what a reader can actually reach: the
+product's own surface, its public documentation, the things a user can do.
+Internal documents may be used to *check a fact*, never as the *shape of the
+story* — a document written to divide responsibility between internal systems
+will, if followed, produce a page organised around those systems. That is how
+this site came to describe its own architecture to the public.
+
+**Naming.** [`data/naming-authority.md`](./data/naming-authority.md) is
+authoritative for how anything is named in public copy.
+[`data/ecosystem-sitemap.json`](./data/ecosystem-sitemap.json) is authoritative
+for what is public at all. Its short list is intentional, not incomplete.
+
+**If a banned term genuinely must appear**, append `disclosure-ok: <reason>` on
+that line. The reason gets reviewed; it is an escape hatch, not a mute button.
+
+## Structure
+
 ```
 the-alephain-guild.github.io/
-├── index.html          # Main page with bilingual content
-├── style.css           # Styles (CSS variables, responsive layout)
-├── script.js           # Interactivity (language toggle, navigation)
-├── _config.yml         # GitHub Pages configuration
-├── favicon.ico         # Website favicon (placeholder)
-├── images/             # Brand logo assets
-└── README.md           # This file
+├── index.html        # the entire site — markup, styles link, inline i18n dictionaries
+├── style.css         # design tokens and layout
+├── data/             # naming authority + public surface definition
+├── scripts/          # tooling (not published — see _config.yml)
+├── _config.yml       # Pages config; excludes tooling from the build
+└── package.json      # verify entry point; no dependencies
 ```
 
-## Brand Compliance Checklist
-- [x] Colors: Strict use of `#0A0F2C`, `#D4AF37`, `#5A5A5A`, `#3A6B8C`, `#FFFFFF`
-- [x] Typography: Inter (Bold/Regular) + Source Han Sans fallback
-- [x] Logo Usage: Correct permissions for main and sub-brand logos
-- [x] Tone: Rational, clear, confident - no marketing jargon
-- [x] Gold Usage: ≤10% total area (primarily for highest emphasis)
+Copy exists in three places per string: inline HTML (the fallback shown before
+scripts run) and the `en` / `zh` dictionaries near the bottom of `index.html`.
+**Change all three.** Editing only the inline text leaves the dictionaries
+stale; editing only the dictionaries leaves the wrong text in the page source,
+where readers and crawlers still find it.
 
-## Content Sources
-- **Brand Identity**: [brand-guide/README.md](../brand-guide/README.md)
-- **Philosophy**: [grimoire/manifesto/](../grimoire/manifesto/)
-- **Methodology**: [grimoire/methodology/](../grimoire/methodology/)
-- **Logo Design**: [brand-guide/logo.md](../brand-guide/logo.md)
+## Design
 
-## Development Notes
+The visual system follows brand v2 — monochrome, editorial, serif. Ink is
+`#0F1115` on paper and `#EDE9DD` on slate; gold is a UI accent only and is never
+applied to a logo. Display type is Newsreader; Noto Serif SC carries Chinese;
+JetBrains Mono sets the small caps labels.
 
-### Language System
-The site uses a simple JavaScript-based language toggle:
-- English content: `[data-lang="en"]`
-- Chinese content: `[data-lang="zh"]`
-- Default language: English
-- Toggle button: "EN / 中文"
-
-### Image Assets
-- Source PNGs are 2048×2048, copied from `brand-guide/images/`
-- Recommended optimization: Convert to SVG/WebP for production
-- Favicon: Placeholder only - replace with proper favicon.ico
-
-### Color Variables (CSS)
-```css
-:root {
-    --color-black: #0A0F2C;      /* 本源黑 */
-    --color-gold: #D4AF37;       /* 哲思金 (use ≤10% area) */
-    --color-gray: #5A5A5A;       /* 无限灰 */
-    --color-blue: #3A6B8C;       /* 星云蓝 */
-    --color-white: #FFFFFF;      /* 纯粹白 */
-}
-```
+Both themes ship. Test both — dark mode contrast is not implied by light mode
+passing.
 
 ## Deployment
-The site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
 
-**Live URL**: https://the-alephain-guild.github.io
-
-## Maintenance
-
-### Updating Content
-1. Edit `index.html` (both English `[data-lang="en"]` and Chinese `[data-lang="zh"]` sections)
-2. Ensure bilingual consistency
-3. Test language toggle functionality
-
-### Updating Images
-1. Add new images to `images/` directory
-2. Update references in `index.html` and `style.css`
-3. Optimize for web (recommend SVG/WebP conversion)
-
-### Brand Compliance Verification
-Before any update, verify:
-- [ ] Gold color usage remains ≤10% of visual area
-- [ ] Fonts remain Inter + Source Han Sans fallback
-- [ ] Logo usage follows brand guide permissions
-- [ ] Tone remains rational, clear, confident
+Pushing to `main` publishes. There is no build step and no CI, so `npm run
+verify` locally is the only thing standing between an edit and the public
+internet.
 
 ## License
-© 2025 The Alephain Guild. All rights reserved.
-This website and its contents are proprietary to The Alephain Guild.
+
+© 2026 The Alephain Guild. All rights reserved.
