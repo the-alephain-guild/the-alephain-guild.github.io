@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Tesseract · B · Italic T cradled in diamond</title>
+  <path d="M32 10 L54 32 L32 54 L10 32 Z" stroke="#0F1115" stroke-width="2.4" fill="none" stroke-linejoin="miter"></path>
+  <path transform="matrix(0.014000 0 0 -0.014000 23.418 40.0)" d="M1351 1246H368L479 1267L258 979L221 998L371 1408H388L485 1324L419 1340H1358L1273 1324L1429 1408H1446L1346 978H1309L1272 1265ZM796 1279H948L585 83L724 38L712 0H260L272 38L434 86Z" fill="#0F1115"/>
+</svg>
