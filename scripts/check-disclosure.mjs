@@ -81,9 +81,12 @@ const BANNED = [
       /\bsaga\b/i,
       /\bDeploymentSpec\b/,
       /\bRunnerFacts\b/,
-      /\bl[123]-(foundation|kernel|edge)\b/i,
+      // Layer numbering appears both as an identifier and as display text.
+      /\bl[123][-\s·]+(foundation|kernel|edge)\b/i,
       /\bstack_layer\b/,
-      /\bcanonical (owner|state authority)\b/i,
+      // "canonical owner", "canonical business owners", "canonical state authority".
+      /\bcanonical\s+(?:\w+\s+)?(owner|authority|authorities|owners)\b/i,
+      /\bphase\s+[34]\b/i,
     ],
     guidance:
       'Describe the behaviour a reader can rely on, not the mechanism that delivers it. Layer names and message types are internal.',

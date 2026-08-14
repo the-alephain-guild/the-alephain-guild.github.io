@@ -2117,10 +2117,10 @@
 
       <div class="systems-stack">
 
-        <!-- L3 · Edge -->
+        <!-- Runs on the reader's own hardware -->
         <div class="sys-layer">
           <div class="layer-tag">
-            <span class="layer-idx">L3 · Edge</span>
+            <span class="layer-idx" data-i18n="sys.l3.idx">Local</span>
             <span class="layer-name" data-i18n="sys.l3.name">Runs on your machine — never hosted by the Guild.</span>
           </div>
           <div class="sys-cards">
@@ -2131,17 +2131,17 @@
                 <span class="badge op" data-i18n="sys.badge.operating">● operating</span>
                 <span class="badge os" data-i18n="sys.badge.custos.vis">◆ open source · apache-2.0</span>
               </div>
-              <p class="sys-body" data-i18n="sys.custos.body">Local daemon. You hold the keys. Signs execution facts back to Crucible; runs your strategies on your machine.</p>
-              <a class="sys-link" href="https://github.com/alchymia-labs/custos" data-i18n="sys.custos.cta">View on GitHub ↗</a>
+              <p class="sys-body" data-i18n="sys.custos.body">Local daemon. You hold the keys. Runs your strategies on your machine and signs execution facts back to the ecosystem.</p>
+              <a class="sys-link" href="https://github.com/the-alephain-guild/custos" data-i18n="sys.custos.cta">View on GitHub ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- L2 · Kernel -->
+        <!-- Guild-hosted -->
         <div class="sys-layer">
           <div class="layer-tag">
-            <span class="layer-idx">L2 · Kernel</span>
-            <span class="layer-name" data-i18n="sys.l2.name">Authorization + orchestration — coordinates canonical owners without absorbing them.</span>
+            <span class="layer-idx" data-i18n="sys.l2.idx">Hosted</span>
+            <span class="layer-name" data-i18n="sys.l2.name">Authorization and orchestration — it coordinates, it never takes custody.</span>
           </div>
           <div class="sys-cards">
             <div class="sys-card sys-kernel">
@@ -2151,7 +2151,7 @@
                 <span class="badge pb" data-i18n="sys.badge.beta">◐ private beta</span>
                 <span class="badge tbd" data-i18n="sys.badge.arx.vis">◇ visibility tbd</span>
               </div>
-              <p class="sys-body" data-i18n="sys.arx.body">Identity, tenants, and authorization for the ecosystem. Today coordinates Crucible and custos. Phase 3 extends to engine-neutral integrations; Phase 4 to the AI research loop.</p>
+              <p class="sys-body" data-i18n="sys.arx.body">Identity, tenancy, and authorization for quantitative trading operations. It coordinates what you run without taking custody of it.</p>
               <a class="sys-link" href="mailto:contact@alephain.com?subject=ARX%20private%20beta%20%C2%B7%20invite%20request" data-i18n="sys.arx.cta">Request invite ↗</a>
             </div>
           </div>
@@ -2159,7 +2159,7 @@
 
       </div>
 
-      <div class="systems-foot" data-i18n="sys.foot">ARX orchestrates open and proprietary engines built across the Guild's research units — coordination, not custody.</div>
+      <div class="systems-foot" data-i18n="sys.foot">ARX coordinates; it never takes custody. Your keys and your execution stay on your own machine.</div>
     </div>
 
   </div>
@@ -2793,7 +2793,9 @@
     "sys.title.em": "product",
     "sys.title.post": ".",
     "sys.deck": "ARX is the neutral quant operating system. custos is the runner you own — the trust anchor the OS depends on.",
-    "sys.l2.name": "Authorization + orchestration — coordinates canonical owners without absorbing them.",
+    "sys.l2.idx": "Hosted",
+    "sys.l2.name": "Authorization and orchestration — it coordinates, it never takes custody.",
+    "sys.l3.idx": "Local",
     "sys.l3.name": "Runs on your machine — never hosted by the Guild.",
     "sys.badge.operating": "● operating",
     "sys.badge.beta": "◐ private beta",
@@ -2803,9 +2805,9 @@
     "sys.custos.body": "Local daemon. You hold the keys. Runs your strategies on your machine and signs execution facts back to the ecosystem.",
     "sys.custos.cta": "View on GitHub ↗",
     "sys.arx.tag": "the neutral quant operating system",
-    "sys.arx.body": "Identity, tenants, and authorization for the ecosystem. Coordinates canonical business owners today; extends to engine-neutral integrations in Phase 3 and to the AI research loop in Phase 4.",
+    "sys.arx.body": "Identity, tenancy, and authorization for quantitative trading operations. It coordinates what you run without taking custody of it.",
     "sys.arx.cta": "Request invite ↗",
-    "sys.foot": "ARX orchestrates open and proprietary engines built across the Guild's research units — coordination, not custody."
+    "sys.foot": "ARX coordinates; it never takes custody. Your keys and your execution stay on your own machine."
   },
   "zh": {
     "topbar.cities": "香港 · 新加坡 · 伦敦",
@@ -3083,7 +3085,9 @@
     "sys.title.em": "面孔",
     "sys.title.post": "。",
     "sys.deck": "ARX 是中立量化操作系统。custos 是你自己跑的 runner —— 操作系统所依赖的信任锚。",
-    "sys.l2.name": "授权 + 编排 —— 协调各权威而不吸收之。",
+    "sys.l2.idx": "托管",
+    "sys.l2.name": "授权与编排 —— 只协调,不接管。",
+    "sys.l3.idx": "本地",
     "sys.l3.name": "跑在你的机器上 —— 永不由 Guild 托管。",
     "sys.badge.operating": "● 运行中",
     "sys.badge.beta": "◐ 内测中",
@@ -3093,9 +3097,9 @@
     "sys.custos.body": "本地守护进程。密钥在你手上。跑在你的机器上,签名执行事实回流生态。",
     "sys.custos.cta": "在 GitHub 上查看 ↗",
     "sys.arx.tag": "中立量化操作系统",
-    "sys.arx.body": "生态的身份、租户与授权。今天协调各规范业务权威;Phase 3 拓展到引擎中立集成,Phase 4 到 AI 研究闭环。",
+    "sys.arx.body": "面向量化交易运营的身份、租户与授权。协调你所运行的一切,而不接管它。",
     "sys.arx.cta": "申请邀请 ↗",
-    "sys.foot": "ARX 协调 Guild 各研究单元自建的开源与自有引擎 —— 协调,不托管。"
+    "sys.foot": "ARX 只做协调,不做托管。密钥与执行始终留在你自己的机器上。"
   }
 };
   
