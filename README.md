@@ -39,8 +39,8 @@ that line. The reason gets reviewed; it is an escape hatch, not a mute button.
 
 ```
 the-alephain-guild.github.io/
-├── index.html        # the entire site — markup, styles link, inline i18n dictionaries
-├── style.css         # design tokens and layout
+├── index.html        # the main page — markup, styles and i18n dictionaries, all inline
+├── brand/            # the public brand page and the published marks
 ├── data/             # naming authority + public surface definition
 ├── scripts/          # tooling (not published — see _config.yml)
 ├── _config.yml       # Pages config; excludes tooling from the build
