@@ -10,6 +10,10 @@ markdown: kramdown
 highlighter: rouge
 
 # Exclude from processing
+#
+# scripts/ and the npm manifests are tooling, not content. The disclosure gate
+# in particular must never ship: it necessarily spells out every term it
+# forbids, so publishing it would defeat the check it performs.
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -18,6 +22,10 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - scripts/
+  - package.json
+  - package-lock.json
+  - README.md
 
 # Custom variables
 brand_colors:

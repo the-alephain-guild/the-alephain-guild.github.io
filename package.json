@@ -1,0 +1,14 @@
+{
+  "name": "alephain-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The Alephain Guild public site. Tooling only — the site itself is static and needs no build step.",
+  "scripts": {
+    "verify": "npm run check:disclosure",
+    "check:disclosure": "node scripts/check-disclosure.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
