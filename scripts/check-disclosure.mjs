@@ -69,6 +69,7 @@ const BANNED = [
       /\bSynedrion\b/i,
       /\bAthanor\b/i,
       /\bArgus\b/i,
+      /\bElenchus\b/i,
       /\bNummus\b/i,
       /\bFama\b/i,
       /\bphilosophers[-_]stone\b/i,
