@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Custos · A · Chirograph, one sheet cut on a toothed line</title>
+  <!-- An indenture: one text written twice on a single skin, then cut apart along
+       a toothed line so that each half proves the other by fitting it. The seam
+       carries 3.0 units of clear paper at its narrowest and ends in a valley at
+       both ends, because the two places most likely to bridge are the ends. -->
+  <path d="M10 10 L22 10 L28.7 17.33 L22 24.67 L28.7 32 L22 39.33 L28.7 46.67 L22 54 L10 54 Z" fill="none" stroke="#EDE9DD" stroke-width="2.6" stroke-linejoin="miter"></path>
+  <path d="M54 10 L42 10 L35.3 17.33 L42 24.67 L35.3 32 L42 39.33 L35.3 46.67 L42 54 L54 54 Z" fill="none" stroke="#EDE9DD" stroke-width="2.6" stroke-linejoin="miter"></path>
+</svg>

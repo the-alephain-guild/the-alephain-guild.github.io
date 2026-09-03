@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Aegis Labs · A · Favicon cut</title>
+  <!-- Route A enlarged 1.20x with the stroke taken from 2.6 to 3.4, the scale
+       baked into the coordinates. This mark is already in the upper half of
+       the route A band, so the icon cannot take the 5.0 stroke collegium
+       took: at 4.0 it measures over 33 % and at 3.4 it sits at 28.7 % against
+       an icon band of 21.8-34.7 (median 28.4). The channels keep 6.2 units of
+       air, 1.55 px at 16, and the raster holds as one piece. Both colourways
+       in one file. -->
+  <style>
+    .ink { stroke: #0F1115; }
+    @media (prefers-color-scheme: dark) {
+      .ink { stroke: #EDE9DD; }
+    }
+  </style>
+  <path class="ink" d="M5.60 5.60 L39.20 5.60 L39.20 39.20 L48.80 39.20 L48.80 5.60 L58.40 5.60 L58.40 58.40 L24.80 58.40 L24.80 24.80 L15.20 24.80 L15.20 58.40 L5.60 58.40 Z" fill="none" stroke-width="3.4" stroke-linejoin="miter"></path>
+</svg>

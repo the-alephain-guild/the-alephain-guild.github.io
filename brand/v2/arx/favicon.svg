@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Arx · A · Keystone with the gate keys do not cross</title>
+  <!-- Route A redrawn to fill the frame: at 16px the margin route A leaves is
+       pixels the mark cannot spare. Both colourways ship in this one file. -->
+  <style>
+    .ink { stroke: #0F1115; fill: none; }
+    .slit { fill: #0F1115; }
+    @media (prefers-color-scheme: dark) {
+      .ink { stroke: #EDE9DD; }
+      .slit { fill: #EDE9DD; }
+    }
+  </style>
+  <path class="ink" d="M16 3 L48 3 L61 61 L3 61 Z" stroke-width="3.4" stroke-linejoin="miter"></path>
+  <rect class="slit" x="28.5" y="21" width="7" height="27"></rect>
+</svg>

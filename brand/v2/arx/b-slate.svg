@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Arx · B · Italic A locked into the keystone</title>
+  <path d="M19 8 L45 8 L57 58 L7 58 Z" fill="none" stroke="#EDE9DD" stroke-width="2.8" stroke-linejoin="miter"></path>
+  <path transform="matrix(0.021000 0 0 -0.021000 18.234499999999997 48.0)" d="M367 505 395 587H1023L995 505ZM1089 85 1212 38 1201 0H744L755 38L937 83L831 1195H894L149 83L286 38L275 0H-133L-122 38L42 83L913 1360H958Z" fill="#EDE9DD"/>
+</svg>

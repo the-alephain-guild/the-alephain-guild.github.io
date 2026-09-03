@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Collegium · A · Square with its setting-out lines carried past the corners</title>
+  <!-- Four identical lines, each starting inside one corner and carried eight
+       units past the next, all in the same rotation. No line owns a corner and
+       no side is first. A square with its construction left in: a stamp hides
+       its method, this keeps it visible — the difference between a fact you are
+       told and a fact you can re-derive.
+       The overruns are not a registration error, and that is checkable rather
+       than arguable: a slipped plate is a translation, translation destroys
+       rotational symmetry, and this is 180-degree rotationally symmetric to
+       0.00% where a genuinely misregistered square measures 48.58% off.
+       Written as four separate paths rather than a group because the package's
+       React compiler handles leaf elements only. -->
+  <path d="M14 14 L58 14" fill="none" stroke="#0F1115" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path d="M50 14 L50 58" fill="none" stroke="#0F1115" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path d="M50 50 L6 50" fill="none" stroke="#0F1115" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path d="M14 50 L14 6" fill="none" stroke="#0F1115" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt"></path>
+</svg>

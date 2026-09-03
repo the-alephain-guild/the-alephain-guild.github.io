@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Collegium · A · Favicon cut</title>
+  <!-- Route A enlarged 1.23x with the stroke taken from 2.6 to 5.0, the scale
+       baked into the coordinates rather than carried in a transform. Scale
+       alone is not enough for a stroked mark: the family's icons run 20.4-32.4%
+       and route A merely scaled to fill measures 16.3%, so the weight has to
+       come up with it. At 5.0 it lands at 23.6% and the overruns are 9.8 units,
+       2.5px at 16 — the feature this mark is about survives the cut it was
+       drawn for. Both colourways ship in this one file. -->
+  <style>
+    .ink { stroke: #0F1115; }
+    @media (prefers-color-scheme: dark) {
+      .ink { stroke: #EDE9DD; }
+    }
+  </style>
+  <path class="ink" d="M9.86 9.86 L63.98 9.86" fill="none" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path class="ink" d="M54.14 9.86 L54.14 63.98" fill="none" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path class="ink" d="M54.14 54.14 L0.02 54.14" fill="none" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"></path>
+  <path class="ink" d="M9.86 54.14 L9.86 0.02" fill="none" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"></path>
+</svg>
